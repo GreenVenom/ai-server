@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+
+# Secrets
+.env
+*.env
+
+# SSH
+*.pem
+*.key
+id_ed25519
+id_rsa
+
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
