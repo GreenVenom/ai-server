@@ -4,12 +4,12 @@
 #
 # Personal AI Platform
 #
-# Script: doctor.sh
+# Script: health.sh
 #
 # Purpose:
-# Comprehensive platform diagnostics.
+# Complete platform health assessment.
 #
-# Version: 2.0.0
+# Version: 1.0.0
 #
 ############################################################
 
@@ -27,36 +27,11 @@ source "${LIB_DIR}/services.sh"
 source "${LIB_DIR}/results.sh"
 source "${LIB_DIR}/checks.sh"
 
-############################################################
-# Header
-############################################################
-
-print_header "$PLATFORM_NAME"
-
-echo "Platform Version   : $PLATFORM_VERSION"
-echo "Operations Version : $OPERATIONS_VERSION"
-echo "Hostname           : $(get_hostname)"
-echo
-
-############################################################
-# Platform
-############################################################
-
-print_section "Platform"
-
-echo "macOS        : $(get_macos_version)"
-echo "Build        : $(get_build_version)"
-echo "Architecture : $(get_architecture)"
-echo "CPU          : $(get_cpu)"
-echo "Memory       : $(get_memory_gb) GB"
-echo "Disk Free    : $(get_disk_free)"
-echo
+print_header "Platform Health"
 
 ############################################################
 # Commands
 ############################################################
-
-print_section "Installed Commands"
 
 execute_check check_command git
 execute_check check_command docker
@@ -66,8 +41,6 @@ execute_check check_command ollama
 # Services
 ############################################################
 
-print_section "Services"
-
 execute_check check_service "Ollama" ollama_running
 execute_check check_service "Docker" docker_running
 execute_check check_service "Tailscale" tailscale_running
@@ -75,8 +48,6 @@ execute_check check_service "Tailscale" tailscale_running
 ############################################################
 # Directories
 ############################################################
-
-print_section "Directories"
 
 execute_check check_directory "Server Root" "$SERVER_ROOT"
 execute_check check_directory "Configuration" "$CONFIG_DIR"
@@ -86,18 +57,23 @@ execute_check check_directory "Backups" "$BACKUP_DIR"
 execute_check check_directory "Models" "$MODEL_DIR"
 
 ############################################################
+# Resources
+############################################################
+
+execute_check check_memory 24
+
+execute_check check_disk_space "$SERVER_ROOT" 20
+
+############################################################
 # API
 ############################################################
 
-print_section "API"
-
-execute_check check_api "Ollama API" "http://${OLLAMA_HOST}/api/version"
+execute_check check_api "Ollama API" \
+"http://${OLLAMA_HOST}/api/version"
 
 ############################################################
 # Models
 ############################################################
-
-print_section "Recommended Models"
 
 execute_check check_model "nomic-embed-text"
 
@@ -107,4 +83,4 @@ execute_check check_model "nomic-embed-text"
 
 print_summary
 
-log_info "doctor.sh completed successfully."
+log_info "health.sh completed."

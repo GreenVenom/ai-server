@@ -1,276 +1,290 @@
 ---
-title: Personal AI Server
-status: Active Development
-version: 0.1.0
-last_updated: 2026-07-12
-owner: GreenVenom
----
+title: README
+document: README
+version: 2.0
+status: Complete
+created: 2026-07-12
+updated: 2026-07-13
+author: GreenVenom
+-------------
 
-## Personal AI Server
+# Personal AI Platform
 
-> A local-first AI platform built on a Mac mini M4 Pro, designed to provide secure, reproducible, and maintainable AI infrastructure while minimizing dependence on cloud-hosted AI services.
+> A production-quality, local-first AI platform engineered for privacy, reproducibility, operational excellence, and long-term maintainability.
 
 ---
 
 ## Vision
 
-The goal of this project is to build a production-quality personal AI platform capable of supporting:
+The Personal AI Platform provides a secure, self-hosted environment for AI-assisted development, knowledge management, and automation while minimizing reliance on external cloud AI services.
 
-- Local Large Language Models
-- AI-assisted software development
-- Obsidian knowledge management
-- Retrieval-Augmented Generation (RAG)
-- Personal automation
-- MCP server integrations
-- Long-term maintainability
-
-The platform is designed with a strong emphasis on:
-
-- Local-first AI
-- Security by default
-- Infrastructure as Code
-- Documentation as Code
-- Reproducible deployments
-- Modular architecture
+The platform is designed to evolve incrementally through documented milestones, architecture decisions, and operational best practices.
 
 ---
 
-## Hardware
+## Project Goals
 
-| Component | Specification |
-| --------- | --------------- |
-| Platform | Mac mini (2024) |
-| Processor | Apple M4 Pro |
-| Memory | 24 GB Unified Memory |
-| Storage | 512 GB SSD |
-
----
-
-## Current Project Status
-
-| Milestone | Status |
-| --------- | ------ |
-| M01 – Foundation | ✅ Complete |
-| M02 – AI Runtime Layer | 🚧 In Progress |
-| M03 – OpenClaw Platform | ⏳ Planned |
-| M04 – Knowledge Layer | ⏳ Planned |
-| M05 – MCP Services | ⏳ Planned |
-| M06 – Monitoring & Operations | ⏳ Planned |
-| M07 – Backup & Disaster Recovery | ⏳ Planned |
+* Local-first AI inference
+* Minimal cloud AI usage
+* Secure remote administration
+* Production-quality operations
+* Knowledge management
+* AI-assisted software development
+* Infrastructure as Code
+* Reproducible platform builds
+* Comprehensive engineering documentation
 
 ---
 
-## High-Level Architecture
+## Platform Hardware
 
-```text
-Windows Workstation
-        │
-SSH + Tailscale
-        │
-──────────────────────────────
-Mac mini M4 Pro
-──────────────────────────────
-        │
-      launchd
-        │
- ┌──────┴────────┐
- │               │
-Ollama      OpenClaw
- │               │
- └──────┬────────┘
-        │
-  Local AI Models
-        │
-──────────────────────────────
-Docker Compose
-──────────────────────────────
-Qdrant
-Grafana
-Prometheus
-Uptime Kuma
-```
+| Component              | Specification              |
+| ---------------------- | -------------------------- |
+| Platform               | Apple Mac mini (M4 Pro)    |
+| Memory                 | 24 GB Unified Memory       |
+| Storage                | 512 GB SSD                 |
+| Primary Administration | Windows 11 (SSH + VS Code) |
+| Remote Access          | Tailscale                  |
 
 ---
 
-## Technology Stack
+## Core Platform Components
 
-### Native Services
-
-- Ollama
-- OpenClaw (planned)
-
-### Containerized Services
-
-- Docker Compose
-- Qdrant (planned)
-- Grafana (planned)
-- Prometheus (planned)
-- Uptime Kuma (planned)
-
-### Networking
-
-- Tailscale
-- SSH (Ed25519 Key Authentication)
-
-### Development
-
-- Git
-- GitHub
-- Homebrew
-- Xcode Command Line Tools
-- Docker Desktop
-
----
-
-## Initial AI Models
-
-| Model | Purpose |
-| -------- | --------- |
-| Qwen3 14B | Primary reasoning model |
-| Gemma 3 12B | Coding and structured tasks |
-| nomic-embed-text | Embeddings and semantic search |
-
----
-
-## Repository Structure
-
-```text
-.
-├── bootstrap/
-├── docker/
-├── infrastructure/
-├── scripts/
-├── services/
-├── docs/
-│   ├── architecture/
-│   ├── decisions/
-│   ├── milestones/
-│   ├── runbooks/
-│   └── templates/
-└── inventory/
-```
-
----
-
-## Documentation
-
-### Architecture
-
-Describes how the platform is designed.
-
-- System Overview
-- Runtime Architecture
-- Service Management
-- Network Architecture
-- Directory Layout
-
----
-
-### Architecture Decision Records (ADRs)
-
-Documents significant architectural decisions.
-
-Current ADRs include:
-
-- ADR-0001 – Separate AI Account
-- ADR-0002 – Tailscale Only Remote Access
-- ADR-0003 – Ollama Model Storage
-- ADR-0004 – launchd vs Docker Compose
-- ADR-0005 – Official Ollama Installation
-- ADR-0006 – Architecture as Code
-
----
-
-### Milestones
-
-Milestones document the implementation roadmap.
-
-- M01 – Foundation
-- M02 – AI Runtime Layer
-- M03 – OpenClaw Platform
-- M04 – Knowledge Layer
-- M05 – MCP Services
-
----
-
-### Runbooks
-
-Runbooks provide repeatable operational procedures.
-
-Examples include:
-
-- Install Ollama
-- Configure Ollama
-- Verify Ollama
-- Update Ollama
-- Recover Ollama
-
----
-
-## Design Principles
-
-The platform follows several guiding principles.
-
-### Local First
-
-Run AI workloads locally whenever practical.
-
----
-
-### Least Privilege
-
-Services execute with the minimum required permissions.
-
----
-
-### Infrastructure as Code
-
-Infrastructure should be reproducible from version-controlled configuration.
-
----
-
-### Documentation as Code
-
-Documentation evolves alongside the platform and is treated as a first-class component.
-
----
-
-### Modular Architecture
-
-Services should be loosely coupled and independently maintainable.
-
----
-
-### Observability
-
-Every service should provide:
-
-- Logging
-- Health checks
-- Verification procedures
-- Operational runbooks
-
----
-
-## Long-Term Roadmap
-
-Future milestones include:
-
-- OpenClaw integration
-- Semantic search
-- Obsidian RAG
-- MCP server ecosystem
-- AI-assisted software development
-- Monitoring dashboards
-- Automated backups
-- Disaster recovery
-- Multi-model routing
-- Performance benchmarking
+| Component      | Purpose                               |
+| -------------- | ------------------------------------- |
+| Ollama         | Local AI inference runtime            |
+| OpenClaw       | AI orchestration platform             |
+| Docker Desktop | Container runtime                     |
+| Qdrant         | Vector database                       |
+| Obsidian       | Knowledge management                  |
+| MCP Servers    | External tool integrations            |
+| GitHub         | Repository backup and version control |
 
 ---
 
 ## Repository Philosophy
 
-This repository is the single source of truth for the Personal AI Server.
+This repository is the authoritative source of truth for the Personal AI Platform.
 
-Configuration, documentation, architecture, operational procedures, and implementation history are maintained together to ensure the platform remains understandable, reproducible, and maintainable over its entire lifecycle.
+It contains:
+
+* Architecture documentation
+* Engineering principles
+* Milestones
+* Architecture Decision Records (ADRs)
+* Runbooks
+* Platform configuration
+* Operational scripts
+* Templates
+* Release documentation
+
+The platform should be reproducible from this repository together with official vendor installers.
+
+---
+
+## Repository Layout
+
+```text
+.
+├── README.md
+├── ROADMAP.md
+├── VERSION.md
+│
+├── docs/
+│   ├── architecture/
+│   ├── decisions/
+│   ├── glossary/
+│   ├── milestones/
+│   ├── platform-config/
+│   ├── releases/
+│   ├── runbooks/
+│   └── templates/
+│
+├── scripts/
+│
+└── server/
+    ├── config/
+    ├── data/
+    ├── docker/
+    ├── logs/
+    ├── backups/
+    └── services/
+```
+
+---
+
+## Documentation Reading Order
+
+The documentation is organized from strategic guidance to operational implementation.
+
+### 1. Platform Foundation
+
+Start here to understand the project.
+
+* M00 – Platform Charter
+* Engineering Principles
+* Glossary
+
+---
+
+### 2. Platform Status
+
+Understand the current state of the platform.
+
+* VERSION.md
+* ROADMAP.md
+
+---
+
+### 3. Architecture
+
+Learn how the platform is designed.
+
+* System Overview
+* Runtime Architecture
+* Service Management
+* Network Architecture
+* Directory Layout
+
+---
+
+### 4. Engineering Decisions
+
+Review significant architectural decisions.
+
+* Architecture Decision Records (ADRs)
+
+---
+
+### 5. Milestones
+
+Understand how the platform evolved.
+
+* M01 – Foundation
+* M02 – Production Ollama Runtime
+* M03–M12 (planned)
+
+---
+
+### 6. Platform Configuration
+
+Reference documentation for installed software.
+
+* Ollama
+* Docker Desktop
+* Tailscale
+* (Additional platform components)
+
+---
+
+### 7. Runbooks
+
+Operational procedures.
+
+Examples include:
+
+* Health verification
+* Platform updates
+* Backup and restore
+* Disaster recovery
+
+---
+
+### 8. Release Notes
+
+Historical platform changes.
+
+---
+
+## Engineering Principles
+
+The platform follows several guiding principles.
+
+* Documentation First
+* Git as the Source of Truth
+* Infrastructure as Code
+* Vendor-Supported Solutions
+* Automation by Default
+* Operational Readiness
+* Security by Design
+* Incremental Delivery
+
+See **Engineering Principles** for the complete philosophy.
+
+---
+
+## Development Workflow
+
+Every significant change follows the same lifecycle.
+
+```text
+Idea
+    ↓
+Architecture Discussion
+    ↓
+Architecture Decision Record (ADR)
+    ↓
+Milestone Planning
+    ↓
+Implementation
+    ↓
+Validation
+    ↓
+Documentation
+    ↓
+Git Commit
+    ↓
+Release Tag
+```
+
+---
+
+## Versioning
+
+The platform follows Semantic Versioning.
+
+* Major versions represent production releases.
+* Minor versions correspond to completed milestones.
+* Patch versions contain maintenance improvements and documentation updates.
+
+See `VERSION.md` for the current platform version.
+
+---
+
+## Current Roadmap
+
+| Version | Milestone                     | Status          |
+| ------- | ----------------------------- | --------------- |
+| v0.1.0  | Foundation                    | ✅ Complete     |
+| v0.2.0  | Production Ollama Runtime     | 🚧 In Progress  |
+| v0.3.0  | OpenClaw Platform             | ⏳ Planned      |
+| v0.4.0  | Docker Platform               | ⏳ Planned      |
+| v0.5.0  | Qdrant                        | ⏳ Planned      |
+| v0.6.0  | Obsidian Integration          | ⏳ Planned      |
+| v0.7.0  | Platform Operations Framework | ⏳ Planned      |
+| v0.8.0  | MCP Ecosystem                 | ⏳ Planned      |
+| v0.9.0  | Observability & Monitoring    | ⏳ Planned      |
+| v0.9.5  | Production Hardening          | ⏳ Planned      |
+| v0.9.8  | Backup & Disaster Recovery    | ⏳ Planned      |
+| v1.0.0  | Production Release            | ⏳ Planned      |
+
+---
+
+## Success Criteria
+
+Version **1.0** is achieved when:
+
+* All planned milestones are complete.
+* Documentation is current.
+* Health checks pass.
+* Operational procedures are documented.
+* Disaster recovery has been validated.
+* The platform can be rebuilt from bare hardware using this repository and official vendor installers.
+
+---
+
+## License
+
+This repository is maintained as the engineering documentation and operational handbook for the Personal AI Platform.
+
+Its primary purpose is to ensure the platform remains secure, reproducible, maintainable, and well documented throughout its lifecycle.

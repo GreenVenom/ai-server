@@ -1,61 +1,38 @@
 #!/bin/bash
 
-PASS_COUNT=0
-WARN_COUNT=0
-FAIL_COUNT=0
+############################################################
+#
+# Personal AI Platform
+#
+# Script: common.sh
+#
+############################################################
 
-PASS="[PASS]"
-WARN="[WARN]"
-FAIL="[FAIL]"
-INFO="[INFO]"
+divider() {
+    printf '%*s\n' "${COLUMNS:-60}" '' | tr ' ' '-'
+}
+
+confirm() {
+    read -rp "$1 [y/N]: " response
+
+    [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+}
+
+require_command() {
+
+    if ! command -v "$1" >/dev/null 2>&1; then
+        echo "Missing required command: $1"
+        exit 1
+    fi
+}
+
+backup_file() {
+
+    file="$1"
+
+    cp "$file" "${file}.bak.$(date +%s)"
+}
 
 timestamp() {
-    date "+%Y-%m-%d %H:%M:%S"
-}
-
-pass() {
-    ((PASS_COUNT++))
-    printf "%s %s %s\n" "$(timestamp)" "$PASS" "$1"
-}
-
-warn() {
-    ((WARN_COUNT++))
-    printf "%s %s %s\n" "$(timestamp)" "$WARN" "$1"
-}
-
-fail() {
-    ((FAIL_COUNT++))
-    printf "%s %s %s\n" "$(timestamp)" "$FAIL" "$1"
-}
-
-info() {
-    printf "%s %s %s\n" "$(timestamp)" "$INFO" "$1"
-}
-
-header() {
-    echo
-    echo "============================================"
-    echo "$1"
-    echo "============================================"
-}
-
-summary() {
-
-    echo
-
-    echo "--------------------------------------------"
-
-    echo "PASS : $PASS_COUNT"
-
-    echo "WARN : $WARN_COUNT"
-
-    echo "FAIL : $FAIL_COUNT"
-
-    echo "--------------------------------------------"
-
-    if [[ $FAIL_COUNT -eq 0 ]]; then
-        return 0
-    else
-        return 1
-    fi
+    date +"%Y-%m-%d_%H-%M-%S"
 }
