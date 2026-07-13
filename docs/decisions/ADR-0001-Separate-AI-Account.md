@@ -2,6 +2,9 @@
 title: Separate AI Account
 status: Accepted
 date: 2026-07-12
+decision_id: ADR-0001
+supersedes:
+superseded_by:
 ---
 
 ## Context

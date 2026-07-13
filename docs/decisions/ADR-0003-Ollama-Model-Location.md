@@ -2,6 +2,9 @@
 title: Ollama Model Storage
 status: Accepted
 date: 2026-07-12
+decision_id: ADR-0003
+supersedes:
+superseded_by:
 ---
 
 ## Context
