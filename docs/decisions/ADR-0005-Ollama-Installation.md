@@ -38,6 +38,10 @@ Service management, configuration, logging, and operational behavior will be man
 
 The installation method and the service management layer are intentionally treated as separate concerns.
 
+The official Ollama macOS application is used for both runtime management and persistent application configuration.
+
+Platform documentation records the required configuration, but does not replace vendor-supported configuration mechanisms where they exist.
+
 ---
 
 ## Rationale
