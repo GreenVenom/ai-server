@@ -9,7 +9,7 @@ updated: 2026-07-13
 platform_version: v0.1.0
 maturity: Foundation
 author: Revan
--------------
+---
 
 # M01 – Foundation
 

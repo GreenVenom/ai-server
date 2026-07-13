@@ -8,7 +8,7 @@ created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.2.0
 author: Revan
--------------
+---
 
 # Documentation Architecture
 

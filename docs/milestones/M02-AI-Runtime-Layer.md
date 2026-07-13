@@ -9,7 +9,7 @@ updated: 2026-07-13
 platform_version: v0.2.0
 maturity: Operational
 author: Revan
--------------
+---
 
 # M02 – Production Ollama Runtime
 
