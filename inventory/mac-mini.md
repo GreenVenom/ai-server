@@ -2,9 +2,9 @@
 
 ## Hardware
 
-- Model:
-- Serial:
-- Purchase Date:
+- Model: Mac Mini M4 Pro 2024 (24GB RAM, 512GB SSD)
+- Serial: KC919CXJ36
+- Purchase Date: 2026-06-03
 
 ## Accounts
 

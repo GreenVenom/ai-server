@@ -1,0 +1,9 @@
+Host macmini-ai
+    HostName xyz.domain.com
+    User ai
+    IdentityFile C:/Users/<user>/.ssh/macmini_ai
+    IdentitiesOnly yes
+    IdentitiesOnly yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    Compression yes
