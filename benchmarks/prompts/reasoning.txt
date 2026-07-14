@@ -1,0 +1,14 @@
+A company has three teams.
+
+Engineering has 18 people.
+
+Operations has 12 people.
+
+Support has 10 people.
+
+If Engineering grows by 25%, Operations grows by 50%, and Support loses 20%, calculate:
+
+1. New team sizes
+2. Total employees
+3. Percentage of each team
+4. Explain each calculation step.

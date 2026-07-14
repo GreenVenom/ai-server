@@ -1,0 +1,17 @@
+Extract the following information into JSON.
+
+Customer:
+Jane Smith
+
+Order Number:
+ORD-20260713
+
+Items:
+Laptop
+Mouse
+Keyboard
+
+Shipping:
+Priority Overnight
+
+Return valid JSON only.

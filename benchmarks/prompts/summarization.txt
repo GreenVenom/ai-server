@@ -1,0 +1,3 @@
+Summarize the following information in fewer than 150 words.
+
+A local-first AI server consists of multiple services including an LLM runtime, vector database, orchestration software, monitoring framework, backup system, documentation repository, and secure remote access. The system emphasizes reproducibility, operational excellence, modular architecture, and infrastructure as code.

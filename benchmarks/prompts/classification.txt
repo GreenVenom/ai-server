@@ -1,0 +1,18 @@
+Classify each ticket as one of:
+
+Hardware
+Software
+Networking
+Security
+
+Tickets:
+
+The VPN will not connect.
+
+Docker Desktop crashes after login.
+
+The Mac mini does not power on.
+
+SSH authentication fails after updating keys.
+
+Return only the category for each ticket.
