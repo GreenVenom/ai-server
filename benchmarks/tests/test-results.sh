@@ -42,7 +42,7 @@ cleanup() {
 trap cleanup EXIT
 
 printf "============================================================\n"
-printf "Benchmark Framework Result Repository Smoke Test\n"
+printf "Benchmark Framework Result Repository Smoke Test \n"
 printf "============================================================\n\n"
 
 if source "${API_DIR}/errors.sh"; then

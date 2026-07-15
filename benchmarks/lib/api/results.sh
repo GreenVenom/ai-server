@@ -380,8 +380,12 @@ results_count() {
 }
 
 results_ids() {
-    [ "$RESULT_COUNT" -gt 0 ] || return 0
-    printf "%s\n" "${RESULT_IDS[@]}"
+    local i=0
+
+    while [ "$i" -lt "$RESULT_COUNT" ]; do
+        printf "%s\n" "${RESULT_IDS[$i]}"
+        i=$((i + 1))
+    done
 }
 
 result_last() {
@@ -707,10 +711,11 @@ result_validate() {
 }
 
 results_validate() {
-    local id
+    local i=0
 
-    for id in "${RESULT_IDS[@]}"; do
-        result_validate "$id" || return 1
+    while [ "$i" -lt "$RESULT_COUNT" ]; do
+        result_validate "${RESULT_IDS[$i]}" || return 1
+        i=$((i + 1))
     done
 
     return 0
@@ -833,15 +838,16 @@ result_print() {
 }
 
 results_print() {
-    local id
+    local i=0
     local first=1
 
-    for id in "${RESULT_IDS[@]}"; do
+    while [ "$i" -lt "$RESULT_COUNT" ]; do
         if [ "$first" -eq 0 ]; then
             printf "\n"
         fi
         first=0
-        result_print "$id"
+        result_print "${RESULT_IDS[$i]}"
+        i=$((i + 1))
     done
 }
 
@@ -957,8 +963,10 @@ results_markdown() {
     printf "Repository Version: %s\n\n" "$RESULT_REPOSITORY_RUNTIME_VERSION"
     printf "Result Count: %s\n" "$RESULT_COUNT"
 
-    for id in "${RESULT_IDS[@]}"; do
-        result_markdown "$id"
+    local i=0
+    while [ "$i" -lt "$RESULT_COUNT" ]; do
+        result_markdown "${RESULT_IDS[$i]}"
+        i=$((i + 1))
     done
 }
 
@@ -999,12 +1007,13 @@ result_csv() {
 }
 
 results_csv() {
-    local id
+    local i=0
 
     results_csv_header
 
-    for id in "${RESULT_IDS[@]}"; do
-        result_csv "$id"
+    while [ "$i" -lt "$RESULT_COUNT" ]; do
+        result_csv "${RESULT_IDS[$i]}"
+        i=$((i + 1))
     done
 }
 
