@@ -1,167 +1,163 @@
----
-title: Error Framework Architecture
-status: Active
----
+# Error Framework
 
 ## Purpose
 
-The Error Framework provides a standardized mechanism for representing, reporting, and transporting errors throughout the Personal AI Platform.
+The Error Framework provides structured, queryable error information for the Benchmark Framework.
 
-It serves as a foundational framework used by reusable libraries while remaining independent of user interfaces and logging systems.
-
----
-
-## Goals
-
-The framework is designed to provide:
-
-- Consistent diagnostics
-- Structured errors
-- Human-readable output
-- Machine-readable serialization
-- Stable APIs
-- Low coupling
-
----
+It replaces ad hoc stderr-only failures with an in-memory Error Repository that can preserve diagnostic context during execution.
 
 ## Architecture
 
+Implementation:
+
 ```text
-Application
-      │
-      ▼
-Framework Library
-      │
-      ▼
-errors.sh
-      │
-      ▼
+benchmarks/lib/api/errors.sh
+```
+
+Supporting dependencies:
+
+```text
 definitions.sh
+validators.sh
 ```
 
----
+Design references:
 
-## Responsibilities
+- ADR-0008 — Standardized Error Framework
+- ADR-0009 — Standardized Repository Pattern
 
-The Error Framework owns:
+## Error Schema
 
-- Error lifecycle
-- Error objects
-- Error metadata
-- Error formatting
-- Serialization
-- Assertions
-
-It does **not** own:
-
-- Logging
-- User interaction
-- Process termination
-- Retry logic
-
----
-
-## Error Lifecycle
+Structured fields:
 
 ```text
-Create
-
-↓
-
-Populate
-
-↓
-
-Return
-
-↓
-
-Application decides
-
-↓
-
-Print
-Log
-Serialize
-Retry
-Ignore
+timestamp
+component
+function
+code
+exit_code
+category
+severity
+message
+details
+suggestion
 ```
-
----
-
-## Error Object
-
-```text
-Timestamp
-Component
-Function
-Code
-Exit Code
-Category
-Severity
-Message
-Details
-Suggestion
-```
-
----
 
 ## Categories
 
-- Validation
-- Configuration
-- Execution
-- Filesystem
-- Network
-- Provider
-- Serialization
-- Internal
-
----
-
-## Severity
-
-- INFO
-- WARNING
-- ERROR
-- FATAL
-
----
-
-## Public API
-
-The framework exposes a small public API.
-
-```bash
-error_create()
-
-error_clear()
-
-error_last()
-
-error_exists()
-
-error_print()
-
-error_json()
-
-error_markdown()
+```text
+validation
+configuration
+execution
+filesystem
+network
+provider
+serialization
+internal
 ```
 
----
+## Severities
 
-## Design Principles
+```text
+info
+warning
+error
+fatal
+```
 
-- Errors are data.
-- Validation never creates errors.
-- Operational failures create structured errors.
-- Applications control presentation.
-- Errors are immutable after creation.
+## Identity
 
----
+Errors receive unique sequential identifiers:
 
-## Related Documents
+```text
+error-000001
+error-000002
+...
+```
 
-- ADR-0008
-- Benchmark-Framework.md
-- Engineering-Principles.md
+Identifiers are immutable after creation.
+
+## Repository Capabilities
+
+The Error Repository supports:
+
+- create
+- read
+- update
+- delete
+- clear
+- reset
+- count
+- first
+- last
+- existence checks
+- category filters
+- severity filters
+- validation
+- diagnostics
+
+## Serialization
+
+Supported formats:
+
+- text
+- JSON
+- Markdown
+
+The repository also provides save helpers for persistent diagnostics.
+
+## Shell Exit Codes vs Framework Error Codes
+
+Bash function return values are limited to `0-255`.
+
+Framework error codes such as:
+
+```text
+1001  invalid provider
+1004  invalid result
+4000  serialization failure
+9000  internal failure
+```
+
+are therefore stored as structured Error fields.
+
+Functions return shell-compatible exit codes separately.
+
+## Bash 3.2 Implementation
+
+The Error Repository uses parallel indexed arrays because the production host's system Bash does not support associative arrays.
+
+The canonical index is the Error ID array. Each field has a corresponding indexed array using the same position.
+
+## Mutation and Subshell Safety
+
+Error Repository mutations must occur in the current shell.
+
+Command substitution creates a subshell:
+
+```bash
+value="$(some_mutating_error_function)"
+```
+
+Any repository state changes made inside that subshell are discarded when it exits.
+
+Mutating functions should therefore be invoked directly, with output redirected when necessary.
+
+## Integration
+
+The Result Repository creates structured errors for:
+
+- invalid fields
+- invalid values
+- invalid state transitions
+- serialization failures
+
+Provider and executor layers also use framework exit codes and error structures.
+
+## Known Limitation
+
+When a provider call is itself executed inside command substitution so the provider response can be captured, provider-side Error Repository mutations occur in the subshell and may not survive.
+
+Current Result failure handling still records the execution failure.
+
+A future provider API may set a global response variable or write response data to a temporary file so provider execution can remain in the current shell.

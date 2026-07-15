@@ -1,484 +1,305 @@
----
-title: Benchmark Framework Architecture
-status: Active
----
+# Benchmark Framework
 
 ## Purpose
 
-The Benchmark Framework provides a standardized, provider-agnostic mechanism for evaluating AI models running on the Personal AI Platform.
+The Benchmark Framework provides a provider-neutral, workload-driven system for measuring local model behavior and producing repeatable benchmark reports.
 
-The framework is designed as reusable infrastructure rather than a collection of benchmark scripts. It separates benchmark execution, provider integration, reporting, and framework implementation into distinct architectural layers.
+The framework separates command-line concerns, benchmark orchestration, public APIs, and low-level core utilities.
 
-This document describes the architecture of the Benchmark Framework. It intentionally avoids implementation-specific details that may evolve over time.
-
----
-
-## Goals
-
-The framework is designed to satisfy the following goals:
-
-- Provider independence
-- Repeatable benchmark execution
-- Consistent benchmark reporting
-- Extensible workload definitions
-- Stable public APIs
-- Minimal coupling
-- High cohesion
-- Long-term maintainability
-- Future support for multiple inference providers
-
----
-
-## Non-Goals
-
-The Benchmark Framework is **not** responsible for:
-
-- Managing AI models
-- Installing providers
-- Operating system configuration
-- Docker orchestration
-- Monitoring platform services
-- Backup and recovery
-
-Those responsibilities belong to other components of the Personal AI Platform.
-
----
-
-## Architectural Principles
-
-The framework follows the engineering principles defined in:
-
-```text
-docs/Engineering-Principles.md
-```
-
-Key principles include:
-
-- Separation of Concerns
-- Layered Architecture
-- Specification First
-- Provider Independence
-- Stable Public Interfaces
-- Single Responsibility Principle
-- Extensibility over Specialization
-
----
-
-## High-Level Architecture
-
-```text
-                 User
-                  │
-                  ▼
-        benchmark (Application)
-                  │
-                  ▼
-        Benchmark Engines
-                  │
-                  ▼
-         Public Framework API
-                  │
-                  ▼
-        Framework Core Services
-                  │
-                  ▼
-      AI Inference Provider Layer
-                  │
-                  ▼
-          Local / Remote Models
-```
-
-Each layer has clearly defined responsibilities.
-
-Dependencies always flow downward.
-
----
-
-## Layer Responsibilities
-
-### Applications
-
-Applications are the user-facing commands.
-
-Responsibilities:
-
-- Parse command-line arguments
-- Load benchmark profiles
-- Select workloads
-- Invoke benchmark engines
-
-Applications contain minimal business logic.
-
-Examples:
-
-- benchmark
-- benchmark-install
-- benchmark-doctor
-
----
-
-### Engines
-
-Engines orchestrate benchmark execution.
-
-Responsibilities:
-
-- Create benchmark jobs
-- Execute providers
-- Coordinate reporting
-- Aggregate benchmark runs
-
-Examples:
-
-- benchmark-model.sh
-- benchmark-profile.sh
-- benchmark-provider.sh
-- benchmark-workload.sh
-
-Engines coordinate framework components but do not implement provider-specific logic.
-
----
-
-### Public API
-
-The Public API exposes stable interfaces used by the benchmark engines.
-
-```bash
-benchmarks/lib/api/
-```
-
-Current APIs include:
-
-- Provider API
-- Model API
-- Prompt API
-- Result API
-- Reporting API
-
-The API layer represents the supported programming interface of the Benchmark Framework.
-
-Breaking changes to this layer should be minimized.
-
----
-
-### Framework Core
-
-The Core layer contains implementation details.
-
-```bash
-benchmarks/lib/core/
-```
-
-Responsibilities include:
-
-- Framework definitions
-- Job lifecycle
-- Execution engine
-- Timing
-- Statistics
-- Shared utilities
-
-Core libraries are internal implementation details.
-
-They may evolve without affecting benchmark engines.
-
----
-
-## Dependency Rules
-
-Dependencies follow a strict hierarchy.
+## Architecture
 
 ```text
 Applications
-        │
-        ▼
+    ↓
 Engines
-        │
-        ▼
+    ↓
 API
-        │
-        ▼
+    ↓
 Core
 ```
 
-The following dependencies are prohibited:
-
-- Core → API
-- API → Engines
-- Engines → Applications
-
-These rules minimize coupling and improve maintainability.
-
----
-
-## Framework Specification
-
-The framework is specification-driven.
-
-The canonical specification is:
-
-```bash
-benchmarks/lib/core/definitions.sh
-```
-
-This specification defines:
-
-- Supported providers
-- Workloads
-- Capabilities
-- Result schema
-- Result lifecycle
-- Output formats
-- Exit codes
-- Default values
-
-Implementation libraries consume the specification rather than redefining constants.
-
----
-
-## Provider Architecture
-
-The framework treats inference providers as interchangeable implementations.
+Current implementation:
 
 ```text
-             Provider API
-                   │
-     ┌─────────────┼─────────────┐
-     ▼             ▼             ▼
-  Ollama      LM Studio       vLLM
-     │
-     ▼
- Models
+benchmarks/
+├── benchmark.sh
+├── engines/
+│   └── benchmark-model.sh
+├── lib/
+│   ├── api/
+│   │   ├── errors.sh
+│   │   ├── results.sh
+│   │   ├── providers.sh
+│   │   ├── models.sh
+│   │   ├── prompts.sh
+│   │   └── reporting.sh
+│   └── core/
+│       ├── definitions.sh
+│       ├── types.sh
+│       ├── validators.sh
+│       ├── profile.sh
+│       └── executor.sh
+├── profiles/
+├── prompts/
+├── expected/
+├── results/
+├── reports/
+└── tests/
 ```
 
-Current provider:
+## Layer Responsibilities
 
-- Ollama
+### Application Layer
 
-Planned providers:
+`benchmark.sh`
 
-- LM Studio
-- vLLM
-- llama.cpp
-- OpenAI
-- Claude
-- OpenRouter
+Responsibilities:
 
-Provider-specific behavior is isolated behind the Provider API.
+- parse CLI arguments
+- load profile defaults
+- apply CLI overrides
+- choose default models or workloads
+- invoke the benchmark engine
+- emit or save reports
+- create missing report parent directories
 
----
+The application layer does not implement provider logic.
 
-## Benchmark Job Lifecycle
+### Engine Layer
 
-Each benchmark executes as a Job.
+`engines/benchmark-model.sh`
 
-```text
-Create Job
-      │
-      ▼
-Validate
-      │
-      ▼
-Execute
-      │
-      ▼
-Collect Metrics
-      │
-      ▼
-Create Result
-      │
-      ▼
-Generate Report
-```
+Responsibilities:
 
-Jobs are immutable once execution begins.
+- hold benchmark configuration
+- apply profile configuration
+- validate the requested benchmark
+- iterate workloads and repetitions
+- call the executor
+- expose report generation and report saving
 
----
+The engine coordinates benchmark execution but does not implement provider-specific transport.
 
-## Result Repository
+### API Layer
 
-Each benchmark execution produces a Result object.
+Public benchmark interfaces:
 
-Results are stored within a Result Repository.
+- `errors.sh`
+- `results.sh`
+- `providers.sh`
+- `models.sh`
+- `prompts.sh`
+- `reporting.sh`
 
-```text
-Benchmark Run
+The API layer provides stable functions used by engines and applications.
 
-├── Result
-├── Result
-├── Result
-└── Result
-```
+### Core Layer
 
-The repository becomes the authoritative data source for:
+Internal implementation support:
 
-- Reporting
-- Serialization
-- Historical analysis
-- Dashboard generation
-- Trend analysis
+- `definitions.sh`
+- `types.sh`
+- `validators.sh`
+- `profile.sh`
+- `executor.sh`
 
----
-
-## Reporting Pipeline
-
-Reporting consumes Result objects.
-
-```text
-Results
-    │
-    ▼
-Report Generator
-    │
-    ├── Console
-    ├── Markdown
-    ├── JSON
-    ├── CSV
-    └── HTML (Future)
-```
-
-Reporting never communicates directly with providers.
-
----
-
-## Workload Architecture
-
-Benchmarks are organized into workloads.
-
-Examples include:
-
-- Reasoning
-- Coding
-- Summarization
-- Classification
-- Extraction
-- Creative Writing
-- Embeddings
-
-Workloads are independent of providers.
-
-Each workload defines:
-
-- Prompt
-- Description
-- Timeout
-- Expected output
-- Scoring policy
-
----
-
-## Profiles
-
-Profiles define benchmark suites.
-
-Examples:
-
-- Quick
-- Standard
-- Full
-- Regression
-
-Profiles select:
-
-- Models
-- Workloads
-- Iterations
-- Reporting options
-
-Profiles enable repeatable benchmark execution.
-
----
+Core owns framework definitions, validation primitives, profile loading, and execution orchestration.
 
 ## Execution Flow
 
 ```text
-Application
-      │
-      ▼
-Engine
-      │
-      ▼
-Create Job
-      │
-      ▼
-Provider API
-      │
-      ▼
-Inference Provider
-      │
-      ▼
-Execution Metrics
-      │
-      ▼
-Result Repository
-      │
-      ▼
-Reporting API
+CLI request
+    ↓
+profile defaults
+    ↓
+CLI overrides
+    ↓
+benchmark-model engine
+    ↓
+executor creates Result
+    ↓
+Result marked running
+    ↓
+provider request executed
+    ↓
+response and metrics captured
+    ↓
+Result completed or failed
+    ↓
+reporting consumes Result Repository
 ```
 
-Each layer performs a single responsibility.
+## Result Lifecycle
 
----
+Supported states:
 
-## Design Decisions
+```text
+created
+running
+completed
+failed
+skipped
+timeout
+cancelled
+```
 
-The framework adopts the following architectural decisions:
+The Result Repository is the authoritative in-memory source for benchmark outcomes during a run.
 
-- Layered Architecture
-- Repository Pattern
-- Provider Abstraction
-- Specification-First Design
-- Stable Public API
-- Framework Core Separation
+## Provider Abstraction
 
-Rationale for these decisions is documented in:
+Current public provider API:
+
+```text
+provider_exists
+provider_available
+provider_version
+provider_models
+provider_model_exists
+provider_generate
+provider_embeddings
+```
+
+Ollama is the current concrete provider implementation.
+
+The architecture permits future providers such as:
+
+```text
+lmstudio
+vllm
+llamacpp
+openai
+claude
+openrouter
+```
+
+## Workloads
+
+Current workload set:
+
+```text
+reasoning
+coding
+summarization
+extraction
+classification
+creative
+embedding
+```
+
+Generation workloads read prompt files from:
+
+```text
+benchmarks/prompts/
+```
+
+Optional expected outputs may be stored under:
+
+```text
+benchmarks/expected/
+```
+
+Expected-output scoring is not yet part of M02.
+
+## Profiles
+
+Profiles provide benchmark defaults.
+
+Supported configuration includes:
+
+- iterations
+- timeout
+- workloads
+- cold-start flag
+- warm-start flag
+- CPU measurement flag
+- memory measurement flag
+
+Precedence:
+
+```text
+framework defaults
+    ↓
+profile defaults
+    ↓
+explicit CLI overrides
+```
+
+## Reporting
+
+Reporting consumes the Result Repository and currently provides:
+
+- total results
+- completed results
+- failed results
+- skipped results
+- timeout results
+- cancelled results
+- average duration
+- average tokens per second
+- grouped field counts
+- text output
+- Markdown output
+- JSON output
+- CSV output
+
+Future reporting enhancements include median, min/max, standard deviation, success rate, and richer grouped aggregates.
+
+## Bash 3.2 Compatibility
+
+The production host uses the macOS system Bash environment.
+
+Framework constraints:
+
+- no associative arrays
+- no `declare -g`
+- parallel indexed arrays for repositories
+- explicit counters for empty-array safety under `set -u`
+- shell return values limited to `0-255`
+
+Framework error codes larger than `255` are stored as structured data rather than returned directly as shell exit statuses.
+
+## Current-Shell Mutation Rule
+
+Repository mutation must happen in the current shell.
+
+Incorrect:
 
 ```bash
-docs/decisions/ADR-0007-Layered-Benchmark-Architecture.md
+RESULT_ID="$(result_create ...)"
 ```
 
----
+The function runs in a subshell, so repository mutations are lost.
 
-## Future Evolution
+Correct:
 
-The architecture is expected to support:
+```bash
+result_create ... >/dev/null
+RESULT_ID="$RESULT_LAST_ID"
+```
 
-- Historical benchmark repositories
-- Benchmark dashboards
-- Regression detection
-- Scheduled benchmark execution
-- Distributed benchmarking
-- Multiple concurrent providers
-- Additional workload types
-- Vision benchmarks
-- Audio benchmarks
-- Tool-calling benchmarks
-- Automated performance baselines
+The same rule applies to sequence-based ID generation.
 
-These capabilities should require minimal architectural changes.
+## Model Normalization
 
----
+Provider model matching normalizes implicit `:latest` tags.
 
-## Related Documents
+For example:
 
-Architecture
+```text
+nomic-embed-text
+```
 
-- System-Overview.md
-- Runtime-Architecture.md
-- Service-Management.md
-- Network-Architecture.md
-- Directory-Layout.md
+matches:
 
-Engineering
+```text
+nomic-embed-text:latest
+```
 
-- Engineering-Principles.md
-- Glossary.md
+## Current Limitations
 
-Decisions
+- profile CPU and memory flags are defined but measurement is not yet fully implemented
+- provider error repository mutations can be lost when provider calls are captured through command substitution
+- provider transport timeouts are not yet consistently mapped to the `timeout` Result state
+- expected-output scoring is not yet implemented
 
-- ADR-0007-Layered-Benchmark-Architecture.md
-
-Milestones
-
-- M02-Production-Ollama.md
-- M03-OpenClaw.md
+These limitations do not block the M02 benchmark baseline.

@@ -1,74 +1,124 @@
-# Personal AI Platform Roadmap
+# Roadmap
 
-## Vision
+## M01 — Foundation ✅
 
-Build a production-quality, local-first AI platform that prioritizes privacy, reproducibility, operational excellence, and minimal reliance on cloud AI providers.
+Status: Complete
 
----
+Delivered:
 
-## Current Status
+- initial repository structure
+- engineering principles
+- documentation architecture
+- system architecture documentation
+- versioning and release structure
+- core host setup
+- secure administration foundation
 
-**Current Version:** v0.2.0
+## M02 — Production Ollama Runtime ✅
 
-**Current Milestone:** M02 – Production Ollama Runtime
+Status: Complete
 
----
+Delivered:
 
-## Milestones
+- production Ollama runtime
+- persistent local model storage
+- reboot persistence
+- local-only Ollama API binding
+- validated primary generation models
+- validated embedding model
+- operational health and verification scripts
+- provider-neutral Benchmark Framework
+- structured Error Repository
+- structured Result Repository
+- model and prompt APIs
+- profile-driven benchmark execution
+- generation and embedding execution
+- Markdown, JSON, CSV, and text reporting
+- successful Qwen and Gemma benchmark paths
+- benchmark validation test suite
 
-| Status | Milestone                           | Version |
-|--------|-------------------------------------|---------|
-| ✅     | M01 – Foundation                    | v0.1.0  |
-| 🚧     | M02 – Production Ollama Runtime     | v0.2.0  |
-| ⏳     | M03 – OpenClaw Platform             | v0.3.0  |
-| ⏳     | M04 – Docker Platform               | v0.4.0  |
-| ⏳     | M05 – Qdrant                        | v0.5.0  |
-| ⏳     | M06 – Obsidian Integration          | v0.6.0  |
-| ⏳     | M07 – Platform Operations Framework | v0.7.0  |
-| ⏳     | M08 – MCP Ecosystem                 | v0.8.0  |
-| ⏳     | M09 – Observability & Monitoring    | v0.9.0  |
-| ⏳     | M10 – Production Hardening          | v0.9.5  |
-| ⏳     | M11 – Backup & Disaster Recovery    | v0.9.8  |
-| ⏳     | M12 – Version 1.0 Release           | v1.0.0  |
+Primary models:
 
----
+```text
+qwen3:14b
+gemma4:12b
+nomic-embed-text:latest
+```
 
-## Long-Term Goals
+Architecture decisions:
 
-* Local-first AI inference
-* Minimal Claude Cloud usage
-* Complete infrastructure as code
-* Reproducible server builds
-* Production-quality documentation
-* Automated operations
-* Secure remote administration
-* Integrated knowledge management
-* Multi-model AI routing
-* Robust disaster recovery
+```text
+ADR-0007
+ADR-0008
+ADR-0009
+```
 
----
+## M03 — OpenClaw Platform ⏳
 
-## Success Criteria
+Status: Next
 
-Version 1.0 is complete when:
+Objectives:
 
-* All milestones are complete.
-* All documentation is current.
-* Every service can be rebuilt from the repository.
-* All health checks pass.
-* Benchmark baselines are recorded.
-* Disaster recovery has been successfully tested.
-* The platform can be maintained using the Operations Framework.
+- install and configure OpenClaw
+- define orchestration boundaries
+- integrate local Ollama models
+- establish model routing policy
+- preserve local-first behavior
+- define cloud fallback strategy
+- integrate existing operations and health checks
 
----
+## M04 — Qdrant ⏳
 
-## Release Philosophy
+Objectives:
 
-Every completed milestone results in:
+- deploy Qdrant
+- define persistent storage
+- configure collection lifecycle
+- integrate `nomic-embed-text`
+- establish retrieval validation
 
-* Git tag
-* Milestone documentation
-* Updated ADRs (if applicable)
-* Architecture review
-* Documentation review
-* Benchmark results (where appropriate)
+## M05 — Obsidian Integration ⏳
+
+Objectives:
+
+- connect Obsidian workflows to the AI platform
+- define indexing boundaries
+- support retrieval and assisted note workflows
+- preserve user-controlled source data
+
+## M06 — MCP Servers ⏳
+
+Objectives:
+
+- introduce MCP integrations
+- define trust and permission boundaries
+- validate local-first tool execution
+
+## M07 — Monitoring ⏳
+
+Objectives:
+
+- runtime visibility
+- service health
+- benchmark trend tracking
+- resource monitoring
+- alerting strategy
+
+## M08 — Backup & Disaster Recovery ⏳
+
+Objectives:
+
+- backup runtime configuration
+- backup persistent data
+- validate restore procedures
+- document disaster recovery
+
+## Future Work
+
+Potential later milestones include:
+
+- richer benchmark statistics
+- multi-provider benchmark comparison
+- automated baseline regression detection
+- expanded local model routing
+- additional retrieval and agent workflows

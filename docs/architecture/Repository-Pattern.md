@@ -1,271 +1,181 @@
----
-title: Repository Pattern
-status: Active
----
+# Repository Pattern
 
 ## Purpose
 
-The Repository Pattern defines how framework libraries manage collections of structured objects.
+The Repository Pattern standardizes how the Personal AI Platform represents collections of structured in-memory objects in Bash.
 
-It provides a consistent interface for object storage while separating data management from validation, execution, and presentation.
+It provides consistent conventions for:
 
----
+- object identity
+- lifecycle
+- querying
+- validation
+- serialization
+- reset behavior
+- testing
 
-## Design Principles
+Design reference:
 
-Repositories should:
+- ADR-0009 — Standardized Repository Pattern
 
-- Own data
-- Hide implementation details
-- Expose consistent APIs
-- Delegate validation
-- Support serialization
-- Be framework independent
+## Current Implementations
 
----
+| Repository | Status | Purpose |
+|---|---|---|
+| Error Repository | Implemented | Structured framework errors |
+| Result Repository | Implemented | Benchmark execution results |
+| Job Repository | Future | Long-running or queued work |
+| Metrics Repository | Future | Collected runtime measurements |
+| Event Repository | Future | Platform event records |
 
-## Architectural Placement
+## Storage Model
 
-```text
-Applications
-        │
-        ▼
-Framework Libraries
-        │
-        ▼
-Repositories
-        │
-        ▼
-Definitions
-Types
-Validators
-Errors
-```
+The production environment uses Bash 3.2.
 
-Repositories act as the bridge between business logic and data.
+Repositories therefore use parallel indexed arrays rather than associative arrays.
 
----
-
-## Responsibilities
-
-Repositories are responsible for:
-
-- Creating objects
-- Storing objects
-- Updating objects
-- Retrieving objects
-- Deleting objects
-- Enumerating objects
-- Serializing objects
-
-Repositories are not responsible for:
-
-- Validation
-- Logging
-- Execution
-- User interaction
-
----
-
-## Repository Lifecycle
+Example:
 
 ```text
-Initialize Repository
-
-↓
-
-Create Object
-
-↓
-
-Populate Object
-
-↓
-
-Validate
-
-↓
-
-Store
-
-↓
-
-Query
-
-↓
-
-Serialize
-
-↓
-
-Delete
+OBJECT_IDS[0]
+OBJECT_STATUS[0]
+OBJECT_MESSAGE[0]
 ```
 
----
+All arrays use the same index for the same object.
 
-## Repository API
+The ID array is the canonical object index.
 
-Every repository should expose a common vocabulary.
+## Required Repository Properties
 
-### Repository Operations
+A repository should provide:
+
+- unique immutable IDs
+- deterministic object creation
+- existence checks
+- object count
+- first and last object lookup
+- field access
+- field validation
+- repository reset
+- object deletion
+- serialization where appropriate
+- automated tests
+
+## Identity
+
+Sequence generation must occur in the current shell.
+
+Incorrect:
+
+```bash
+id="$(_generate_id)"
+```
+
+when `_generate_id` mutates repository sequence state.
+
+Correct:
+
+```bash
+_generate_id
+id="$GENERATED_ID"
+```
+
+The generator updates a global result variable while preserving sequence state in the active shell.
+
+## Current-Shell Mutation Rule
+
+All mutating repository functions must execute in the current shell.
+
+Command substitution executes in a subshell and discards in-memory mutations.
+
+Incorrect:
+
+```bash
+RESULT_ID="$(result_create ...)"
+```
+
+Correct:
+
+```bash
+result_create ... >/dev/null
+RESULT_ID="$RESULT_LAST_ID"
+```
+
+This rule is mandatory for all future in-memory repositories.
+
+## Empty Repository Safety
+
+Repository functions must be safe under:
+
+```bash
+set -u
+```
+
+and Bash 3.2.
+
+Do not assume an empty indexed array can always be expanded safely.
+
+Prefer:
+
+- explicit counters
+- count-guarded loops
+- index-based iteration
+
+## Reset Semantics
+
+A full repository reset should:
+
+- remove all objects
+- reset count to zero
+- clear first/last tracking
+- reset sequence state when deterministic IDs are expected for tests
+
+A clear-all operation may remove objects without resetting sequence state, depending on repository semantics.
+
+## Validation
+
+Validation should be layered:
 
 ```text
-count()
-
-ids()
-
-exists()
-
-clear()
-
-clear_all()
+definitions
+    ↓
+primitive type validation
+    ↓
+business validation
+    ↓
+repository object validation
 ```
 
----
-
-### Object Operations
-
-```text
-create()
-
-delete()
-
-exists()
-
-get()
-
-set()
-```
-
----
-
-### Serialization of Repository API
-
-```text
-json()
-
-markdown()
-
-text()
-```
-
----
-
-## Naming Convention
-
-The framework distinguishes between repository-level operations and object-level operations.
-
-| Scope | Prefix | Example |
-| ------ | ------ | ------- |
-| Private | `_` | `_result_set()` |
-| Object | singular | `result_create()` |
-| Repository | plural | `results_count()` |
-
----
-
-## Object Identity
-
-Each object has:
-
-- Immutable identifier
-- Repository ownership
-- Independent lifecycle
-
-Repositories generate identifiers automatically.
-
----
-
-## Validation Pipeline
-
-Repositories delegate validation.
-
-```text
-Repository
-
-↓
-
-validators.sh
-
-↓
-
-types.sh
-
-↓
-
-definitions.sh
-```
-
-Validation never resides inside repository implementations.
-
----
-
-## Error Handling
-
-Repositories integrate with the Error Framework.
-
-Operational failures produce structured errors.
-
-Predicate functions return only success or failure.
-
----
+Repositories should not redefine framework enums or primitive type rules.
 
 ## Serialization
 
-Repositories should support multiple output targets.
+Where useful, repositories should provide stable serializers such as:
 
-Current formats:
-
-- Text
+- text
 - JSON
 - Markdown
-
-Future formats may include:
-
 - CSV
-- YAML
-- SQLite
-- REST
 
----
+Serialization failures should use the Error Framework rather than only writing unstructured messages.
 
-## Current Repository Implementations
+## Testing Requirements
 
-| Repository | Status |
-| ---------- | ------ |
-| Error Repository | Planned |
-| Result Repository | Planned |
-| Job Repository | Planned |
-| Metrics Repository | Future |
-| Event Repository | Future |
+Each repository should test:
 
----
-
-## Relationship to Other Frameworks
-
-The Repository Pattern is shared across:
-
-- Operations Framework
-- Benchmark Framework
-- Error Framework
-
-Future frameworks are expected to follow the same architecture.
-
----
-
-## Benefits
-
-- Consistency
-- Predictability
-- Reusability
-- Easier testing
-- Lower maintenance
-- Clear separation of concerns
-
----
-
-## Related Documents
-
-- ADR-0007 — Benchmark Framework Architecture
-- ADR-0008 — Standardized Error Framework
-- ADR-0009 — Standardize Repository Pattern
-- Engineering-Principles.md
+- empty initial state
+- creation
+- unique IDs
+- count changes
+- first/last lookup
+- field storage
+- field mutation
+- invalid field rejection
+- invalid value rejection
+- deletion
+- reset
+- serialization
+- Bash 3.2 behavior
+- `set -u` behavior
+- subshell mutation safety
