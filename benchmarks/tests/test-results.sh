@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#
+# Benchmark Framework Result Repository Smoke Test
+# Bash 3.2 compatible.
+#
+
 set -u
 
 TEST_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -12,61 +17,79 @@ pass() { PASS_COUNT=$((PASS_COUNT + 1)); printf "PASS: %s\n" "$1"; }
 fail() { FAIL_COUNT=$((FAIL_COUNT + 1)); printf "FAIL: %s\n" "$1" >&2; }
 
 assert_success() {
-    local d="$1"; shift
-    if "$@"; then pass "$d"; else fail "$d"; fi
+    local description="$1"
+    shift
+    if "$@"; then pass "$description"; else fail "$description"; fi
 }
 
 assert_failure() {
-    local d="$1"; shift
-    if "$@"; then fail "$d"; else pass "$d"; fi
+    local description="$1"
+    shift
+    if "$@"; then fail "$description"; else pass "$description"; fi
 }
 
 assert_equals() {
-    local d="$1" e="$2" a="$3"
-    if [ "$e" = "$a" ]; then pass "$d"; else fail "$d (expected='$e', actual='$a')"; fi
+    local description="$1"
+    local expected="$2"
+    local actual="$3"
+
+    if [ "$expected" = "$actual" ]; then
+        pass "$description"
+    else
+        fail "$description (expected='${expected}', actual='${actual}')"
+    fi
 }
 
 assert_nonempty() {
-    local d="$1" v="$2"
-    if [ -n "$v" ]; then pass "$d"; else fail "$d"; fi
+    local description="$1"
+    local value="$2"
+
+    if [ -n "$value" ]; then pass "$description"; else fail "$description"; fi
 }
 
 assert_file_nonempty() {
-    local d="$1" f="$2"
-    if [ -s "$f" ]; then pass "$d"; else fail "$d"; fi
+    local description="$1"
+    local file="$2"
+
+    if [ -s "$file" ]; then pass "$description"; else fail "$description"; fi
 }
 
 cleanup() {
-    rm -f "${TEST_DIR}/.test-results.json"           "${TEST_DIR}/.test-results.csv"           "${TEST_DIR}/.test-results.md"           "${TEST_DIR}/.test-results.txt"
+    rm -f \
+        "${TEST_DIR}/.test-results.json" \
+        "${TEST_DIR}/.test-results.csv" \
+        "${TEST_DIR}/.test-results.md" \
+        "${TEST_DIR}/.test-results.txt"
 }
 trap cleanup EXIT
 
 printf "============================================================\n"
-printf "Benchmark Framework Result Repository Smoke Test \n"
+printf "Benchmark Framework Result Repository Smoke Test\n"
 printf "============================================================\n\n"
 
-if source "${API_DIR}/errors.sh"; then
-    pass "errors.sh loads"
-else
-    fail "errors.sh loads"
-    exit 1
-fi
+source "${API_DIR}/errors.sh"
+pass "errors.sh loads"
 
-if source "${API_DIR}/results.sh"; then
-    pass "results.sh loads"
-else
-    fail "results.sh loads"
-    exit 1
-fi
+source "${API_DIR}/results.sh"
+pass "results.sh loads"
 
 assert_success "Error repository resets" errors_reset
 assert_success "Result repository resets" results_reset
 assert_equals "Initial error count is zero" "0" "$(errors_count)"
 assert_equals "Initial result count is zero" "0" "$(results_count)"
 
-RESULT_ID="$(
-    result_create         "$DEFAULT_PROVIDER"         "smoke-test-model"         "$DEFAULT_PROFILE"         "$WORKLOAD_REASONING"         "Explain why deterministic tests are useful."
-)"
+# IMPORTANT:
+# Mutating repository functions MUST execute in the current shell.
+# Do not wrap result_create/result_set/result_delete in $(...).
+
+result_create \
+    "$DEFAULT_PROVIDER" \
+    "smoke-test-model" \
+    "$DEFAULT_PROFILE" \
+    "$WORKLOAD_REASONING" \
+    "Explain why deterministic tests are useful." >/dev/null
+
+RESULT_ID="$RESULT_LAST_ID"
 
 assert_nonempty "Valid result returns an ID" "$RESULT_ID"
 assert_success "Created result exists" result_exists "$RESULT_ID"
@@ -90,6 +113,7 @@ assert_equals "Updated duration is retrievable" "1250" "$(result_duration_ms_get
 
 assert_success "Result can transition to running" result_mark_running "$RESULT_ID"
 assert_equals "Status becomes running" "$RESULT_STATUS_RUNNING" "$(result_status_get "$RESULT_ID")"
+
 assert_success "Result can transition to completed" result_mark_completed "$RESULT_ID" "0"
 assert_equals "Status becomes completed" "$RESULT_STATUS_COMPLETED" "$(result_status_get "$RESULT_ID")"
 assert_equals "Exit code is stored" "0" "$(result_exit_code_get "$RESULT_ID")"
@@ -104,6 +128,7 @@ else
     pass "Invalid field is rejected"
 fi
 ERRORS_AFTER="$(errors_count)"
+
 if [ "$ERRORS_AFTER" -gt "$ERRORS_BEFORE" ]; then
     pass "Invalid field creates an Error Repository entry"
 else
@@ -112,27 +137,50 @@ fi
 
 LAST_ERROR_ID="$(error_last || true)"
 assert_nonempty "Last error ID is available" "$LAST_ERROR_ID"
+
 if [ -n "$LAST_ERROR_ID" ]; then
     assert_success "Last error object validates" error_validate "$LAST_ERROR_ID"
 fi
 
 ERRORS_BEFORE="$(errors_count)"
-if result_create "not-a-provider" "smoke-test-model" "$DEFAULT_PROFILE" "$WORKLOAD_REASONING" "prompt" >/dev/null 2>&1; then
+if result_create \
+    "not-a-provider" \
+    "smoke-test-model" \
+    "$DEFAULT_PROFILE" \
+    "$WORKLOAD_REASONING" \
+    "prompt" >/dev/null 2>&1
+then
     fail "Invalid provider is rejected"
 else
     pass "Invalid provider is rejected"
 fi
 ERRORS_AFTER="$(errors_count)"
-if [ "$ERRORS_AFTER" -gt "$ERRORS_BEFORE" ]; then pass "Invalid provider creates an Error Repository entry"; else fail "Invalid provider creates an Error Repository entry"; fi
+
+if [ "$ERRORS_AFTER" -gt "$ERRORS_BEFORE" ]; then
+    pass "Invalid provider creates an Error Repository entry"
+else
+    fail "Invalid provider creates an Error Repository entry"
+fi
 
 ERRORS_BEFORE="$(errors_count)"
-if result_create "$DEFAULT_PROVIDER" "smoke-test-model" "$DEFAULT_PROFILE" "not-a-workload" "prompt" >/dev/null 2>&1; then
+if result_create \
+    "$DEFAULT_PROVIDER" \
+    "smoke-test-model" \
+    "$DEFAULT_PROFILE" \
+    "not-a-workload" \
+    "prompt" >/dev/null 2>&1
+then
     fail "Invalid workload is rejected"
 else
     pass "Invalid workload is rejected"
 fi
 ERRORS_AFTER="$(errors_count)"
-if [ "$ERRORS_AFTER" -gt "$ERRORS_BEFORE" ]; then pass "Invalid workload creates an Error Repository entry"; else fail "Invalid workload creates an Error Repository entry"; fi
+
+if [ "$ERRORS_AFTER" -gt "$ERRORS_BEFORE" ]; then
+    pass "Invalid workload creates an Error Repository entry"
+else
+    fail "Invalid workload creates an Error Repository entry"
+fi
 
 assert_equals "Filter by provider finds result" "$RESULT_ID" "$(results_by_provider "$DEFAULT_PROVIDER")"
 assert_equals "Filter by workload finds result" "$RESULT_ID" "$(results_by_workload "$WORKLOAD_REASONING")"
@@ -142,8 +190,17 @@ JSON_OUTPUT="$(result_json "$RESULT_ID")"
 assert_nonempty "Single-result JSON serialization returns data" "$JSON_OUTPUT"
 
 if command -v python3 >/dev/null 2>&1; then
-    if printf "%s" "$JSON_OUTPUT" | python3 -m json.tool >/dev/null 2>&1; then pass "Single-result JSON is valid"; else fail "Single-result JSON is valid"; fi
-    if results_json | python3 -m json.tool >/dev/null 2>&1; then pass "Repository JSON is valid"; else fail "Repository JSON is valid"; fi
+    if printf "%s" "$JSON_OUTPUT" | python3 -m json.tool >/dev/null 2>&1; then
+        pass "Single-result JSON is valid"
+    else
+        fail "Single-result JSON is valid"
+    fi
+
+    if results_json | python3 -m json.tool >/dev/null 2>&1; then
+        pass "Repository JSON is valid"
+    else
+        fail "Repository JSON is valid"
+    fi
 else
     printf "SKIP: JSON syntax validation (python3 not found)\n"
 fi
@@ -171,14 +228,21 @@ assert_success "Result can be deleted" result_delete "$RESULT_ID"
 assert_failure "Deleted result no longer exists" result_exists "$RESULT_ID"
 assert_equals "Result count returns to zero" "0" "$(results_count)"
 
-SECOND_ID="$(
-    result_create         "$DEFAULT_PROVIDER"         "second-smoke-test-model"         "$DEFAULT_PROFILE"         "$WORKLOAD_CODING"         "Write a simple deterministic function."
-)"
+result_create \
+    "$DEFAULT_PROVIDER" \
+    "second-smoke-test-model" \
+    "$DEFAULT_PROFILE" \
+    "$WORKLOAD_CODING" \
+    "Write a simple deterministic function." >/dev/null
+
+SECOND_ID="$RESULT_LAST_ID"
+
 assert_nonempty "Second result can be created" "$SECOND_ID"
 assert_equals "Result count is one before reset" "1" "$(results_count)"
 
 assert_success "Result repository reset succeeds" results_reset
 assert_equals "Result count is zero after reset" "0" "$(results_count)"
+
 assert_success "Error repository reset succeeds" errors_reset
 assert_equals "Error count is zero after reset" "0" "$(errors_count)"
 
