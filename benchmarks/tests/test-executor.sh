@@ -205,11 +205,18 @@ if [ -n "$GENERATION_MODEL" ]; then
         "$PROVIDER_OLLAMA" \
         "$GENERATION_MODEL" \
         "quick" \
-        "$WORKLOAD_REASONING" \
-        "60" >/dev/null
+        "$WORKLOAD_REASONING" >/dev/null
 
     WORKLOAD_EXIT=$?
     WORKLOAD_RESULT_ID="$RESULT_LAST_ID"
+
+    if [ "$WORKLOAD_EXIT" -ne 0 ]; then
+    printf "DEBUG: Workload exit code: %s\n" "$WORKLOAD_EXIT"
+    printf "DEBUG: Result error: %s\n" \
+        "$(result_error_get "$WORKLOAD_RESULT_ID")"
+    printf "DEBUG: Result status: %s\n" \
+        "$(result_status_get "$WORKLOAD_RESULT_ID")"
+fi
 
     if [ "$WORKLOAD_EXIT" -eq 0 ]; then
         pass "Prompt-file workload execution succeeds"
