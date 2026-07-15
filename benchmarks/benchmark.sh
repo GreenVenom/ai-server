@@ -91,7 +91,23 @@ benchmark_model_run
 RUN_EXIT=$?
 
 if [ -n "$MODEL_BENCHMARK_REPORT_FILE" ]; then
-    benchmark_model_save_report "$MODEL_BENCHMARK_REPORT_FILE" || exit $?
+    REPORT_PARENT_DIR="$(dirname "$MODEL_BENCHMARK_REPORT_FILE")"
+
+    if [ ! -d "$REPORT_PARENT_DIR" ]; then
+        if ! mkdir -p "$REPORT_PARENT_DIR"; then
+            printf "Failed to create report directory: %s\n" "$REPORT_PARENT_DIR" >&2
+            exit "$EXIT_FAILURE"
+        fi
+    fi
+
+    benchmark_model_save_report "$MODEL_BENCHMARK_REPORT_FILE"
+    SAVE_EXIT=$?
+
+    if [ "$SAVE_EXIT" -ne 0 ]; then
+        printf "Failed to save benchmark report: %s\n" "$MODEL_BENCHMARK_REPORT_FILE" >&2
+        exit "$SAVE_EXIT"
+    fi
+
     printf "Report saved to: %s\n" "$MODEL_BENCHMARK_REPORT_FILE" >&2
 else
     benchmark_model_report
