@@ -114,6 +114,7 @@ RESULT_OUTPUT_VALUES=()
 RESULT_COUNT=0
 RESULT_SEQUENCE=0
 RESULT_LAST_ID=""
+RESULT_GENERATED_ID=""
 
 # ------------------------------------------------------------
 # Internal helpers
@@ -125,10 +126,12 @@ _result_now() {
 
 _result_generate_id() {
     RESULT_SEQUENCE=$((RESULT_SEQUENCE + 1))
-    printf "%s-%0*d\n" \
-        "${RESULT_ID_PREFIX}" \
-        "${RESULT_ID_PADDING}" \
-        "${RESULT_SEQUENCE}"
+    RESULT_GENERATED_ID="$(
+        printf "%s-%0*d" \
+            "${RESULT_ID_PREFIX}" \
+            "${RESULT_ID_PADDING}" \
+            "${RESULT_SEQUENCE}"
+    )"
 }
 
 _result_index_of() {
@@ -431,6 +434,7 @@ results_clear_all() {
 results_reset() {
     results_clear_all
     RESULT_SEQUENCE=0
+    RESULT_GENERATED_ID=""
     return "$EXIT_SUCCESS"
 }
 
@@ -476,7 +480,8 @@ result_create() {
     local index
     local now
 
-    id="$(_result_generate_id)"
+    _result_generate_id
+    id="$RESULT_GENERATED_ID"
     index="$RESULT_COUNT"
     now="$(_result_now)"
 

@@ -103,6 +103,7 @@ ERROR_SUGGESTIONS=()
 ERROR_COUNT=0
 ERROR_SEQUENCE=0
 ERROR_LAST_ID=""
+ERROR_GENERATED_ID=""
 
 # ------------------------------------------------------------
 # Internal helpers
@@ -114,10 +115,12 @@ _error_now() {
 
 _error_generate_id() {
     ERROR_SEQUENCE=$((ERROR_SEQUENCE + 1))
-    printf "%s-%0*d\n" \
-        "${ERROR_ID_PREFIX}" \
-        "${ERROR_ID_PADDING}" \
-        "${ERROR_SEQUENCE}"
+    ERROR_GENERATED_ID="$(
+        printf "%s-%0*d" \
+            "${ERROR_ID_PREFIX}" \
+            "${ERROR_ID_PADDING}" \
+            "${ERROR_SEQUENCE}"
+    )"
 }
 
 _error_index_of() {
@@ -363,6 +366,7 @@ errors_clear_all() {
 errors_reset() {
     errors_clear_all
     ERROR_SEQUENCE=0
+    ERROR_GENERATED_ID=""
     return "$EXIT_SUCCESS"
 }
 
@@ -396,7 +400,8 @@ error_create() {
     local id
     local index
 
-    id="$(_error_generate_id)"
+    _error_generate_id
+    id="$ERROR_GENERATED_ID"
     index="$ERROR_COUNT"
 
     ERROR_IDS[$index]="$id"
