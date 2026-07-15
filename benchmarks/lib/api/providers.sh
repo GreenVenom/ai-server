@@ -187,9 +187,20 @@ for model in data.get("models", []):
 _ollama_model_exists() {
     local target="$1"
     local model
+    local normalized_target="$target"
+
+    case "$normalized_target" in
+        *:*)
+            ;;
+        *)
+            normalized_target="${normalized_target}:latest"
+            ;;
+    esac
 
     while IFS= read -r model; do
-        [ "$model" = "$target" ] && return 0
+        if [ "$model" = "$target" ] || [ "$model" = "$normalized_target" ]; then
+            return 0
+        fi
     done <<EOF
 $(_ollama_models)
 EOF
