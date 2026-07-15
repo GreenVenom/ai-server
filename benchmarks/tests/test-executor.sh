@@ -216,7 +216,7 @@ if [ -n "$GENERATION_MODEL" ]; then
         "$(result_error_get "$WORKLOAD_RESULT_ID")"
     printf "DEBUG: Result status: %s\n" \
         "$(result_status_get "$WORKLOAD_RESULT_ID")"
-fi
+    fi
 
     if [ "$WORKLOAD_EXIT" -eq 0 ]; then
         pass "Prompt-file workload execution succeeds"
