@@ -86,6 +86,16 @@ else
     fail "Model benchmark run succeeds"
 fi
 
+if [ "$(report_count_failed)" -gt 0 ]; then
+    printf "\n--- Failed Result Diagnostics ---\n"
+    printf "Result ID : %s\n" "$RESULT_LAST_ID"
+    printf "Status    : %s\n" "$(result_status_get "$RESULT_LAST_ID")"
+    printf "Error     : %s\n" "$(result_error_get "$RESULT_LAST_ID")"
+    printf "Exit Code : %s\n" "$(result_exit_code_get "$RESULT_LAST_ID")"
+    printf "Duration  : %s ms\n" "$(result_duration_ms_get "$RESULT_LAST_ID")"
+    printf "---------------------------------\n\n"
+fi
+
 assert_equals "One result is created" "1" "$(results_count)"
 assert_equals "Completed count is one" "1" "$(report_count_completed)"
 assert_equals "Failed count is zero" "0" "$(report_count_failed)"
