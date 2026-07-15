@@ -7,204 +7,192 @@
 # File: validators.sh
 #
 # Purpose:
-#   Framework validation library.
+#   Provides framework-level validation rules.
 #
 # Responsibilities:
+#   - Enum membership validation
+#   - Result schema validation
+#   - Result field type validation
 #
-#   • Validate framework objects
-#   • Validate providers
-#   • Validate workloads
-#   • Validate result schema
-#   • Validate output formats
-#   • Provide assertion helpers
-#
-# This library builds upon:
-#
-#   definitions.sh
-#   types.sh
-#
+# Compatibility:
+#   - Bash 3.2+
+#   - Safe under set -u
 # ============================================================
 
-[[ -n "${BENCHMARK_VALIDATORS_LOADED:-}" ]] && return
-readonly BENCHMARK_VALIDATORS_LOADED=1
+[[ -n "${BENCHMARK_VALIDATORS_LOADED:-}" ]] && return 0
+BENCHMARK_VALIDATORS_LOADED=1
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VALIDATORS_CORE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-source "${SCRIPT_DIR}/definitions.sh"
-source "${SCRIPT_DIR}/types.sh"
+# shellcheck source=/dev/null
+source "${VALIDATORS_CORE_DIR}/definitions.sh"
 
-############################################################
-# Generic Helpers
-############################################################
+# shellcheck source=/dev/null
+source "${VALIDATORS_CORE_DIR}/types.sh"
+
+# ------------------------------------------------------------
+# Generic helpers
+# ------------------------------------------------------------
 
 array_contains() {
-
-    local value="$1"
+    local needle="$1"
     shift
 
     local item
-
-    for item in "$@"
-    do
-        [[ "$item" == "$value" ]] && return 0
+    for item in "$@"; do
+        [ "$item" = "$needle" ] && return 0
     done
 
     return 1
-
 }
 
-############################################################
-# Enumerations
-############################################################
+# ------------------------------------------------------------
+# Enum predicates
+# ------------------------------------------------------------
 
 provider_valid() {
-
     array_contains "$1" "${PROVIDER_ENUM[@]}"
+}
 
+capability_valid() {
+    array_contains "$1" "${CAPABILITY_ENUM[@]}"
 }
 
 workload_valid() {
-
     array_contains "$1" "${WORKLOAD_ENUM[@]}"
-
 }
 
 result_status_valid() {
-
     array_contains "$1" "${RESULT_STATUS_ENUM[@]}"
-
 }
 
 output_format_valid() {
-
     array_contains "$1" "${OUTPUT_FORMAT_ENUM[@]}"
+}
 
+error_category_valid() {
+    array_contains "$1" "${ERROR_CATEGORY_ENUM[@]}"
+}
+
+error_severity_valid() {
+    array_contains "$1" "${ERROR_SEVERITY_ENUM[@]}"
 }
 
 result_field_valid() {
-
     array_contains "$1" "${RESULT_FIELD_ENUM[@]}"
-
 }
 
-############################################################
-# Result Schema
-############################################################
+error_field_valid() {
+    array_contains "$1" "${ERROR_FIELD_ENUM[@]}"
+}
+
+# ------------------------------------------------------------
+# Result schema helpers
+# ------------------------------------------------------------
 
 result_field_type() {
-
-    local field="$1"
-
-    echo "${RESULT_FIELD_TYPES[$field]}"
-
+    result_field_type_lookup "$1"
 }
 
 result_field_required() {
+    local required
 
-    [[ "${RESULT_FIELD_REQUIRED[$1]}" == "true" ]]
-
+    required="$(result_field_required_lookup "$1")" || return 1
+    [ "$required" = "true" ]
 }
 
-############################################################
-# Value Validation
-############################################################
+# ------------------------------------------------------------
+# Result value validation
+# ------------------------------------------------------------
 
 result_value_valid() {
-
     local field="$1"
-
-    local value="$2"
+    local value="${2-}"
+    local type
 
     result_field_valid "$field" || return 1
 
-    local type
+    type="$(result_field_type "$field")" || return 1
 
-    type=$(result_field_type "$field")
-
-    case "$type" in
-
-        enum)
-
-            validate_type enum \
-                "$value" \
-                "${RESULT_STATUS_ENUM[@]}"
+    case "$field" in
+        "$RESULT_FIELD_STATUS")
+            result_status_valid "$value"
             ;;
-
+        "$RESULT_FIELD_PROVIDER")
+            provider_valid "$value"
+            ;;
+        "$RESULT_FIELD_WORKLOAD")
+            [ -z "$value" ] || workload_valid "$value"
+            ;;
         *)
-
             validate_type "$type" "$value"
             ;;
-
     esac
-
 }
 
-############################################################
+# ------------------------------------------------------------
 # Assertions
-############################################################
+#
+# These are intentionally side-effect free. They return success
+# or failure and do not print or create Error Repository objects.
+# ------------------------------------------------------------
 
 assert_provider() {
-
     provider_valid "$1"
+}
 
+assert_capability() {
+    capability_valid "$1"
 }
 
 assert_workload() {
-
     workload_valid "$1"
-
 }
 
 assert_result_field() {
-
     result_field_valid "$1"
-
 }
 
 assert_result_value() {
-
-    result_value_valid "$1" "$2"
-
+    result_value_valid "$1" "${2-}"
 }
 
 assert_result_status() {
-
     result_status_valid "$1"
-
 }
 
 assert_output_format() {
-
     output_format_valid "$1"
-
 }
 
-############################################################
-# Repository Validation
-############################################################
+assert_error_category() {
+    error_category_valid "$1"
+}
+
+assert_error_severity() {
+    error_severity_valid "$1"
+}
+
+# ------------------------------------------------------------
+# Required-field validation
+#
+# The getter function must accept:
+#   getter <field>
+#
+# and print the field value.
+# ------------------------------------------------------------
 
 result_required_fields_present() {
-
     local getter="$1"
-
     local field
+    local value
 
-    for field in "${RESULT_FIELD_ENUM[@]}"
-    do
-
-        if result_field_required "$field"
-        then
-
-            local value
-
-            value=$($getter "$field")
-
-            [[ -z "$value" ]] && return 1
-
+    for field in "${RESULT_FIELD_ENUM[@]}"; do
+        if result_field_required "$field"; then
+            value="$("$getter" "$field")"
+            [ -n "$value" ] || return 1
         fi
-
     done
 
     return 0
-
 }
