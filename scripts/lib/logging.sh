@@ -8,9 +8,11 @@
 #
 ############################################################
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOG_DIR="${SCRIPT_DIR}/../logs"
+LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_ROOT="$(cd "${LIB_DIR}/.." && pwd)"
+SERVER_ROOT="$(cd "${SCRIPT_ROOT}/.." && pwd)"
 
+LOG_DIR="${SERVER_ROOT}/logs"
 mkdir -p "$LOG_DIR"
 
 LOG_FILE="${LOG_DIR}/operations.log"
