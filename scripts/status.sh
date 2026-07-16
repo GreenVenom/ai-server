@@ -9,7 +9,7 @@
 # Purpose:
 # Quick operational status overview.
 #
-# Version: 1.0.0
+# Version: 2.0.0
 #
 ############################################################
 
@@ -33,29 +33,29 @@ echo "Platform : $PLATFORM_VERSION"
 echo "Hostname : $(get_hostname)"
 echo
 
+print_section "Core Services"
+
 execute_check check_service "Ollama" ollama_running
 execute_check check_service "Docker" docker_running
 execute_check check_service "Tailscale" tailscale_running
+execute_check check_openclaw_gateway
+execute_check check_openclaw_rpc
 
-echo
+print_section "Endpoints"
 
 execute_check check_api "Ollama API" "http://${OLLAMA_HOST}/api/version"
+execute_check check_port "OpenClaw Gateway" "$OPENCLAW_GATEWAY_HOST" "$OPENCLAW_GATEWAY_PORT"
+
+print_section "OpenClaw"
+
+execute_check check_openclaw_version
+execute_check check_openclaw_models
+execute_check check_openclaw_sandbox_runtime
 
 echo
-
-echo "Installed Models"
-
-if ollama_installed; then
-    ollama list
-else
-    echo "Ollama not installed."
-fi
-
+echo "OpenClaw Workspace : $OPENCLAW_WORKSPACE"
+echo "Sandbox Image      : $OPENCLAW_SANDBOX_IMAGE"
+echo "Disk Free          : $(get_disk_free)"
+echo "Memory             : $(get_memory_gb) GB"
 echo
-
-echo "Disk Free : $(get_disk_free)"
-echo "Memory    : $(get_memory_gb) GB"
-
-echo
-
-echo "Overall Status : $(overall_status)"
+echo "Overall Status     : $(overall_status)"
