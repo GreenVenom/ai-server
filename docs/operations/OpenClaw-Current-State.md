@@ -2,7 +2,7 @@
 
 ## Summary
 
-OpenClaw is operational as a local-only agent platform using Ollama and Docker sandboxing.
+OpenClaw is operational as a local-only agent platform using Ollama and Docker sandboxing. This is the completed M03 state released in v0.3.0.
 
 ## Versions
 
@@ -75,6 +75,9 @@ openclaw-sandbox:bookworm-slim
 [x] Agent writes a file
 [x] Host sees the generated file
 [x] Test file removed successfully
+[x] Operations scripts integrated
+[x] Reboot persistence validated
+[x] Docker Desktop auto-start validated for the `openclaw` user
 ```
 
 ## Known Non-Blocking Items
@@ -82,5 +85,4 @@ openclaw-sandbox:bookworm-slim
 - `operator.read` is not granted to the current diagnostic client.
 - `gateway.trustedProxies` is unset because no reverse proxy exists.
 - Docker Desktop must be available in the logged-in `openclaw` GUI session.
-- Reboot persistence has not yet been fully validated.
-- OpenClaw has not yet been integrated into platform operations scripts.
+- Docker Desktop requires an active `openclaw` user login session after reboot.

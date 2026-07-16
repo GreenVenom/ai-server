@@ -1,8 +1,10 @@
 # M03 — OpenClaw Platform
 
-**Status:** Complete  
-**Platform Version:** v0.2.0  
-**Milestone:** M03
+| Field | Value |
+| --- | --- |
+| Status | Complete |
+| Platform version | v0.3.0 |
+| Milestone | M03 |
 
 ## Objective
 
@@ -122,4 +124,4 @@ Verified after reboot and login:
 [x] Docker auto-start on user login validated
 ```
 
-M03 is complete.
+M03 is complete. See the [v0.3.0 release notes](../releases/v0.3.0.md).

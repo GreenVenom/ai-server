@@ -53,21 +53,23 @@ ADR-0008
 ADR-0009
 ```
 
-## M03 — OpenClaw Platform ⏳
+## M03 — OpenClaw Platform ✅
 
-Status: Next
+Status: Complete
 
-Objectives:
+Delivered:
 
-- install and configure OpenClaw
-- define orchestration boundaries
-- integrate local Ollama models
-- establish model routing policy
-- preserve local-first behavior
-- define cloud fallback strategy
-- integrate existing operations and health checks
+- OpenClaw 2026.7.1 with a LaunchAgent-managed, loopback-only Gateway
+- local Ollama routing with Gemma 4 12B primary and Qwen3 14B fallback models
+- token authentication and a hardened local-only control plane
+- Docker sandboxing with a dedicated read-write productive workspace
+- OpenClaw-aware status, doctor, health, and verification scripts
+- reboot-persistence validation and Docker Desktop auto-start at user login
+- zero critical findings in the deep security audit
 
 ## M04 — Qdrant ⏳
+
+Status: Next
 
 Objectives:
 

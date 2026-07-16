@@ -3,15 +3,15 @@ title: Platform Version
 status: Active
 ---
 
-## Personal AI Platform
+# Platform Version
 
 ### Current Version
 
-v0.2.0
+v0.3.0
 
 ### Current Milestone
 
-M02 – Production Ollama Runtime
+M03 – OpenClaw Platform
 
 ### Repository Status
 
@@ -50,7 +50,7 @@ macOS
 | Ollama | 0.31.2 | ✅ |
 | Docker Desktop | Current | ✅ |
 | Tailscale | Current | ✅ |
-| OpenClaw | Planned | ⏳ |
+| OpenClaw | 2026.7.1 | ✅ |
 | Qdrant | Planned | ⏳ |
 
 ---
@@ -60,8 +60,8 @@ macOS
 | Version | Milestone | Status |
 | -------- | ----------- | -------- |
 | v0.1.0 | Foundation | Complete |
-| v0.2.0 | Production Ollama | In Progress |
-| v0.3.0 | OpenClaw | Planned |
+| v0.2.0 | Production Ollama Runtime | Complete |
+| v0.3.0 | OpenClaw Platform | Complete |
 | v0.4.0 | Docker Platform | Planned |
 | v0.5.0 | Qdrant | Planned |
 | v0.6.0 | Obsidian Integration | Planned |

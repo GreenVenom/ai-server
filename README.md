@@ -9,8 +9,8 @@ The platform is designed to keep routine inference and data processing local whi
 ```text
 M01  Foundation                    Complete
 M02  Production Ollama Runtime     Complete
-M03  OpenClaw Platform             Next
-M04  Qdrant                        Planned
+M03  OpenClaw Platform             Complete
+M04  Qdrant                        Next
 M05  Obsidian Integration          Planned
 M06  MCP Servers                   Planned
 M07  Monitoring                    Planned
@@ -26,6 +26,7 @@ Provider    : Ollama
 API         : http://127.0.0.1:11434
 Service     : com.ollama.ollama
 Model Store : ~/server/data/models/ollama
+OpenClaw    : 2026.7.1 (loopback Gateway, Docker sandbox)
 ```
 
 ## Models
@@ -184,6 +185,10 @@ Important rules:
 - safe under `set -u`
 - repository mutation must occur in the current shell
 
+## Current Release
+
+v0.3.0 completes M03 and adds the OpenClaw orchestration layer. See the [M03 milestone record](docs/milestones/M03-OpenClaw-Platform.md) and [v0.3.0 release notes](docs/releases/v0.3.0.md).
+
 ## Next Milestone
 
-M03 introduces OpenClaw as the orchestration layer above the validated production Ollama runtime.
+M04 introduces Qdrant as the local vector database and retrieval foundation.
