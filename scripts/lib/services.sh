@@ -9,7 +9,7 @@
 # Purpose:
 # Service discovery and status.
 #
-# Version: 2.1.0
+# Version: 2.2.0
 #
 ############################################################
 
@@ -161,28 +161,31 @@ openclaw_config_valid() {
     openclaw config validate >/dev/null 2>&1
 }
 
-# Return everything after the first colon. Model identifiers contain
-# additional colons, for example ollama/gemma4:12b.
-_openclaw_status_value() {
-    local key_pattern="$1"
-
-    openclaw models status 2>/dev/null |
-        awk -v pattern="$key_pattern" '
-            $0 ~ pattern {
-                line=$0
-                sub(/^[^:]*:[[:space:]]*/, "", line)
-                print line
-                exit
-            }
-        '
+# Read the authoritative model-selection object rather than parsing the
+# human-oriented `openclaw models status` output.
+openclaw_model_config() {
+    openclaw config get agents.defaults.model 2>/dev/null
 }
 
 openclaw_primary_model() {
-    _openclaw_status_value '^Default[[:space:]]*:'
+    local output
+
+    output="$(openclaw_model_config)" || return 1
+
+    printf '%s\n' "$output" |
+        sed -n 's/^[[:space:]]*"primary":[[:space:]]*"\([^"]*\)".*/\1/p' |
+        head -n 1
 }
 
 openclaw_fallback_models() {
-    _openclaw_status_value '^Fallbacks'
+    local output
+
+    output="$(openclaw_model_config)" || return 1
+
+    printf '%s\n' "$output" |
+        sed -n '/"fallbacks"[[:space:]]*:/,/]/ {
+            s/^[[:space:]]*"\([^"]*\)"[,]*/\1/p
+        }'
 }
 
 openclaw_primary_model_correct() {
@@ -191,7 +194,7 @@ openclaw_primary_model_correct() {
 
 openclaw_fallback_model_correct() {
     openclaw_fallback_models |
-        grep -Fq "$OPENCLAW_FALLBACK_MODEL"
+        grep -Fxq "$OPENCLAW_FALLBACK_MODEL"
 }
 
 openclaw_workspace_configured() {
