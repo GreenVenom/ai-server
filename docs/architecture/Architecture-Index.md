@@ -3,11 +3,11 @@ title: Architecture Index
 status: Active
 ---
 
-## Architecture Documentation
+# Architecture Documentation
 
 This directory contains the high-level architectural documentation for the Personal AI Platform.
 
-### Documents
+## Documents
 
 | Document | Purpose |
 | --- | --- |
@@ -16,6 +16,12 @@ This directory contains the high-level architectural documentation for the Perso
 | Service Management | Service lifecycle and orchestration |
 | Network Architecture | Connectivity and security |
 | Directory Layout | Filesystem organization |
+| Documentation Architecture | Documentation system and responsibilities |
+| Benchmark Framework | Layered, provider-neutral benchmark design |
+| Benchmark Profiles | Reusable benchmark execution defaults |
+| Error Framework | Structured error handling for benchmarks |
+| Repository Pattern | In-memory repository conventions for Bash |
+| OpenClaw Architecture | Orchestration and agent-layer design |
 
 ### Design Principles
 

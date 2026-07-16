@@ -474,6 +474,8 @@ For example:
 
 Cross-referencing keeps documentation cohesive and reduces duplication.
 
+Documentation links, metadata, filenames, and required sections are standardized in the [Documentation Standards](../templates/Documentation-Standards.md). Apply that standard to new or materially revised documents; do not rewrite historical records solely for formatting consistency.
+
 ---
 
 ## Definition of Complete Documentation

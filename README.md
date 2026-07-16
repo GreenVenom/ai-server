@@ -61,11 +61,14 @@ nomic-embed-text:latest
 ```text
 docs/
 ├── architecture/
-├── engineering/
+├── decisions/
+├── glossary/
 ├── milestones/
 ├── operations/
+├── platform-config/
 ├── releases/
-└── runbooks/
+├── runbooks/
+└── templates/
 
 benchmarks/
 ├── benchmark.sh
@@ -80,11 +83,15 @@ benchmarks/
 ├── reports/
 └── tests/
 
+configs/
+infrastructure/
 scripts/
 services/
-config/
-docker/
 ```
+
+## Documentation
+
+Start with the [documentation map](docs/README.md). New or substantially revised documentation should follow the [documentation standards](docs/templates/Documentation-Standards.md).
 
 ## Operations
 

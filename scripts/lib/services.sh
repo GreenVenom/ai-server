@@ -9,7 +9,7 @@
 # Purpose:
 # Service discovery and status.
 #
-# Version: 2.0.0
+# Version: 2.1.0
 #
 ############################################################
 
@@ -69,11 +69,36 @@ docker_sandbox_image_available() {
 ############################################################
 
 tailscale_installed() {
-    command -v tailscale >/dev/null 2>&1
+    command -v tailscale >/dev/null 2>&1 ||
+        [[ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]]
+}
+
+tailscale_cli() {
+    if command -v tailscale >/dev/null 2>&1; then
+        command -v tailscale
+        return 0
+    fi
+
+    if [[ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]]; then
+        printf "%s\n" "/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+        return 0
+    fi
+
+    return 1
 }
 
 tailscale_running() {
-    pgrep tailscaled >/dev/null 2>&1
+    local cli
+
+    if cli="$(tailscale_cli 2>/dev/null)"; then
+        "$cli" status >/dev/null 2>&1 && return 0
+    fi
+
+    # macOS App Store / GUI deployments do not always expose a
+    # process named exactly "tailscaled".
+    pgrep -f \
+        '(^|/)(tailscaled|Tailscale|IPNExtension)([[:space:]]|$)' \
+        >/dev/null 2>&1
 }
 
 ############################################################
@@ -136,22 +161,28 @@ openclaw_config_valid() {
     openclaw config validate >/dev/null 2>&1
 }
 
-openclaw_primary_model() {
+# Return everything after the first colon. Model identifiers contain
+# additional colons, for example ollama/gemma4:12b.
+_openclaw_status_value() {
+    local key_pattern="$1"
+
     openclaw models status 2>/dev/null |
-        awk -F: '/^Default[[:space:]]*:/ {
-            sub(/^[[:space:]]+/, "", $2)
-            print $2
-            exit
-        }'
+        awk -v pattern="$key_pattern" '
+            $0 ~ pattern {
+                line=$0
+                sub(/^[^:]*:[[:space:]]*/, "", line)
+                print line
+                exit
+            }
+        '
+}
+
+openclaw_primary_model() {
+    _openclaw_status_value '^Default[[:space:]]*:'
 }
 
 openclaw_fallback_models() {
-    openclaw models status 2>/dev/null |
-        awk -F: '/^Fallbacks/ {
-            sub(/^[[:space:]]+/, "", $2)
-            print $2
-            exit
-        }'
+    _openclaw_status_value '^Fallbacks'
 }
 
 openclaw_primary_model_correct() {
