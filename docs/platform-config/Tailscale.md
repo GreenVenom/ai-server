@@ -1,7 +1,15 @@
 ---
 title: Tailscale Configuration
+document: Configuration
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
+
+# Tailscale Configuration
+
 
 ## Tailscale
 
@@ -69,3 +77,7 @@ SSH uses Ed25519 authentication.
 2. Authenticate.
 3. Enable SSH.
 4. Verify connectivity.
+
+## Related documentation
+
+- [Documentation map](../README.md)

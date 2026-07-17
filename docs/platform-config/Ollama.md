@@ -1,11 +1,18 @@
 ---
 title: Ollama Configuration
+document: Configuration
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Revan
 last_updated: 2026-07-13
 application: Ollama
 version: 0.31.2
-owner: Revan
 ---
+
+# Ollama Configuration
+
 
 ## Ollama
 
@@ -141,3 +148,7 @@ Embeddings
 Use vendor-supported configuration whenever possible.
 
 Do not modify vendor launchd services.
+
+## Related documentation
+
+- [Documentation map](../README.md)

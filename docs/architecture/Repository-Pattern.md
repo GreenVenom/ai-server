@@ -1,3 +1,13 @@
+---
+title: Repository Pattern
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Repository Pattern
 
 ## Purpose
@@ -179,3 +189,7 @@ Each repository should test:
 - Bash 3.2 behavior
 - `set -u` behavior
 - subshell mutation safety
+
+## Related documentation
+
+- [Documentation map](../README.md)

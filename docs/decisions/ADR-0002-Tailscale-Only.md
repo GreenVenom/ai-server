@@ -1,11 +1,19 @@
 ---
-title: Tailscale Only Remote Access
+title: ADR-0002 - Tailscale Only Remote Access
+document: ADR
 status: Accepted
-date: 2026-07-12
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0002
 supersedes:
 superseded_by:
+date: 2026-07-12
 ---
+
+# ADR-0002 - Tailscale Only Remote Access
+
 
 ## Context
 
@@ -34,3 +42,7 @@ SSH will not be exposed to the public Internet.
 
 - Requires Tailscale availability.
 - Requires Tailscale authentication.
+
+## Related documentation
+
+- [Documentation map](../README.md)

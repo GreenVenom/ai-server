@@ -1,15 +1,15 @@
 ---
 title: M00 - Platform Charter
 document: Milestone
-version: 1.0
 status: Complete
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.2.0
-author: GreenVenom
+owner: GreenVenom
+version: 1.0
 ---
 
-# M00 – Platform Charter
+# M00 - Platform Charter
 
 ## Purpose
 
@@ -278,3 +278,7 @@ If a future decision conflicts with this charter, either:
 2. The charter should be intentionally revised through documented review.
 
 The charter is the highest-level design document for the Personal AI Platform.
+
+## Related documentation
+
+- [Documentation map](../README.md)

@@ -1,3 +1,13 @@
+---
+title: M02 — Production Ollama Runtime
+document: Milestone
+status: Complete
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # M02 — Production Ollama Runtime
 
 **Status:** Complete  
@@ -226,3 +236,7 @@ The following are enhancements and do not block M02 completion:
 M02 establishes a secure, persistent local inference runtime and a tested benchmark foundation for the Personal AI Platform.
 
 The platform is ready to proceed to **M03 — OpenClaw Platform**.
+
+## Related documentation
+
+- [Documentation map](../README.md)

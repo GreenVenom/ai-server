@@ -1,3 +1,13 @@
+---
+title: OpenClaw Architecture
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Architecture
 
 ```text
@@ -53,3 +63,7 @@ OpenClaw Gateway
 ```
 
 Docker Desktop starts automatically when the `openclaw` account logs in.
+
+## Related documentation
+
+- [Documentation map](../README.md)

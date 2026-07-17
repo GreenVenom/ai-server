@@ -1,12 +1,10 @@
 ---
 title: ADR-XXXX - Decision Title
-document: ADR
+document: Template
 status: Proposed
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-decision_id: ADR-XXXX
-supersedes:
-superseded_by:
+platform_version: v0.3.0
 owner: Platform owner
 ---
 

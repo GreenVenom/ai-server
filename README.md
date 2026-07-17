@@ -1,3 +1,13 @@
+---
+title: Personal AI Platform
+document: Reference
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Personal AI Platform
 
 A production-quality, local-first personal AI platform running on a Mac mini M4 Pro.
@@ -192,3 +202,7 @@ v0.3.0 completes M03 and adds the OpenClaw orchestration layer. See the [M03 mil
 ## Next Milestone
 
 M04 introduces Qdrant as the local vector database and retrieval foundation.
+
+## Related documentation
+
+- [Documentation map](docs/README.md)

@@ -1,4 +1,17 @@
-# ADR-0012: Standardize Qdrant Collection, Vector, and Embedding Metadata
+---
+title: ADR-0012 - Standardize Qdrant Collection, Vector, and Embedding Metadata
+document: ADR
+status: Accepted
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+decision_id: ADR-0012
+supersedes:
+superseded_by:
+---
+
+# ADR-0012 - Standardize Qdrant Collection, Vector, and Embedding Metadata
 
 - **Status:** Accepted
 - **Date:** 2026-07-17
@@ -314,3 +327,7 @@ Revisit this decision if:
 - multiple vector stores must share one schema;
 - Qdrant adds a feature that materially improves migration;
 - production corpus scale reveals unacceptable payload overhead.
+
+## Related documentation
+
+- [Documentation map](../README.md)

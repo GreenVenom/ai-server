@@ -1,7 +1,15 @@
 ---
 title: Docker Desktop Configuration
+document: Configuration
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
+
+# Docker Desktop Configuration
+
 
 ## Docker Desktop
 
@@ -70,3 +78,7 @@ All persistent storage must be mounted from:
 ```bash
 ~/server/data
 ```
+
+## Related documentation
+
+- [Documentation map](../README.md)

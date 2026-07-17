@@ -1,17 +1,22 @@
 ---
 title: Runtime Architecture
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
-## Runtime Architecture
+# Runtime Architecture
 
-### Purpose
+## Purpose
 
 Provide reliable AI inference for all platform services.
 
 ---
 
-### Components
+## Components
 
 OpenClaw
 
@@ -29,7 +34,7 @@ Embeddings
 
 ---
 
-### Runtime Responsibilities
+## Runtime Responsibilities
 
 - Model loading
 - Inference
@@ -39,7 +44,7 @@ Embeddings
 
 ---
 
-### Initial Models
+## Initial Models
 
 Primary
 
@@ -55,7 +60,7 @@ Embedding
 
 ---
 
-### Future Expansion
+## Future Expansion
 
 - Vision models
 - Audio models
@@ -63,3 +68,7 @@ Embedding
 - Cloud providers
 - Automation workflows
 - Disaster recovery
+
+## Related documentation
+
+- [Documentation map](../README.md)

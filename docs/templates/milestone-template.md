@@ -1,16 +1,15 @@
 ---
-
 title: Milestone Template
 document: Template
-version: 1.0
 status: Active
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.0.0
-author: GreenVenom
+owner: GreenVenom
+version: 1.0
 ---
 
-# MXX – Milestone Name
+# Milestone Template
 
 ## Executive Summary
 

@@ -1,11 +1,16 @@
 ---
 title: Directory Layout
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
-## Directory Layout
+# Directory Layout
 
-### Runtime
+## Runtime
 
 ```text
 ~/server/
@@ -29,7 +34,7 @@ runbooks/
 
 ---
 
-### Data
+## Data
 
 ```text
 data/
@@ -43,7 +48,7 @@ indexes/
 
 ---
 
-### Logs
+## Logs
 
 ```text
 logs/
@@ -59,7 +64,7 @@ docker/
 
 ---
 
-### Repository
+## Repository
 
 ```text
 docs/
@@ -77,10 +82,14 @@ templates/
 
 ---
 
-### Principles
+## Principles
 
 - Configuration is separate from data.
 - Data is separate from logs.
 - Documentation lives with infrastructure.
 - Every component has a defined location.
 - Every component has a defined purpose.
+
+## Related documentation
+
+- [Documentation map](../README.md)

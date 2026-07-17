@@ -1,11 +1,19 @@
 ---
-title: Layered Benchmark Architecture
+title: ADR-0007 - Layered Benchmark Architecture
+document: ADR
 status: Accepted
-date: 2026-07-14
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0007
 supersedes:
 superseded_by:
+date: 2026-07-14
 ---
+
+# ADR-0007 - Layered Benchmark Architecture
+
 
 ## Context
 
@@ -326,3 +334,7 @@ This ADR affects:
 - All future benchmark-related milestones
 
 This ADR establishes the Benchmark Framework as a first-class subsystem within the Personal AI Platform.
+
+## Related documentation
+
+- [Documentation map](../README.md)

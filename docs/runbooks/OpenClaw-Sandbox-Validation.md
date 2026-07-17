@@ -1,3 +1,13 @@
+---
+title: OpenClaw Sandbox Validation
+document: Runbook
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Sandbox Validation
 
 ## Prerequisites
@@ -103,3 +113,7 @@ rm ~/server/workspaces/main/workspace-test.txt
 [x] Agent file write successful
 [x] Host file verification successful
 ```
+
+## Related documentation
+
+- [Documentation map](../README.md)

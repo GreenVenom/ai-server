@@ -1,11 +1,16 @@
 ---
 title: Service Management
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
-## Service Management
+# Service Management
 
-### Philosophy
+## Philosophy
 
 Each service should have:
 
@@ -17,7 +22,7 @@ Each service should have:
 
 ---
 
-### Native Services
+## Native Services
 
 Managed through launchd.
 
@@ -28,7 +33,7 @@ Examples
 
 ---
 
-### Containerized Services
+## Containerized Services
 
 Managed through Docker Compose.
 
@@ -41,7 +46,7 @@ Examples
 
 ---
 
-### Lifecycle
+## Lifecycle
 
 Install
 
@@ -67,7 +72,7 @@ Retire
 
 ---
 
-### Operational Standards
+## Operational Standards
 
 Every service must include:
 
@@ -76,3 +81,7 @@ Every service must include:
 - Health check
 - Runbook
 - Verification
+
+## Related documentation
+
+- [Documentation map](../README.md)

@@ -1,11 +1,19 @@
 ---
-title: Adopt a Standardized Error Framework
+title: ADR-0008 - Adopt a Standardized Error Framework
+document: ADR
 status: Accepted
-date: 2026-07-14
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0008
 supersedes:
 superseded_by:
+date: 2026-07-14
 ---
+
+# ADR-0008 - Adopt a Standardized Error Framework
+
 
 ## Context
 
@@ -233,3 +241,7 @@ The Error Framework is expected to support:
 - JSON diagnostics
 
 without requiring architectural changes.
+
+## Related documentation
+
+- [Documentation map](../README.md)

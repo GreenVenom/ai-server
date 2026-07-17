@@ -1,3 +1,13 @@
+---
+title: OpenClaw Reboot Validation
+document: Runbook
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Reboot Validation
 
 ## Before reboot
@@ -50,3 +60,7 @@ rm ~/server/workspaces/main/reboot-test.txt
 [x] workspace write succeeded
 [x] all operations scripts passed
 ```
+
+## Related documentation
+
+- [Documentation map](../README.md)

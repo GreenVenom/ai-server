@@ -1,4 +1,17 @@
-# ADR-0013: Standardize Qdrant Snapshot Retention and Cleanup
+---
+title: ADR-0013 - Standardize Qdrant Snapshot Retention and Cleanup
+document: ADR
+status: Accepted
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+decision_id: ADR-0013
+supersedes:
+superseded_by:
+---
+
+# ADR-0013 - Standardize Qdrant Snapshot Retention and Cleanup
 
 - **Status:** Accepted
 - **Date:** 2026-07-17
@@ -318,3 +331,7 @@ Revisit this decision if:
 - encryption-at-rest requirements apply to portable snapshots;
 - multiple collections require different policies;
 - scheduled automation introduces alerting or failure-handling requirements.
+
+## Related documentation
+
+- [Documentation map](../README.md)

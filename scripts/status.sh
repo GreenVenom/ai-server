@@ -108,14 +108,18 @@ print(data.get("version", "unknown"))
 }
 
 qdrant_collection_summary() {
-    curl --fail --silent --show-error \
-        "${QDRANT_URL}/collections/${QDRANT_COLLECTION}" 2>/dev/null |
-    python3 - "$QDRANT_COLLECTION" <<'PY' 2>/dev/null
+    metadata="$(
+        curl --fail --silent --show-error \
+            "${QDRANT_URL}/collections/${QDRANT_COLLECTION}" 2>/dev/null
+    )" || return 1
+
+    python3 - "$metadata" "$QDRANT_COLLECTION" <<'PY' 2>/dev/null
 import json
 import sys
 
-collection = sys.argv[1]
-data = json.load(sys.stdin)["result"]
+payload = json.loads(sys.argv[1])
+collection = sys.argv[2]
+data = payload["result"]
 print(
     "{}: status={}, points={}".format(
         collection,

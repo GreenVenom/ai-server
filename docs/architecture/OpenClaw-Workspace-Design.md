@@ -1,3 +1,13 @@
+---
+title: OpenClaw Workspace Design
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Workspace Design
 
 ## Purpose
@@ -80,3 +90,7 @@ The main agent should not receive direct access to:
 ## Verification
 
 The main agent created `workspace-test.txt` in `~/server/workspaces/main`, the host verified the expected content, and the test file was removed.
+
+## Related documentation
+
+- [Documentation map](../README.md)

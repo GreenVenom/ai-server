@@ -1,9 +1,14 @@
 ---
 title: Architecture Index
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
-# Architecture Documentation
+# Architecture Index
 
 This directory contains the high-level architectural documentation for the Personal AI Platform.
 
@@ -39,3 +44,7 @@ This directory contains the high-level architectural documentation for the Perso
 - ADRs
 - Milestones
 - Runbooks
+
+## Related documentation
+
+- [Documentation map](../README.md)

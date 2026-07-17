@@ -1,3 +1,13 @@
+---
+title: Enable Remote Login
+document: Reference
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Enable Remote Login
 
 Enable remote login on macOS to allow SSH access to your machine. This can be done through the System Settings or via the command line.
@@ -23,3 +33,7 @@ Note: This command will prompt you to enter your password.
 
 1. Run the command `systemsetup -getremotelogin`.
 2. If remote login is enabled, you will see "Remote Login: On".
+
+## Related documentation
+
+- [Documentation map](../../../docs/README.md)

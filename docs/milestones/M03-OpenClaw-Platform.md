@@ -1,3 +1,13 @@
+---
+title: M03 — OpenClaw Platform
+document: Milestone
+status: Complete
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # M03 — OpenClaw Platform
 
 | Field | Value |
@@ -125,3 +135,7 @@ Verified after reboot and login:
 ```
 
 M03 is complete. See the [v0.3.0 release notes](../releases/v0.3.0.md).
+
+## Related documentation
+
+- [Documentation map](../README.md)

@@ -1,3 +1,13 @@
+---
+title: OpenClaw Security Baseline
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Security Baseline
 
 ## Gateway
@@ -86,3 +96,7 @@ Accepted warnings:
 [x] Cloud memory search disabled
 [x] Zero critical security findings
 ```
+
+## Related documentation
+
+- [Documentation map](../README.md)

@@ -1,11 +1,19 @@
 ---
-title: launchd for Native Services
+title: ADR-0004 - launchd for Native Services
+document: ADR
 status: Accepted
-date: 2026-07-12
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0004
 supersedes:
 superseded_by:
+date: 2026-07-12
 ---
+
+# ADR-0004 - launchd for Native Services
+
 
 ## Context
 
@@ -45,3 +53,7 @@ will use Docker Compose.
 ### Negative
 
 Two service management systems must be understood.
+
+## Related documentation
+
+- [Documentation map](../README.md)

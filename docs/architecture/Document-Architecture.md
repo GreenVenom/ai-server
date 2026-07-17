@@ -1,13 +1,12 @@
 ---
-
 title: Documentation Architecture
 document: Architecture
-version: 1.0
 status: Active
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.2.0
-author: Revan
+owner: Revan
+version: 1.0
 ---
 
 # Documentation Architecture

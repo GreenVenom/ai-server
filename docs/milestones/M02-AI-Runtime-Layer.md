@@ -1,17 +1,16 @@
 ---
-
 title: M02 - Production Ollama Runtime
 document: Milestone
-version: 2.0
 status: Complete
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.2.0
+owner: Revan
+version: 2.0
 maturity: Operational
-author: Revan
 ---
 
-# M02 – Production Ollama Runtime
+# M02 - Production Ollama Runtime
 
 ## Executive Summary
 

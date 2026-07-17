@@ -1,13 +1,12 @@
 ---
-
 title: Engineering Principles
 document: Architecture
-version: 1.0
 status: Active
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.2.0
-author: Revan
+owner: Revan
+version: 1.0
 ---
 
 # Engineering Principles
@@ -389,3 +388,7 @@ This document complements the rest of the repository.
 | Version | Date       | Author | Changes         |
 | ------- | ---------- | ------ | --------------- |
 | 1.0     | 2026-07-13 | Revan  | Initial version |
+
+## Related documentation
+
+- [Documentation map](../README.md)

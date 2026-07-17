@@ -1,3 +1,13 @@
+---
+title: OpenClaw Installation and Hardening
+document: Runbook
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Installation and Hardening
 
 ## Installation
@@ -94,3 +104,7 @@ openclaw models status
 openclaw sandbox explain --agent main
 openclaw security audit --deep
 ```
+
+## Related documentation
+
+- [Documentation map](../README.md)

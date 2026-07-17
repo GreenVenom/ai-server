@@ -1,3 +1,13 @@
+---
+title: SSH Configuration
+document: Reference
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # SSH Configuration
 
 ## Purpose
@@ -24,3 +34,7 @@ openclaw is the only user allowed to log in via SSH.
 2. Add the new public key to authorized_keys.
 3. Verify login.
 4. Remove the old key.
+
+## Related documentation
+
+- [Documentation map](../../docs/README.md)

@@ -1,3 +1,13 @@
+---
+title: Benchmark Profiles
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Benchmark Profiles
 
 ## Purpose
@@ -163,3 +173,7 @@ Profile loading verifies:
 - boolean values normalize correctly
 
 The profile loader is Bash 3.2-compatible and safe under `set -u`.
+
+## Related documentation
+
+- [Documentation map](../README.md)

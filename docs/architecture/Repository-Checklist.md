@@ -1,3 +1,13 @@
+---
+title: Repository Implementation Checklist
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Repository Implementation Checklist
 
 Use this checklist when implementing or reviewing an in-memory repository.
@@ -91,3 +101,7 @@ Result Repository
 ```
 
 These implementations define the current repository conventions for the Personal AI Platform.
+
+## Related documentation
+
+- [Documentation map](../README.md)

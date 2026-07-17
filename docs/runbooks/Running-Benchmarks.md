@@ -1,3 +1,13 @@
+---
+title: Running Benchmarks
+document: Runbook
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Running Benchmarks
 
 ## Purpose
@@ -183,3 +193,7 @@ For comparable baselines:
 - avoid other heavy workloads on the Mac mini
 - record runtime and model versions
 - preserve generated reports in version-controlled or archived benchmark directories
+
+## Related documentation
+
+- [Documentation map](../README.md)

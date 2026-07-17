@@ -4,6 +4,8 @@ document: Reference
 status: Active
 created: 2026-07-15
 updated: 2026-07-15
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
 # Documentation
@@ -37,3 +39,7 @@ Use [Documentation Standards](templates/Documentation-Standards.md) for all new 
 ## Status Conventions
 
 Use `Draft`, `Active`, `In Progress`, `Complete`, `Deprecated`, or `Superseded` as appropriate. ADRs use `Proposed`, `Accepted`, `Deprecated`, or `Superseded`.
+
+## Related documentation
+
+- [Documentation map](README.md)

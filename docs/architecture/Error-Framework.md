@@ -1,3 +1,13 @@
+---
+title: Error Framework
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Error Framework
 
 ## Purpose
@@ -161,3 +171,7 @@ When a provider call is itself executed inside command substitution so the provi
 Current Result failure handling still records the execution failure.
 
 A future provider API may set a global response variable or write response data to a temporary file so provider execution can remain in the current shell.
+
+## Related documentation
+
+- [Documentation map](../README.md)

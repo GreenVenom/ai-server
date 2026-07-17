@@ -1,3 +1,13 @@
+---
+title: OpenClaw Current State
+document: Operation
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Current State
 
 ## Summary
@@ -86,3 +96,7 @@ openclaw-sandbox:bookworm-slim
 - `gateway.trustedProxies` is unset because no reverse proxy exists.
 - Docker Desktop must be available in the logged-in `openclaw` GUI session.
 - Docker Desktop requires an active `openclaw` user login session after reboot.
+
+## Related documentation
+
+- [Documentation map](../README.md)

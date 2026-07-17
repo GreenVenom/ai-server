@@ -1,17 +1,22 @@
 ---
 title: Network Architecture
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
-## Network Architecture
+# Network Architecture
 
-### Philosophy
+## Philosophy
 
 Remote access is private by default.
 
 ---
 
-### External Access
+## External Access
 
 Windows Workstation
 
@@ -29,7 +34,7 @@ Mac mini
 
 ---
 
-### Internal Services
+## Internal Services
 
 OpenClaw
 
@@ -55,7 +60,7 @@ Monitoring
 
 ---
 
-### Security Principles
+## Security Principles
 
 - No public SSH
 - No port forwarding
@@ -65,8 +70,12 @@ Monitoring
 
 ---
 
-### Future
+## Future
 
 - Reverse proxy
 - TLS certificates
 - Service authentication
+
+## Related documentation
+
+- [Documentation map](../README.md)

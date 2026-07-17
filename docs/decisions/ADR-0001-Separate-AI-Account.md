@@ -1,11 +1,19 @@
 ---
-title: Separate AI Account
+title: ADR-0001 - Separate AI Account
+document: ADR
 status: Accepted
-date: 2026-07-12
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0001
 supersedes:
 superseded_by:
+date: 2026-07-12
 ---
+
+# ADR-0001 - Separate AI Account
+
 
 ## Context
 
@@ -46,3 +54,7 @@ AI
 ### Negative
 
 - Software updates require the admin account.
+
+## Related documentation
+
+- [Documentation map](../README.md)

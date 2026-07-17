@@ -1,11 +1,16 @@
 ---
 title: System Overview
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
-## System Overview
+# System Overview
 
-### Mission
+## Mission
 
 Provide a secure, local-first AI platform for development, knowledge management, and automation while minimizing dependence on cloud-hosted AI services.
 
@@ -72,3 +77,7 @@ Future Infrastructure
 - Automation workflows
 - Disaster recovery
 - Future cloud providers
+
+## Related documentation
+
+- [Documentation map](../README.md)

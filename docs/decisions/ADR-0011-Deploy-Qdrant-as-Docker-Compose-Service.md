@@ -1,4 +1,17 @@
-# ADR-0011: Deploy Qdrant as a Docker Compose Service
+---
+title: ADR-0011 - Deploy Qdrant as a Docker Compose Service
+document: ADR
+status: Accepted
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+decision_id: ADR-0011
+supersedes:
+superseded_by:
+---
+
+# ADR-0011 - Deploy Qdrant as a Docker Compose Service
 
 - **Status:** Accepted
 - **Date:** 2026-07-17
@@ -228,3 +241,7 @@ Revisit this decision if:
 - the named volume prevents an acceptable disaster-recovery design;
 - high availability or clustering becomes a requirement;
 - storage performance or scale exceeds the current single-node design.
+
+## Related documentation
+
+- [Documentation map](../README.md)

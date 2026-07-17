@@ -1,3 +1,13 @@
+---
+title: Benchmark Framework
+document: Architecture
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Benchmark Framework
 
 ## Purpose
@@ -303,3 +313,7 @@ nomic-embed-text:latest
 - expected-output scoring is not yet implemented
 
 These limitations do not block the M02 benchmark baseline.
+
+## Related documentation
+
+- [Documentation map](../README.md)

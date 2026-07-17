@@ -1,3 +1,13 @@
+---
+title: Roadmap
+document: Reference
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # Roadmap
 
 ## M01 — Foundation ✅
@@ -124,3 +134,7 @@ Potential later milestones include:
 - automated baseline regression detection
 - expanded local model routing
 - additional retrieval and agent workflows
+
+## Related documentation
+
+- [Documentation map](docs/README.md)

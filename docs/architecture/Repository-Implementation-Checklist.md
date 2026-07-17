@@ -1,7 +1,15 @@
 ---
 title: Repository Implementation Checklist
+document: Architecture
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
+
+# Repository Implementation Checklist
+
 
 ## Purpose
 
@@ -312,3 +320,7 @@ A repository implementation is considered complete when:
 - Repository-Pattern.md
 - Error-Framework.md
 - Engineering-Principles.md
+
+## Related documentation
+
+- [Documentation map](../README.md)

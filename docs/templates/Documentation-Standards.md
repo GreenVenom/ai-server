@@ -4,6 +4,8 @@ document: Standard
 status: Active
 created: 2026-07-15
 updated: 2026-07-15
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
 # Documentation Standards
@@ -14,7 +16,7 @@ This standard makes documentation predictable to navigate, maintain, and review.
 
 ## File and Heading Conventions
 
-- Use descriptive, Title-Case filenames with hyphens: `OpenClaw-Sandbox-Validation.md`.
+- Use descriptive, Title-Case filenames with hyphens: `OpenClaw-Sandbox-Validation.md`. `README.md` and versioned release notes such as `v0.3.0.md` are intentional exceptions.
 - Prefix ADRs and milestones with their identifiers: `ADR-0010-Example.md`, `M07-Monitoring.md`.
 - Begin every document with YAML front matter, followed by exactly one level-one heading that matches `title`.
 - Use sentence-style section headings and keep heading levels sequential; do not skip from `##` to `####`.
@@ -67,4 +69,8 @@ Use the following type-specific sections when applicable:
 
 ## Templates
 
-Use the [milestone template](milestone-template.md), [ADR template](ADR-template.md), or [runbook template](Runbook-template.md) as appropriate.
+Use the [milestone template](Milestone-Template.md), [ADR template](ADR-Template.md), or [runbook template](Runbook-Template.md) as appropriate.
+
+## Related documentation
+
+- [Documentation map](../README.md)

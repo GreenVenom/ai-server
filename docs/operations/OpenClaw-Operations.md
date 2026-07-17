@@ -1,3 +1,13 @@
+---
+title: OpenClaw Operations
+document: Operation
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # OpenClaw Operations
 
 ## Standard Commands
@@ -59,3 +69,7 @@ Expected socket target:
 ## Reboot Behavior
 
 After reboot, log into the `openclaw` account. Docker Desktop starts automatically on user login. Then run `verify.sh`.
+
+## Related documentation
+
+- [Documentation map](../README.md)

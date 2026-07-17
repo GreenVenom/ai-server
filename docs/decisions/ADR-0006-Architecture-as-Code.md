@@ -1,11 +1,19 @@
 ---
-title: Architecture as Code
+title: ADR-0006 - Architecture as Code
+document: ADR
 status: Accepted
-date: 2026-07-12
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0006
 supersedes:
 superseded_by:
+date: 2026-07-12
 ---
+
+# ADR-0006 - Architecture as Code
+
 
 ## ADR-0006: Architecture as Code
 
@@ -99,3 +107,7 @@ Future architecture documents may include:
 
 - M01 - Foundation
 - M02 - AI Runtime Layer
+
+## Related documentation
+
+- [Documentation map](../README.md)

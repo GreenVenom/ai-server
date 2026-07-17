@@ -1,19 +1,24 @@
 ---
 title: Platform Version
+document: Reference
 status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 ---
 
 # Platform Version
 
-### Current Version
+## Current Version
 
 v0.4.5
 
-### Current Milestone
+## Current Milestone
 
 M03 – OpenClaw Platform
 
-### Repository Status
+## Repository Status
 
 Active Development
 
@@ -110,3 +115,7 @@ Every version requires:
 - Updated benchmarks (if applicable)
 - Git tag
 - Milestone documentation
+
+## Related documentation
+
+- [Documentation map](docs/README.md)

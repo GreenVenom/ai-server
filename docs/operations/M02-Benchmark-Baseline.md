@@ -1,3 +1,13 @@
+---
+title: M02 Benchmark Baseline
+document: Operation
+status: Active
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
+---
+
 # M02 Benchmark Baseline
 
 ## Purpose
@@ -143,3 +153,7 @@ Future reporting should also add:
 - success rate
 - per-model aggregates
 - per-workload aggregates
+
+## Related documentation
+
+- [Documentation map](../README.md)

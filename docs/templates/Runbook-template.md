@@ -1,6 +1,6 @@
 ---
 title: Runbook Title
-document: Runbook
+document: Template
 status: Draft
 created: YYYY-MM-DD
 updated: YYYY-MM-DD

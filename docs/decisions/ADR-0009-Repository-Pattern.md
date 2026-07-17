@@ -1,11 +1,19 @@
 ---
-title: Standardize Repository Pattern
+title: ADR-0009 - Standardize Repository Pattern
+document: ADR
 status: Accepted
-date: 2026-07-14
+created: 2026-07-17
+updated: 2026-07-17
+platform_version: v0.3.0
+owner: Personal AI Platform maintainers
 decision_id: ADR-0009
 supersedes:
 superseded_by:
+date: 2026-07-14
 ---
+
+# ADR-0009 - Standardize Repository Pattern
+
 
 ## Context
 
@@ -364,3 +372,7 @@ Deferred.
 Bash lacks native object-oriented constructs, making a reusable repository implementation unnecessarily complex.
 
 The project instead standardizes the interface while allowing independent implementations.
+
+## Related documentation
+
+- [Documentation map](../README.md)

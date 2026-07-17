@@ -1,17 +1,16 @@
 ---
-
 title: M01 - Foundation
 document: Milestone
-version: 2.0
 status: Complete
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.1.0
+owner: Revan
+version: 2.0
 maturity: Foundation
-author: Revan
 ---
 
-# M01 – Foundation
+# M01 - Foundation
 
 ## Executive Summary
 
