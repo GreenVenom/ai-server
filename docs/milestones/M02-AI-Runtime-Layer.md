@@ -5,7 +5,7 @@ status: Complete
 created: 2026-07-13
 updated: 2026-07-13
 platform_version: v0.2.0
-owner: Revan
+owner: GreenVenom
 version: 2.0
 maturity: Operational
 ---

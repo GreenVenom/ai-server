@@ -5,7 +5,7 @@ status: Active
 created: 2026-07-17
 updated: 2026-07-17
 platform_version: v0.4.0
-owner: Personal AI Platform maintainers
+owner: GreenVenom
 milestone: M04 - Qdrant Vector Database
 schema_version: 1
 embedding_model: nomic-embed-text:latest

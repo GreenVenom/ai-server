@@ -5,7 +5,7 @@ status: Active
 created: 2026-07-15
 updated: 2026-07-15
 platform_version: v0.3.0
-owner: Personal AI Platform maintainers
+owner: GreenVenom
 ---
 
 # Documentation

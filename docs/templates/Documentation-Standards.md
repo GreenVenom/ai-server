@@ -5,7 +5,7 @@ status: Active
 created: 2026-07-15
 updated: 2026-07-15
 platform_version: v0.3.0
-owner: Personal AI Platform maintainers
+owner: GreenVenom
 ---
 
 # Documentation Standards
@@ -34,11 +34,11 @@ status: Draft
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 platform_version: vX.Y.Z
-owner: Platform owner
+owner: GreenVenom
 ---
 ```
 
-ADR front matter also includes `decision_id`, `supersedes`, and `superseded_by`.
+The default documentation owner is `GreenVenom`. ADR front matter also includes `decision_id`, `supersedes`, and `superseded_by`.
 
 ## Required Content
 

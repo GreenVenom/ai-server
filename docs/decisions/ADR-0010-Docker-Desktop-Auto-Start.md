@@ -5,7 +5,7 @@ status: Accepted
 created: 2026-07-16
 updated: 2026-07-16
 platform_version: v0.3.0
-owner: Personal AI Platform maintainers
+owner: GreenVenom
 decision_id: ADR-0010
 supersedes:
 superseded_by:

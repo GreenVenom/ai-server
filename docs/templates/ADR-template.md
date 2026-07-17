@@ -5,7 +5,7 @@ status: Proposed
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 platform_version: v0.3.0
-owner: Platform owner
+owner: GreenVenom
 ---
 
 # ADR-XXXX - Decision Title
