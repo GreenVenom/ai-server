@@ -4,7 +4,7 @@ document: Reference
 status: Active
 created: 2026-07-17
 updated: 2026-07-17
-platform_version: v0.3.0
+platform_version: v0.4.0
 owner: Personal AI Platform maintainers
 ---
 
@@ -20,8 +20,8 @@ The platform is designed to keep routine inference and data processing local whi
 M01  Foundation                    Complete
 M02  Production Ollama Runtime     Complete
 M03  OpenClaw Platform             Complete
-M04  Qdrant                        Next
-M05  Obsidian Integration          Planned
+M04  Qdrant                        Complete
+M05  Obsidian Integration          Next
 M06  MCP Servers                   Planned
 M07  Monitoring                    Planned
 M08  Backup & Disaster Recovery    Planned
@@ -37,6 +37,7 @@ API         : http://127.0.0.1:11434
 Service     : com.ollama.ollama
 Model Store : ~/server/data/models/ollama
 OpenClaw    : 2026.7.1 (loopback Gateway, Docker sandbox)
+Qdrant      : 1.18.2 (loopback REST and gRPC, Docker Compose)
 ```
 
 ## Models
@@ -197,11 +198,11 @@ Important rules:
 
 ## Current Release
 
-v0.3.0 completes M03 and adds the OpenClaw orchestration layer. See the [M03 milestone record](docs/milestones/M03-OpenClaw-Platform.md) and [v0.3.0 release notes](docs/releases/v0.3.0.md).
+v0.4.0 completes M04 and adds Qdrant as the local vector-storage and retrieval foundation. See the [M04 milestone record](docs/milestones/M04-Qdrant.md) and [v0.4.0 release notes](docs/releases/v0.4.0.md).
 
 ## Next Milestone
 
-M04 introduces Qdrant as the local vector database and retrieval foundation.
+M05 introduces Obsidian integration on top of the validated Qdrant retrieval foundation.
 
 ## Related documentation
 

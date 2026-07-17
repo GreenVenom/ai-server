@@ -4,7 +4,7 @@ document: ADR
 status: Accepted
 created: 2026-07-17
 updated: 2026-07-17
-platform_version: v0.3.0
+platform_version: v0.4.0
 owner: Personal AI Platform maintainers
 decision_id: ADR-0011
 supersedes:
@@ -57,7 +57,7 @@ The service will use:
 Image             qdrant/qdrant:1.18.2
 REST endpoint     127.0.0.1:6333
 gRPC endpoint     127.0.0.1:6334
-Restart policy    unless-stopped
+Restart policy    always
 Telemetry         disabled
 Live data volume  personal-ai-qdrant-storage
 Snapshot export   ~/server/backups/qdrant/snapshots

@@ -4,7 +4,7 @@ document: Reference
 status: Active
 created: 2026-07-17
 updated: 2026-07-17
-platform_version: v0.3.0
+platform_version: v0.4.0
 owner: Personal AI Platform maintainers
 ---
 
@@ -77,19 +77,23 @@ Delivered:
 - reboot-persistence validation and Docker Desktop auto-start at user login
 - zero critical findings in the deep security audit
 
-## M04 — Qdrant ⏳
+## M04 — Qdrant ✅
 
-Status: Next
+Status: Complete
 
-Objectives:
+Delivered:
 
-- deploy Qdrant
-- define persistent storage
-- configure collection lifecycle
-- integrate `nomic-embed-text`
-- establish retrieval validation
+- Qdrant 1.18.2 deployed through Docker Compose with loopback-only REST and gRPC endpoints.
+- Durable Docker named-volume storage and validated `restart: always` lifecycle recovery.
+- Validated `nomic-embed-text:latest` embeddings with 768 dimensions and the `text-dense` named vector.
+- Deterministic collection, point, payload, hashing, and timestamp conventions.
+- Semantic retrieval, payload filtering, and deterministic deletion validation.
+- Portable snapshots, SHA-256 manifests, clean restore validation, and retention tooling.
+- Qdrant integration into platform status, health, and verification scripts.
 
 ## M05 — Obsidian Integration ⏳
+
+Status: Next
 
 Objectives:
 

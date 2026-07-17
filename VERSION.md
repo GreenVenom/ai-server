@@ -4,7 +4,7 @@ document: Reference
 status: Active
 created: 2026-07-17
 updated: 2026-07-17
-platform_version: v0.3.0
+platform_version: v0.4.0
 owner: Personal AI Platform maintainers
 ---
 
@@ -12,11 +12,11 @@ owner: Personal AI Platform maintainers
 
 ## Current Version
 
-v0.4.5
+v0.4.0
 
 ## Current Milestone
 
-M03 – OpenClaw Platform
+M04 – Qdrant Vector Database
 
 ## Repository Status
 
@@ -56,7 +56,7 @@ macOS
 | Docker Desktop | Current | ✅ |
 | Tailscale | Current | ✅ |
 | OpenClaw | 2026.7.1 | ✅ |
-| Qdrant | Planned | ⏳ |
+| Qdrant | 1.18.2 | ✅ |
 
 ---
 
@@ -67,14 +67,11 @@ macOS
 | v0.1.0 | Foundation | Complete |
 | v0.2.0 | Production Ollama Runtime | Complete |
 | v0.3.0 | OpenClaw Platform | Complete |
-| v0.4.0 | Docker Platform | Planned |
-| v0.5.0 | Qdrant | Planned |
-| v0.6.0 | Obsidian Integration | Planned |
-| v0.7.0 | Operations Framework | Planned |
-| v0.8.0 | MCP Ecosystem | Planned |
-| v0.9.0 | Monitoring | Planned |
-| v0.9.5 | Production Hardening | Planned |
-| v0.9.8 | Disaster Recovery | Planned |
+| v0.4.0 | Qdrant Vector Database | Complete |
+| v0.5.0 | Obsidian Integration | Planned |
+| v0.6.0 | MCP Servers | Planned |
+| v0.7.0 | Monitoring | Planned |
+| v0.8.0 | Backup and Disaster Recovery | Planned |
 | v1.0.0 | Production Release | Planned |
 
 ---

@@ -4,7 +4,7 @@ document: ADR
 status: Accepted
 created: 2026-07-17
 updated: 2026-07-17
-platform_version: v0.3.0
+platform_version: v0.4.0
 owner: Personal AI Platform maintainers
 decision_id: ADR-0012
 supersedes:
@@ -328,6 +328,11 @@ Revisit this decision if:
 - Qdrant adds a feature that materially improves migration;
 - production corpus scale reveals unacceptable payload overhead.
 
+
 ## Related documentation
 
-- [Documentation map](../README.md)
+- [Data and collection conventions](../architecture/Data-and-Collection-Conventions.md)
+- [M04 milestone record](../milestones/M04-Qdrant.md)
+- [Qdrant operations](../operations/Qdrant-Operations.md)
+- [ADR-0011](ADR-0011-Deploy-Qdrant-as-Docker-Compose-Service.md)
+- [ADR-0013](ADR-0013-Qdrant-Snapshot-Retention-and-Cleanup.md)

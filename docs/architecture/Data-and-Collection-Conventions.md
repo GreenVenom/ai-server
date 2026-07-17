@@ -4,7 +4,7 @@ document: Architecture
 status: Active
 created: 2026-07-17
 updated: 2026-07-17
-platform_version: v0.3.0
+platform_version: v0.4.0
 owner: Personal AI Platform maintainers
 milestone: M04 - Qdrant Vector Database
 schema_version: 1
