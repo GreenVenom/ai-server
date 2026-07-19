@@ -1,14 +1,14 @@
 ---
-title: Roadmap
+title: 🗺️ Roadmap
 document: Reference
 status: Active
-created: 2026-07-17
+created: 2026-07-14
 updated: 2026-07-18
 platform_version: v0.5.0
 owner: GreenVenom
 ---
 
-# Roadmap
+# 🗺️ Roadmap
 
 ## M01 — Foundation ✅
 
@@ -103,7 +103,7 @@ Delivered:
 - OpenClaw `obsidian_search` retrieval tool
 - scheduled synchronization, health checks, and operational backup
 
-## M06 — MCP Servers ⏳
+## M06 — MCP Servers 🚧
 
 Status: Next
 
@@ -113,7 +113,7 @@ Objectives:
 - reuse the M05 Obsidian retrieval boundary
 - preserve local-first and least-privilege controls
 
-## M07 — Monitoring ⏳
+## M07 — Monitoring 🔜
 
 Objectives:
 
@@ -123,7 +123,7 @@ Objectives:
 - resource monitoring
 - alerting strategy
 
-## M08 — Backup & Disaster Recovery ⏳
+## M08 — Backup & Disaster Recovery 🔜
 
 Objectives:
 
@@ -132,7 +132,7 @@ Objectives:
 - validate restore procedures
 - document disaster recovery
 
-## Future Work
+## 💡 Future Work
 
 Potential later milestones include:
 
@@ -142,6 +142,6 @@ Potential later milestones include:
 - expanded local model routing
 - additional retrieval and agent workflows
 
-## Related documentation
+## 🔗 Related documentation
 
 - [Documentation map](docs/README.md)
