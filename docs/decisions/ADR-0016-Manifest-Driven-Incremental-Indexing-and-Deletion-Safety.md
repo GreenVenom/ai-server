@@ -7,6 +7,7 @@ updated: 2026-07-18
 platform_version: v0.5.0
 owner: GreenVenom
 decision_id: ADR-0016
+milestone: M05
 supersedes: null
 superseded_by: null
 ---

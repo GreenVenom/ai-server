@@ -181,13 +181,15 @@ docs/operations/runbooks/Benchmark-Validation.md
 
 ## 🧭 Architecture Decisions
 
-Current benchmark architecture decisions include:
+Current M05 architecture decisions include:
 
 ```text
-ADR-0007  Layered Benchmark Framework
-ADR-0008  Standardized Error Framework
-ADR-0009  Standardized Repository Pattern
+ADR-0014  Authoritative Obsidian Vault and Read-Only Server Mirror
+ADR-0015  Constrained OpenClaw Obsidian Retrieval Plugin
+ADR-0016  Manifest-Driven Incremental Indexing and Deletion Safety
 ```
+
+For the complete milestone-to-ADR mapping, see the [architecture index](docs/architecture/Architecture-Index.md).
 
 ## 🧱 Development Constraints
 

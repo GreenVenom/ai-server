@@ -3,10 +3,11 @@ title: ADR-0003 - Ollama Model Storage
 document: ADR
 status: Accepted
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-18
 platform_version: v0.3.0
 owner: GreenVenom
 decision_id: ADR-0003
+milestone: M01
 supersedes:
 superseded_by:
 date: 2026-07-12

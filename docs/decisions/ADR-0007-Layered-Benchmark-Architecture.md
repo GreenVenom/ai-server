@@ -3,10 +3,11 @@ title: ADR-0007 - Layered Benchmark Architecture
 document: ADR
 status: Accepted
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-18
 platform_version: v0.3.0
 owner: GreenVenom
 decision_id: ADR-0007
+milestone: M02
 supersedes:
 superseded_by:
 date: 2026-07-14

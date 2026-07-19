@@ -3,7 +3,7 @@ title: M04 - Qdrant Vector Database
 document: Milestone
 status: Complete
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-18
 platform_version: v0.4.0
 owner: GreenVenom
 ---
@@ -187,7 +187,7 @@ Testing revealed that `restart: unless-stopped` did not restore Qdrant after Doc
 
 Completed documentation package:
 
-- ADR-0011 through ADR-0013;
+- ADR-0010 through ADR-0013;
 - Qdrant architecture;
 - retrieval boundary;
 - data and collection conventions;
@@ -233,6 +233,7 @@ qdrant-persistence-check.sh       12 passed, 0 failed
 
 ## Architecture Decisions
 
+- ADR-0010 — Start Docker Desktop at OpenClaw User Login
 - ADR-0011 — Deploy Qdrant as a Docker Compose Service
 - ADR-0012 — Standardize Qdrant Collection, Vector, and Embedding Metadata
 - ADR-0013 — Standardize Qdrant Snapshot Retention and Cleanup
@@ -341,6 +342,7 @@ M04 is complete because its deployment, persistence, retrieval, recovery, securi
 - [v0.4.0 release notes](../../releases/v0.4.0.md)
 - [Qdrant operations](../Qdrant-Operations.md)
 - [Data and collection conventions](../../architecture/Data-and-Collection-Conventions.md)
+- [ADR-0010](../../decisions/ADR-0010-Docker-Desktop-Auto-Start.md)
 - [ADR-0011](../../decisions/ADR-0011-Deploy-Qdrant-as-Docker-Compose-Service.md)
 - [ADR-0012](../../decisions/ADR-0012-Standardize-Qdrant-Collection-and-Embedding-Metadata.md)
 - [ADR-0013](../../decisions/ADR-0013-Qdrant-Snapshot-Retention-and-Cleanup.md)

@@ -24,6 +24,8 @@ Delivered:
 - core host setup
 - secure administration foundation
 
+Architecture decisions: ADR-0001 through ADR-0006.
+
 ## M02 — Production Ollama Runtime ✅
 
 Status: Complete
@@ -91,6 +93,8 @@ Delivered:
 - Portable snapshots, SHA-256 manifests, clean restore validation, and retention tooling.
 - Qdrant integration into platform status, health, and verification scripts.
 
+Architecture decisions: ADR-0010 through ADR-0013.
+
 ## M05 — Obsidian Integration ✅
 
 Status: Complete
@@ -102,6 +106,8 @@ Delivered:
 - Qdrant production collection and incremental reconciliation
 - OpenClaw `obsidian_search` retrieval tool
 - scheduled synchronization, health checks, and operational backup
+
+Architecture decisions: ADR-0014 through ADR-0016.
 
 ## M06 — MCP Servers 🚧
 

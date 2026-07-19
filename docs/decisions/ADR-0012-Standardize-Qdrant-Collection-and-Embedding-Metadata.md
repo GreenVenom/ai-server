@@ -3,10 +3,11 @@ title: ADR-0012 - Standardize Qdrant Collection, Vector, and Embedding Metadata
 document: ADR
 status: Accepted
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-18
 platform_version: v0.4.0
 owner: GreenVenom
 decision_id: ADR-0012
+milestone: M04
 supersedes:
 superseded_by:
 ---

@@ -3,10 +3,11 @@ title: ADR-0011 - Deploy Qdrant as a Docker Compose Service
 document: ADR
 status: Accepted
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-18
 platform_version: v0.4.0
 owner: GreenVenom
 decision_id: ADR-0011
+milestone: M04
 supersedes:
 superseded_by:
 ---

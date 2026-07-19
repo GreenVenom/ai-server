@@ -3,7 +3,7 @@ title: M01 - Foundation
 document: Milestone
 status: Complete
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-07-18
 platform_version: v0.1.0
 owner: GreenVenom
 version: 2.0
@@ -423,7 +423,12 @@ M01 is complete when:
 
 ### ADRs
 
-* ADR-0001 through ADR-0006
+* ADR-0001 — Separate AI Account
+* ADR-0002 — Tailscale Only Remote Access
+* ADR-0003 — Ollama Model Storage
+* ADR-0004 — launchd for Native Services
+* ADR-0005 — Official Ollama Installation
+* ADR-0006 — Architecture as Code
 
 ### Runbooks
 

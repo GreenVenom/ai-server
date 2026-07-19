@@ -3,10 +3,11 @@ title: ADR-0010 - Start Docker Desktop at OpenClaw User Login
 document: ADR
 status: Accepted
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-18
 platform_version: v0.3.0
 owner: GreenVenom
 decision_id: ADR-0010
+milestone: M04
 supersedes:
 superseded_by:
 milestone: M03 - OpenClaw Platform

@@ -162,6 +162,12 @@ services/launchagents/ai.openclaw.obsidian-sync-index.plist
 - Qdrant remains bound to loopback.
 - Destructive reconciliation is protected by a deletion threshold.
 
+## Architecture decisions
+
+- ADR-0014 — Authoritative Obsidian Vault and Read-Only Server Mirror
+- ADR-0015 — Constrained OpenClaw Obsidian Retrieval Plugin
+- ADR-0016 — Manifest-Driven Incremental Indexing and Deletion Safety
+
 ## Deferred work
 
 - Strip inline `data:image/...` payloads during parsing.
@@ -179,3 +185,6 @@ M05 is complete. The platform now provides dependable, automated, and operationa
 - [v0.5.0 release notes](../../releases/v0.5.0.md)
 - [Obsidian integration architecture](../../architecture/Obsidian-Integration.md)
 - [Obsidian operations runbook](../runbooks/Obsidian-Operations.md)
+- [ADR-0014](../../decisions/ADR-0014-Authoritative-Obsidian-Vault-and-Read-Only-Mirror.md)
+- [ADR-0015](../../decisions/ADR-0015-Constrained-OpenClaw-Obsidian-Retrieval-Plugin.md)
+- [ADR-0016](../../decisions/ADR-0016-Manifest-Driven-Incremental-Indexing-and-Deletion-Safety.md)
