@@ -27,3 +27,13 @@ __pycache__/
 
 # Node
 node_modules/
+
+# M05 runtime-only state
+services/obsidian/venv/
+services/openclaw-obsidian-plugin/node_modules/
+services/openclaw-obsidian-plugin/dist/
+data/obsidian/
+logs/obsidian/
+backups/obsidian/
+*.snapshot
+*.tar.gz

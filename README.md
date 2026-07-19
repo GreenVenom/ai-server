@@ -2,9 +2,9 @@
 title: Personal AI Platform
 document: Reference
 status: Active
-created: 2026-07-17
-updated: 2026-07-17
-platform_version: v0.4.0
+created: 2026-07-12
+updated: 2026-07-18
+platform_version: v0.5.0
 owner: GreenVenom
 ---
 
@@ -21,8 +21,8 @@ M01  Foundation                    Complete
 M02  Production Ollama Runtime     Complete
 M03  OpenClaw Platform             Complete
 M04  Qdrant                        Complete
-M05  Obsidian Integration          Next
-M06  MCP Servers                   Planned
+M05  Obsidian Integration          Complete
+M06  MCP Servers                   Next
 M07  Monitoring                    Planned
 M08  Backup & Disaster Recovery    Planned
 ```
@@ -198,11 +198,17 @@ Important rules:
 
 ## Current Release
 
-v0.4.0 completes M04 and adds Qdrant as the local vector-storage and retrieval foundation. See the [M04 milestone record](docs/milestones/M04-Qdrant.md) and [v0.4.0 release notes](docs/releases/v0.4.0.md).
+v0.5.0 completes M05 and adds controlled Obsidian knowledge retrieval. The platform maintains a read-only mirror of an authoritative vault, parses and chunks Markdown, creates local Ollama embeddings, indexes them in Qdrant, and exposes constrained retrieval through OpenClaw's `obsidian_search` tool.
+
+```text
+Obsidian vault → read-only mirror → local embeddings → Qdrant → OpenClaw
+```
+
+Operational safeguards include deterministic manifests, incremental reconciliation, deletion thresholds, scheduled synchronization, health checks, source-grounded results, and snapshot-backed backups. See the [M05 milestone record](docs/operations/milestones/M05-Obsidian-Integration.md) and [v0.5.0 release notes](docs/releases/v0.5.0.md).
 
 ## Next Milestone
 
-M05 introduces Obsidian integration on top of the validated Qdrant retrieval foundation.
+M06 introduces narrow MCP interfaces over approved platform capabilities, beginning with the M05 Obsidian retrieval boundary.
 
 ## Related documentation
 

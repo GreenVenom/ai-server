@@ -23,6 +23,18 @@ source "${LIB_DIR}/colors.sh"
 source "${LIB_DIR}/platform.sh"
 
 QDRANT_URL="${QDRANT_URL:-http://127.0.0.1:6333}"
+
+OBSIDIAN_COLLECTION="obsidian_chunks_v1"
+OBSIDIAN_VAULT_ID="personal-knowledge"
+OBSIDIAN_EXPECTED_DOCUMENTS=7
+OBSIDIAN_EXPECTED_CHUNKS=176
+OBSIDIAN_MANIFEST="$HOME/server/data/obsidian/manifests/personal-knowledge.json"
+OBSIDIAN_MIRROR="$HOME/server/data/obsidian/vaults/personal-knowledge"
+OBSIDIAN_STATE="$HOME/server/data/obsidian/state/personal-knowledge-job-state.json"
+OBSIDIAN_COMMIT="$HOME/server/data/obsidian/state/personal-knowledge-source.commit"
+OBSIDIAN_LAUNCHAGENT="ai.openclaw.obsidian-sync-index"
+OBSIDIAN_PLUGIN="obsidian-retrieval"
+OBSIDIAN_TOOL="obsidian_search"
 QDRANT_CONTAINER="${QDRANT_CONTAINER:-personal-ai-qdrant}"
 QDRANT_COLLECTION="${QDRANT_COLLECTION:-m04_validation}"
 QDRANT_COMPOSE_FILE="${QDRANT_COMPOSE_FILE:-$HOME/server/docker/qdrant/compose.yaml}"
@@ -389,6 +401,224 @@ else
     fail "Qdrant Collection" "Unable to inspect ${QDRANT_COLLECTION}"
     fail "Qdrant Point Count" "Collection unavailable"
     fail "Qdrant Vector Contract" "Collection unavailable"
+fi
+
+
+print_section "Obsidian Health"
+
+if [[ -d "$OBSIDIAN_MIRROR" ]]; then
+    pass "Obsidian Mirror" "Available: $OBSIDIAN_MIRROR"
+else
+    fail "Obsidian Mirror" "Missing: $OBSIDIAN_MIRROR"
+fi
+
+if [[ -f "$OBSIDIAN_MANIFEST" ]]; then
+    pass "Obsidian Manifest" "Present: $OBSIDIAN_MANIFEST"
+else
+    fail "Obsidian Manifest" "Missing: $OBSIDIAN_MANIFEST"
+fi
+
+if [[ -f "$OBSIDIAN_COMMIT" ]]; then
+    obsidian_commit="$(cat "$OBSIDIAN_COMMIT" 2>/dev/null || true)"
+    [[ -n "$obsidian_commit" ]] && \
+        pass "Obsidian Source Commit" "$obsidian_commit" || \
+        fail "Obsidian Source Commit" "Commit state is empty"
+else
+    fail "Obsidian Source Commit" "Missing: $OBSIDIAN_COMMIT"
+fi
+
+if launchctl print \
+    "gui/$(id -u)/${OBSIDIAN_LAUNCHAGENT}" \
+    >/dev/null 2>&1
+then
+    pass "Obsidian LaunchAgent" "Loaded: $OBSIDIAN_LAUNCHAGENT"
+else
+    fail "Obsidian LaunchAgent" "Not loaded: $OBSIDIAN_LAUNCHAGENT"
+fi
+
+if [[ -f "$OBSIDIAN_STATE" ]]; then
+    obsidian_job_status="$(
+        python3 - "$OBSIDIAN_STATE" <<'PYJOB' 2>/dev/null || true
+import json
+import sys
+
+with open(sys.argv[1], encoding="utf-8") as handle:
+    data = json.load(handle)
+
+print(data.get("status", "unknown"))
+PYJOB
+    )"
+
+    if [[ "$obsidian_job_status" == "success" ]]; then
+        pass "Obsidian Scheduled Job" "Last run completed successfully"
+    else
+        fail "Obsidian Scheduled Job" \
+            "Last status=${obsidian_job_status:-unknown}"
+    fi
+else
+    fail "Obsidian Scheduled Job" "State file missing: $OBSIDIAN_STATE"
+fi
+
+obsidian_metadata="$(
+    curl --fail --silent --show-error \
+        "${QDRANT_URL}/collections/${OBSIDIAN_COLLECTION}" \
+        2>/dev/null || true
+)"
+
+if [[ -n "$obsidian_metadata" ]]; then
+    obsidian_values="$(
+        python3 - "$obsidian_metadata" "$EXPECTED_VECTOR_NAME" <<'PYMETA' \
+            2>/dev/null || true
+import json
+import sys
+
+data = json.loads(sys.argv[1])["result"]
+vector = data["config"]["params"]["vectors"][sys.argv[2]]
+
+print(data["status"])
+print(data["points_count"])
+print(vector["size"])
+print(vector["distance"])
+PYMETA
+    )"
+
+    obsidian_collection_status="$(printf '%s\n' "$obsidian_values" | sed -n '1p')"
+    obsidian_total_points="$(printf '%s\n' "$obsidian_values" | sed -n '2p')"
+    obsidian_vector_size="$(printf '%s\n' "$obsidian_values" | sed -n '3p')"
+    obsidian_distance="$(printf '%s\n' "$obsidian_values" | sed -n '4p')"
+
+    if [[ "$obsidian_collection_status" == "green" ]]; then
+        pass "Obsidian Collection" \
+            "${OBSIDIAN_COLLECTION} is green; total=${obsidian_total_points}"
+    else
+        fail "Obsidian Collection" \
+            "status=${obsidian_collection_status:-unknown}"
+    fi
+
+    if [[ "$obsidian_vector_size" == "$EXPECTED_VECTOR_SIZE" &&
+          "$obsidian_distance" == "$EXPECTED_DISTANCE" ]]; then
+        pass "Obsidian Vector Contract" \
+            "${EXPECTED_VECTOR_NAME}: ${obsidian_vector_size} dimensions, ${obsidian_distance}"
+    else
+        fail "Obsidian Vector Contract" \
+            "size=${obsidian_vector_size:-unknown}; distance=${obsidian_distance:-unknown}"
+    fi
+else
+    fail "Obsidian Collection" \
+        "Unable to inspect ${OBSIDIAN_COLLECTION}"
+    fail "Obsidian Vector Contract" "Collection unavailable"
+fi
+
+obsidian_counts="$(
+    PYTHONPATH="$HOME/server/services/obsidian/src" \
+    "$HOME/server/services/obsidian/venv/bin/python" - \
+        "$OBSIDIAN_MANIFEST" \
+        "$OBSIDIAN_MIRROR" \
+        "$QDRANT_URL" \
+        "$OBSIDIAN_COLLECTION" \
+        "$OBSIDIAN_VAULT_ID" \
+        2>/dev/null <<'PYCOUNT' || true
+import json
+import sys
+import urllib.request
+from pathlib import Path
+
+from obsidian_ingest.manifest import load_manifest
+
+manifest_path = Path(sys.argv[1])
+mirror_root = Path(sys.argv[2])
+qdrant_url = sys.argv[3]
+collection = sys.argv[4]
+vault_id = sys.argv[5]
+
+manifest = load_manifest(manifest_path, required=True)
+
+document_count = len(manifest.documents)
+chunk_ids = {
+    chunk_id
+    for document in manifest.documents.values()
+    for chunk_id in document.chunk_ids
+}
+mirror_count = len(list(mirror_root.rglob("*.md")))
+
+request = urllib.request.Request(
+    f"{qdrant_url}/collections/{collection}/points/scroll",
+    data=json.dumps({
+        "limit": 10000,
+        "with_payload": False,
+        "with_vector": False,
+        "filter": {
+            "must": [{
+                "key": "vault_id",
+                "match": {"value": vault_id},
+            }]
+        },
+    }).encode("utf-8"),
+    method="POST",
+    headers={"Content-Type": "application/json"},
+)
+
+with urllib.request.urlopen(request, timeout=30) as response:
+    points = json.load(response)["result"]["points"]
+
+qdrant_ids = {point["id"] for point in points}
+
+print(document_count)
+print(len(chunk_ids))
+print(mirror_count)
+print(len(qdrant_ids))
+print("true" if chunk_ids == qdrant_ids else "false")
+PYCOUNT
+)"
+
+obsidian_documents="$(printf '%s\n' "$obsidian_counts" | sed -n '1p')"
+obsidian_chunks="$(printf '%s\n' "$obsidian_counts" | sed -n '2p')"
+obsidian_mirror_documents="$(printf '%s\n' "$obsidian_counts" | sed -n '3p')"
+obsidian_qdrant_chunks="$(printf '%s\n' "$obsidian_counts" | sed -n '4p')"
+obsidian_reconciled="$(printf '%s\n' "$obsidian_counts" | sed -n '5p')"
+
+if [[ "$obsidian_documents" == "$OBSIDIAN_EXPECTED_DOCUMENTS" &&
+      "$obsidian_mirror_documents" == "$OBSIDIAN_EXPECTED_DOCUMENTS" ]]; then
+    pass "Obsidian Document Count" \
+        "${obsidian_documents} indexed documents"
+else
+    fail "Obsidian Document Count" \
+        "manifest=${obsidian_documents:-unknown}; mirror=${obsidian_mirror_documents:-unknown}"
+fi
+
+if [[ "$obsidian_chunks" == "$OBSIDIAN_EXPECTED_CHUNKS" &&
+      "$obsidian_qdrant_chunks" == "$OBSIDIAN_EXPECTED_CHUNKS" &&
+      "$obsidian_reconciled" == "true" ]]; then
+    pass "Obsidian Chunk Reconciliation" \
+        "${obsidian_chunks} production chunks"
+else
+    fail "Obsidian Chunk Reconciliation" \
+        "manifest=${obsidian_chunks:-unknown}; qdrant=${obsidian_qdrant_chunks:-unknown}; reconciled=${obsidian_reconciled:-unknown}"
+fi
+
+if openclaw plugins inspect "$OBSIDIAN_PLUGIN" \
+    --runtime --json 2>/dev/null |
+    python3 -c '
+import json
+import sys
+
+data = json.load(sys.stdin)
+plugin = data.get("plugin", {})
+tools = plugin.get("toolNames", [])
+
+raise SystemExit(
+    0 if (
+        plugin.get("status") == "loaded"
+        and "obsidian_search" in tools
+    ) else 1
+)
+'
+then
+    pass "Obsidian OpenClaw Tool" \
+        "${OBSIDIAN_TOOL} loaded through ${OBSIDIAN_PLUGIN}"
+else
+    fail "Obsidian OpenClaw Tool" \
+        "Plugin or tool unavailable"
 fi
 
 print_section "Summary"

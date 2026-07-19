@@ -1,0 +1,25 @@
+{
+  "name": "openclaw-plugin-obsidian-retrieval",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only Obsidian semantic retrieval tool for OpenClaw.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "typebox": "^1.1.38"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.5.17"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
+  }
+}

@@ -204,6 +204,6 @@ Revisit this decision if any of the following become requirements:
 
 - [OpenClaw architecture](../architecture/OpenClaw-Architecture.md)
 - [OpenClaw security baseline](../architecture/OpenClaw-Security-Baseline.md)
-- [M03 milestone record](../milestones/M03-OpenClaw-Platform.md)
+- [M03 milestone record](../operations/milestones/M03-OpenClaw-Platform.md)
 - [OpenClaw current state](../operations/OpenClaw-Current-State.md)
-- [OpenClaw installation and hardening runbook](../runbooks/OpenClaw-Installation-and-Hardening.md)
+- [OpenClaw installation and hardening runbook](../operations/runbooks/OpenClaw-Installation-and-Hardening.md)

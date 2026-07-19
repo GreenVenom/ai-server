@@ -23,6 +23,13 @@ source "${LIB_DIR}/colors.sh"
 source "${LIB_DIR}/platform.sh"
 
 QDRANT_URL="${QDRANT_URL:-http://127.0.0.1:6333}"
+
+OBSIDIAN_COLLECTION="obsidian_chunks_v1"
+OBSIDIAN_VAULT_ID="personal-knowledge"
+OBSIDIAN_MANIFEST="$HOME/server/data/obsidian/manifests/personal-knowledge.json"
+OBSIDIAN_STATE="$HOME/server/data/obsidian/state/personal-knowledge-job-state.json"
+OBSIDIAN_COMMIT="$HOME/server/data/obsidian/state/personal-knowledge-source.commit"
+OBSIDIAN_PLUGIN="obsidian-retrieval"
 QDRANT_CONTAINER="${QDRANT_CONTAINER:-personal-ai-qdrant}"
 QDRANT_COLLECTION="${QDRANT_COLLECTION:-m04_validation}"
 OPENCLAW_GATEWAY_PORT="${OPENCLAW_GATEWAY_PORT:-18789}"
@@ -276,11 +283,131 @@ q_collection="$(qdrant_collection_summary || true)"
     fail "Qdrant Validation Collection" \
         "Unable to inspect ${QDRANT_COLLECTION}"
 
+
+print_section "Obsidian"
+
+if [[ -f "$OBSIDIAN_STATE" ]]; then
+    obsidian_status="$(
+        python3 - "$OBSIDIAN_STATE" <<'PYSTATE' 2>/dev/null || true
+import json
+import sys
+
+with open(sys.argv[1], encoding="utf-8") as handle:
+    data = json.load(handle)
+
+print(data.get("status", "unknown"))
+print(data.get("completed_at", "unknown"))
+PYSTATE
+    )"
+
+    obsidian_job_status="$(printf '%s\n' "$obsidian_status" | sed -n '1p')"
+    obsidian_completed_at="$(printf '%s\n' "$obsidian_status" | sed -n '2p')"
+
+    if [[ "$obsidian_job_status" == "success" ]]; then
+        ok "Obsidian Scheduled Job" \
+            "success at ${obsidian_completed_at}"
+    else
+        fail "Obsidian Scheduled Job" \
+            "status=${obsidian_job_status:-unknown}"
+    fi
+else
+    fail "Obsidian Scheduled Job" "State file missing"
+fi
+
+obsidian_summary="$(
+    PYTHONPATH="$HOME/server/services/obsidian/src" \
+    "$HOME/server/services/obsidian/venv/bin/python" - \
+        "$OBSIDIAN_MANIFEST" \
+        "$QDRANT_URL" \
+        "$OBSIDIAN_COLLECTION" \
+        "$OBSIDIAN_VAULT_ID" \
+        2>/dev/null <<'PYSUM' || true
+import json
+import sys
+import urllib.request
+from pathlib import Path
+
+from obsidian_ingest.manifest import load_manifest
+
+manifest = load_manifest(Path(sys.argv[1]), required=True)
+qdrant_url = sys.argv[2]
+collection = sys.argv[3]
+vault_id = sys.argv[4]
+
+chunk_count = sum(
+    len(document.chunk_ids)
+    for document in manifest.documents.values()
+)
+
+request = urllib.request.Request(
+    f"{qdrant_url}/collections/{collection}/points/scroll",
+    data=json.dumps({
+        "limit": 10000,
+        "with_payload": False,
+        "with_vector": False,
+        "filter": {
+            "must": [{
+                "key": "vault_id",
+                "match": {"value": vault_id},
+            }]
+        },
+    }).encode("utf-8"),
+    method="POST",
+    headers={"Content-Type": "application/json"},
+)
+
+with urllib.request.urlopen(request, timeout=30) as response:
+    point_count = len(
+        json.load(response)["result"]["points"]
+    )
+
+print(
+    f"documents={len(manifest.documents)}, "
+    f"chunks={chunk_count}, qdrant={point_count}"
+)
+PYSUM
+)"
+
+[[ -n "$obsidian_summary" ]] && \
+    ok "Obsidian Production Vault" "$obsidian_summary" || \
+    fail "Obsidian Production Vault" "Unable to inspect production vault"
+
+if openclaw plugins inspect "$OBSIDIAN_PLUGIN" \
+    --runtime --json 2>/dev/null |
+    python3 -c '
+import json
+import sys
+
+data = json.load(sys.stdin)
+plugin = data.get("plugin", {})
+
+raise SystemExit(
+    0 if (
+        plugin.get("status") == "loaded"
+        and "obsidian_search" in plugin.get("toolNames", [])
+    ) else 1
+)
+'
+then
+    ok "Obsidian Retrieval Tool" "obsidian_search loaded"
+else
+    fail "Obsidian Retrieval Tool" "Unavailable"
+fi
+
+obsidian_commit="$(
+    cat "$OBSIDIAN_COMMIT" 2>/dev/null || true
+)"
+
+[[ -n "$obsidian_commit" ]] && \
+    ok "Obsidian Source Commit" "$obsidian_commit" || \
+    warn "Obsidian Source Commit" "Unavailable"
+
 printf '\n'
 printf 'OpenClaw Workspace : %s\n' "$OPENCLAW_WORKSPACE"
 printf 'Sandbox Image      : %s\n' "$OPENCLAW_SANDBOX_IMAGE"
 printf 'Qdrant Container   : %s\n' "$QDRANT_CONTAINER"
 printf 'Qdrant Collection  : %s\n' "$QDRANT_COLLECTION"
+printf 'Obsidian Collection: %s\n' "$OBSIDIAN_COLLECTION"
 printf 'Disk Free          : %s\n' "$(get_disk_free)"
 printf 'Memory             : %s GB\n' "$(get_memory_gb)"
 printf '\n'

@@ -21,4 +21,4 @@ Indexing boundaries, retrieval workflows, and source-data controls will be docum
 ## Related documentation
 
 - [Roadmap](../ROADMAP.md)
-- [M05 milestone](milestones/M05-Obsidian.md)
+- [M05 milestone](operations/milestones/M05-Obsidian.md)

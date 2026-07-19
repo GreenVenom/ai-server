@@ -190,8 +190,8 @@ If live data is incompatible or damaged, restore a validated portable collection
 
 ## Related documentation
 
-- [M04 milestone record](../milestones/M04-Qdrant.md)
-- [Installing Qdrant](../runbooks/Installing-Qdrant.md)
-- [Backing up Qdrant](../runbooks/Backing-Up-Qdrant.md)
-- [Restoring Qdrant](../runbooks/Restoring-Qdrant.md)
-- [Troubleshooting Qdrant](../runbooks/Troubleshooting-Qdrant.md)
+- [M04 milestone record](milestones/M04-Qdrant.md)
+- [Installing Qdrant](runbooks/Installing-Qdrant.md)
+- [Backing up Qdrant](runbooks/Backing-Up-Qdrant.md)
+- [Restoring Qdrant](runbooks/Restoring-Qdrant.md)
+- [Troubleshooting Qdrant](runbooks/Troubleshooting-Qdrant.md)

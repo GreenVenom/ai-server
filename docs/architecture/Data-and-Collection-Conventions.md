@@ -435,7 +435,7 @@ These conventions are accepted for M04 and govern M05 unless superseded by a doc
 
 ## Related documentation
 
-- [M04 Qdrant milestone](../milestones/M04-Qdrant.md)
+- [M04 Qdrant milestone](../operations/milestones/M04-Qdrant.md)
 - [System overview](System-Overview.md)
 - [Directory layout](Directory-Layout.md)
 - [OpenClaw architecture](OpenClaw-Architecture.md)

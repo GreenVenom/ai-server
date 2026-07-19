@@ -3,8 +3,8 @@ title: Roadmap
 document: Reference
 status: Active
 created: 2026-07-17
-updated: 2026-07-17
-platform_version: v0.4.0
+updated: 2026-07-18
+platform_version: v0.5.0
 owner: GreenVenom
 ---
 
@@ -91,24 +91,27 @@ Delivered:
 - Portable snapshots, SHA-256 manifests, clean restore validation, and retention tooling.
 - Qdrant integration into platform status, health, and verification scripts.
 
-## M05 — Obsidian Integration ⏳
+## M05 — Obsidian Integration ✅
+
+Status: Complete
+
+Delivered:
+
+- controlled read-only vault mirror
+- Markdown discovery, parsing, chunking, and local embeddings
+- Qdrant production collection and incremental reconciliation
+- OpenClaw `obsidian_search` retrieval tool
+- scheduled synchronization, health checks, and operational backup
+
+## M06 — MCP Servers ⏳
 
 Status: Next
 
 Objectives:
 
-- connect Obsidian workflows to the AI platform
-- define indexing boundaries
-- support retrieval and assisted note workflows
-- preserve user-controlled source data
-
-## M06 — MCP Servers ⏳
-
-Objectives:
-
-- introduce MCP integrations
-- define trust and permission boundaries
-- validate local-first tool execution
+- expose approved platform capabilities through narrow MCP interfaces
+- reuse the M05 Obsidian retrieval boundary
+- preserve local-first and least-privilege controls
 
 ## M07 — Monitoring ⏳
 

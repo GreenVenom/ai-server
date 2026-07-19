@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC
+  "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>ai.openclaw.obsidian-sync-index</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/openclaw/server/scripts/obsidian-sync-index-runner.sh</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/openclaw/server</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>/Users/openclaw</string>
+
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Users/openclaw/server/logs/obsidian/launchagent.stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/openclaw/server/logs/obsidian/launchagent.stderr.log</string>
+</dict>
+</plist>

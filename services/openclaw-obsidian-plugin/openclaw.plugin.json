@@ -1,0 +1,24 @@
+{
+  "id": "obsidian-retrieval",
+  "name": "Obsidian Retrieval",
+  "description": "Provides constrained read-only semantic retrieval from approved Obsidian content.",
+  "version": "0.1.0",
+  "configSchema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "obsidian_search"
+    ]
+  },
+  "toolMetadata": {
+    "obsidian_search": {
+      "optional": true
+    }
+  }
+}

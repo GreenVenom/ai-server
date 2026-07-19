@@ -1,0 +1,13 @@
+schema_version: 1
+vault_id: personal-knowledge
+mirror_path: /Users/openclaw/server/data/obsidian/vaults/personal-knowledge
+read_only: true
+authoritative: false
+collection: obsidian_chunks_v1
+manifest_path: /Users/openclaw/server/data/obsidian/manifests/personal-knowledge.json
+incremental: true
+retrieval:
+  maximum_results: 8
+  default_threshold: 0.35
+reconciliation:
+  maximum_delete_percent: 10

@@ -1,0 +1,26 @@
+schema_version: 1
+embedding:
+  provider: ollama
+  model: nomic-embed-text:latest
+  dimension: 768
+qdrant:
+  url: http://127.0.0.1:6333
+  collection: obsidian_chunks_v1
+  vector_name: text-dense
+  distance: Cosine
+chunking:
+  profile: heading-aware-v1
+  target_characters: 700
+  maximum_characters: 1200
+  overlap_characters: 100
+  minimum_characters: 40
+reconciliation:
+  maximum_delete_percent: 10
+exclusions:
+  directories:
+    - .git
+    - .obsidian
+    - .smart-env
+    - .smtcmp_json_db
+  files:
+    - .smtcmp_vector_db.tar.gz

@@ -332,7 +332,7 @@ Revisit this decision if:
 ## Related documentation
 
 - [Data and collection conventions](../architecture/Data-and-Collection-Conventions.md)
-- [M04 milestone record](../milestones/M04-Qdrant.md)
+- [M04 milestone record](../operations/milestones/M04-Qdrant.md)
 - [Qdrant operations](../operations/Qdrant-Operations.md)
 - [ADR-0011](ADR-0011-Deploy-Qdrant-as-Docker-Compose-Service.md)
 - [ADR-0013](ADR-0013-Qdrant-Snapshot-Retention-and-Cleanup.md)

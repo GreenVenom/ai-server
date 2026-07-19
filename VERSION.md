@@ -3,8 +3,8 @@ title: Platform Version
 document: Reference
 status: Active
 created: 2026-07-17
-updated: 2026-07-17
-platform_version: v0.4.0
+updated: 2026-07-18
+platform_version: v0.5.0
 owner: GreenVenom
 ---
 
@@ -12,11 +12,11 @@ owner: GreenVenom
 
 ## Current Version
 
-v0.4.0
+v0.5.0
 
 ## Current Milestone
 
-M04 – Qdrant Vector Database
+M05 – Obsidian Integration
 
 ## Repository Status
 
@@ -68,7 +68,7 @@ macOS
 | v0.2.0 | Production Ollama Runtime | Complete |
 | v0.3.0 | OpenClaw Platform | Complete |
 | v0.4.0 | Qdrant Vector Database | Complete |
-| v0.5.0 | Obsidian Integration | Planned |
+| v0.5.0 | Obsidian Integration | Complete |
 | v0.6.0 | MCP Servers | Planned |
 | v0.7.0 | Monitoring | Planned |
 | v0.8.0 | Backup and Disaster Recovery | Planned |
