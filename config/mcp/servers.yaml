@@ -1,0 +1,32 @@
+schema_version: 1
+
+servers:
+  obsidian-retrieval:
+    transport: stdio
+    access: read-only
+    enabled: false
+    tools:
+      - obsidian_search
+      - obsidian_get_chunk
+      - obsidian_list_vaults
+      - obsidian_retrieval_status
+
+  platform-status:
+    transport: stdio
+    access: read-only
+    enabled: false
+    tools:
+      - platform_status
+      - platform_health
+      - platform_versions
+      - platform_component_status
+
+prohibited_capabilities:
+  - arbitrary_filesystem
+  - shell_execution
+  - service_control
+  - docker_administration
+  - qdrant_administration
+  - package_installation
+  - obsidian_writeback
+  - unrestricted_network_access

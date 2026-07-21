@@ -1,0 +1,20 @@
+schema_version: 1
+servers:
+  obsidian-retrieval:
+    module: personal_ai_mcp.obsidian.server
+    transport: stdio
+    read_only: true
+    tools:
+      - obsidian_search
+      - obsidian_get_chunk
+      - obsidian_list_vaults
+      - obsidian_retrieval_status
+  platform-status:
+    module: personal_ai_mcp.platform.server
+    transport: stdio
+    read_only: true
+    tools:
+      - platform_status
+      - platform_health
+      - platform_versions
+      - platform_component_status

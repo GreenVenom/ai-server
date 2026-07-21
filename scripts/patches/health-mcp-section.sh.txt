@@ -1,0 +1,14 @@
+# Insert before print_section "Summary".
+source "$HOME/server/scripts/lib/mcp.sh"
+
+print_section "MCP Health"
+
+if mcp_validate_probe >/dev/null; then
+    pass \
+        "MCP Runtime" \
+        "servers=$(mcp_server_count), tools=$(mcp_tool_count), diagnostics=$(mcp_diagnostic_count)"
+else
+    fail \
+        "MCP Runtime" \
+        "Server availability, exact tool inventory, or diagnostics validation failed"
+fi

@@ -1,37 +1,43 @@
 ---
-title: M06 - MCP Servers
+title: M06 - MCP Services
 document: Milestone
-status: Active
+status: Complete
 created: 2026-07-17
-updated: 2026-07-18
-platform_version: v0.3.0
+updated: 2026-07-21
+platform_version: v0.6.0
 owner: GreenVenom
 ---
 
-# M06 - MCP Servers
+# M06 - MCP Services
 
 ## Objective
 
-Introduce Model Context Protocol integrations with explicit trust and permission boundaries.
+Expose approved platform capabilities through narrow, local-first MCP interfaces while preserving the M05 retrieval boundary and least-privilege controls.
 
 ## Scope
 
-M06 will define and validate local-first tool execution through MCP servers.
+M06 delivers local stdio MCP services for read-only Obsidian retrieval and platform inspection. Network listeners, arbitrary command execution, arbitrary filesystem access, and write-capable tools are out of scope.
 
 ## Deliverables
 
-- Documented MCP trust and permission model.
-- Validated local-first integration workflow.
+- Two local stdio MCP servers: `obsidian-retrieval` and `platform-status`.
+- Four approved tools per server, for an exact inventory of eight read-only tools.
+- Strict schemas, sanitized errors, explicit OpenClaw filters, and sandbox allowlists.
+- Restricted subprocess execution with fixed commands, `shell=False`, bounded output, and timeouts.
+- Unit, integration, security, policy, and ten-scenario agent acceptance coverage.
+- Status, health, and verification integration.
 
 ## Validation
 
-Validation criteria will be finalized with the M06 implementation plan.
+The production validation contract is two servers, eight tools, and zero diagnostics. M06 acceptance recorded 10/10 agent scenarios, 56/56 health checks, and 45/45 verification checks.
 
 ## Exit criteria
 
-M06 is complete when its documented integration workflow passes.
+Complete. The documented MCP boundary, tests, and operational checks meet the M06 acceptance contract.
 
 ## Related documentation
 
+- [MCP architecture](../../architecture/MCP-Architecture.md)
+- [MCP development standards](../../engineering/MCP-Development-Standards.md)
+- [M06 release notes](../../releases/v0.6.0.md)
 - [Roadmap](../../../ROADMAP.md)
-- [OpenClaw architecture](../../architecture/OpenClaw-Architecture.md)

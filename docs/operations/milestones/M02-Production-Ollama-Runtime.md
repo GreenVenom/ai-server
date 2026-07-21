@@ -3,7 +3,7 @@ title: M02 — Production Ollama Runtime
 document: Milestone
 status: Complete
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-21
 platform_version: v0.3.0
 owner: GreenVenom
 ---
@@ -19,6 +19,16 @@ owner: GreenVenom
 Establish a secure, persistent, locally operated model runtime on the Mac mini and provide the operational and benchmarking foundations required for later orchestration, retrieval, and agent services.
 
 M02 delivers both the production Ollama runtime and the first complete benchmark execution path used to validate the platform's primary local models.
+
+## Scope
+
+Included: vendor-supported Ollama installation, local-only API binding, persistent model storage, reboot-persistent service management, validated generation and embedding models, operational checks, and the provider-neutral benchmark framework.
+
+Excluded: OpenClaw deployment, Docker workloads, Qdrant, MCP services, and the monitoring stack; later milestones deliver those capabilities.
+
+## Dependencies
+
+M02 builds on M00 and M01, including macOS host hardening, the dedicated service account, Homebrew, SSH, Git, and Tailscale administration.
 
 ## Delivered Capabilities
 
@@ -203,6 +213,10 @@ Average Throughput  : 24.3 tokens/second
 
 Multi-iteration Markdown reports have also been successfully generated for both Qwen and Gemma. Generated reports are the authoritative detailed benchmark artifacts.
 
+## Validation
+
+The production runtime was validated through local API access, persistent model storage, reboot recovery, health and verification scripts, live provider access, automated benchmark tests, and successful benchmark paths for both primary generation models.
+
 ## Acceptance Criteria
 
 - [x] Ollama is installed and managed as a persistent runtime.
@@ -237,6 +251,12 @@ M02 establishes a secure, persistent local inference runtime and a tested benchm
 
 The platform is ready to proceed to **M03 — OpenClaw Platform**.
 
+## Exit criteria
+
+Complete. The local-only Ollama runtime, persistent model store, primary models, operational checks, and benchmark framework meet the M02 acceptance criteria.
+
 ## Related documentation
 
 - [Documentation map](../../README.md)
+- [v0.2.0 release notes](../../releases/v0.2.0.md)
+- [Runtime architecture](../../architecture/Runtime-Architecture.md)

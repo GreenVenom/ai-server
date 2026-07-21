@@ -3,8 +3,8 @@ title: Documentation
 document: Reference
 status: Active
 created: 2026-07-15
-updated: 2026-07-18
-platform_version: v0.3.0
+updated: 2026-07-21
+platform_version: v0.6.0
 owner: GreenVenom
 ---
 

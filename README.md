@@ -3,8 +3,8 @@ title: 🧠 Personal AI Platform
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-18
-platform_version: v0.5.0
+updated: 2026-07-21
+platform_version: v0.6.0
 owner: GreenVenom
 ---
 
@@ -22,7 +22,7 @@ M02  Production Ollama Runtime     ✅ Complete
 M03  OpenClaw Platform             ✅ Complete
 M04  Qdrant                        ✅ Complete
 M05  Obsidian Integration          ✅ Complete
-M06  MCP Servers                   🚧 Next
+M06  MCP Services                  ✅ Complete
 M07  Monitoring                    🔜 Planned
 M08  Backup & Disaster Recovery    🔜 Planned
 ```
@@ -75,7 +75,8 @@ ai-server/
 ├── backups/                 # Runtime backup destination
 ├── benchmarks/              # Benchmark runner, libraries, profiles, prompts, and tests
 ├── bootstrap/               # Host and service bootstrap scripts
-├── configs/
+├── config/
+│   ├── mcp/                 # MCP configuration and development artifacts
 │   └── obsidian/            # Vault registration and mirror configuration
 ├── docs/
 │   ├── architecture/
@@ -91,7 +92,6 @@ ai-server/
 ├── infrastructure/          # Docker, launchd, SSH, and Tailscale definitions
 ├── inventory/               # Hardware and environment inventory
 ├── logs/                    # Runtime logs
-├── mcp/                     # MCP server work area
 ├── scripts/
 │   ├── config/
 │   ├── lib/
@@ -100,6 +100,7 @@ ai-server/
 │   └── tests/
 ├── services/
 │   ├── launchagents/
+│   ├── mcp/                 # Local stdio MCP services and tests
 │   ├── obsidian/
 │   └── openclaw-obsidian-plugin/
 └── templates/               # Repository-level reusable templates
@@ -181,12 +182,17 @@ docs/operations/runbooks/Benchmark-Validation.md
 
 ## 🧭 Architecture Decisions
 
-Current M05 architecture decisions include:
+Current M06 architecture decisions include:
 
 ```text
 ADR-0014  Authoritative Obsidian Vault and Read-Only Server Mirror
 ADR-0015  Constrained OpenClaw Obsidian Retrieval Plugin
 ADR-0016  Manifest-Driven Incremental Indexing and Deletion Safety
+ADR-0017  Read-Only Obsidian Retrieval for OpenClaw
+ADR-0018  First-Party Local STDIO MCP Servers
+ADR-0019  MCP Tool Authorization and Exposure
+ADR-0020  Read-Only Obsidian MCP Adapter
+ADR-0021  MCP Tool Schemas, Errors, and Logging
 ```
 
 For the complete milestone-to-ADR mapping, see the [architecture index](docs/architecture/Architecture-Index.md).
@@ -204,17 +210,17 @@ Important rules:
 
 ## 🚀 Current Release
 
-v0.5.0 completes M05 and adds controlled Obsidian knowledge retrieval. The platform maintains a read-only mirror of an authoritative vault, parses and chunks Markdown, creates local Ollama embeddings, indexes them in Qdrant, and exposes constrained retrieval through OpenClaw's `obsidian_search` tool.
+v0.6.0 completes M06 and adds two secured local stdio MCP services: approved Obsidian retrieval and platform inspection. The services expose exactly eight read-only tools to sandboxed OpenClaw agents and retain the M05 read-only vault, local embedding, and Qdrant retrieval boundary.
 
 ```text
-Obsidian vault → read-only mirror → local embeddings → Qdrant → OpenClaw
+Obsidian vault → read-only mirror → local embeddings → Qdrant → MCP retrieval → OpenClaw
 ```
 
-Operational safeguards include deterministic manifests, incremental reconciliation, deletion thresholds, scheduled synchronization, health checks, source-grounded results, and snapshot-backed backups. See the [M05 milestone record](docs/operations/milestones/M05-Obsidian-Integration.md) and [v0.5.0 release notes](docs/releases/v0.5.0.md).
+Operational safeguards include strict input schemas, explicit tool authorization, subprocess allowlists, bounded output, security and abuse tests, and inventory validation requiring two servers, eight tools, and zero diagnostics. See the [M06 milestone record](docs/operations/milestones/M06-MCP.md), [MCP architecture](docs/architecture/MCP-Architecture.md), and [v0.6.0 release notes](docs/releases/v0.6.0.md).
 
 ## 🚧 Next Milestone
 
-M06 introduces narrow MCP interfaces over approved platform capabilities, beginning with the M05 Obsidian retrieval boundary.
+M07 introduces monitoring for runtime visibility, service health, benchmark trends, resource use, and alerting.
 
 ## 🔗 Related documentation
 

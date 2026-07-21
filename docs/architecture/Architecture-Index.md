@@ -3,8 +3,8 @@ title: Architecture Index
 document: Architecture
 status: Active
 created: 2026-07-17
-updated: 2026-07-18
-platform_version: v0.3.0
+updated: 2026-07-21
+platform_version: v0.6.0
 owner: GreenVenom
 ---
 
@@ -28,6 +28,8 @@ This directory contains the high-level architectural documentation for the Perso
 | Repository Pattern | In-memory repository conventions for Bash |
 | OpenClaw Architecture | Orchestration and agent-layer design |
 | Obsidian Integration | Controlled ingestion and retrieval architecture |
+| [MCP Architecture](MCP-Architecture.md) | Local stdio MCP service boundaries and controls |
+| [Tool Authorization Architecture](Tool-Authorization-Architecture.md) | Layered MCP tool exposure and authorization controls |
 
 ## ADRs by milestone
 
@@ -37,6 +39,7 @@ This directory contains the high-level architectural documentation for the Perso
 | M02 — Production Ollama Runtime | ADR-0007 through ADR-0009 |
 | M04 — Qdrant | ADR-0010 through ADR-0013 |
 | M05 — Obsidian Integration | ADR-0014 through ADR-0016 |
+| M06 — MCP Services | ADR-0017 through ADR-0021 |
 
 ### Design Principles
 

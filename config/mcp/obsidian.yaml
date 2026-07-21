@@ -1,0 +1,12 @@
+schema_version: 1
+
+retrieval:
+  executable: /Users/openclaw/server/services/obsidian/venv/bin/python
+  module: obsidian_ingest.retrieval_boundary
+  pythonpath: /Users/openclaw/server/services/obsidian/src
+  timeout_seconds: 15
+
+vaults:
+  personal-knowledge:
+    enabled: true
+    collection: obsidian_chunks_v1

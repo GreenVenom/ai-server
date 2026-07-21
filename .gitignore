@@ -37,3 +37,12 @@ logs/obsidian/
 backups/obsidian/
 *.snapshot
 *.tar.gz
+
+# MCP local runtime artifacts
+services/mcp/.venv/
+services/mcp/.pytest_cache/
+services/mcp/**/__pycache__/
+services/mcp/tests/acceptance/results/*.stderr
+services/mcp/tests/acceptance/results/*.json
+services/mcp/tests/acceptance/results/summary.tsv
+services/mcp/tests/acceptance/results/initial-sandbox-blocked/

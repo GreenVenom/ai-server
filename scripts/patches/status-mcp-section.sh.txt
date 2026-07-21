@@ -1,0 +1,15 @@
+# Insert before the final status summary.
+source "$HOME/server/scripts/lib/mcp.sh"
+
+printf '\n'
+printf '▶ MCP Servers\n'
+
+if mcp_validate_probe >/dev/null; then
+    ok \
+        "OpenClaw MCP" \
+        "servers=$(mcp_server_count), tools=$(mcp_tool_count), diagnostics=$(mcp_diagnostic_count)"
+else
+    fail \
+        "OpenClaw MCP" \
+        "MCP server inventory, tool inventory, or diagnostics validation failed"
+fi

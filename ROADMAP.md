@@ -3,8 +3,8 @@ title: 🗺️ Roadmap
 document: Reference
 status: Active
 created: 2026-07-14
-updated: 2026-07-18
-platform_version: v0.5.0
+updated: 2026-07-21
+platform_version: v0.6.0
 owner: GreenVenom
 ---
 
@@ -109,15 +109,20 @@ Delivered:
 
 Architecture decisions: ADR-0014 through ADR-0016.
 
-## M06 — MCP Servers 🚧
+## M06 — MCP Services ✅
 
-Status: Next
+Status: Complete
 
-Objectives:
+Delivered:
 
-- expose approved platform capabilities through narrow MCP interfaces
-- reuse the M05 Obsidian retrieval boundary
-- preserve local-first and least-privilege controls
+- two local stdio MCP servers for Obsidian retrieval and platform inspection
+- eight exact read-only tools with strict schemas and sanitized errors
+- explicit OpenClaw filters and sandbox authorization
+- restricted subprocess execution, output limits, and timeouts
+- unit, integration, security, policy, and ten-scenario agent acceptance tests
+- status, health, and verification integration requiring two servers, eight tools, and zero diagnostics
+
+Architecture decisions: ADR-0017 through ADR-0021.
 
 ## M07 — Monitoring 🔜
 

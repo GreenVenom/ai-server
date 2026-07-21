@@ -1,0 +1,26 @@
+[project]
+name = "personal-ai-mcp"
+version = "0.1.0"
+description = "First-party MCP adapters for the Personal AI Platform"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "mcp[cli]==1.28.1",
+    "PyYAML==6.0.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.4.1",
+    "pytest-asyncio==1.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/personal_ai_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

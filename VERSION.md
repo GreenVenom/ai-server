@@ -3,8 +3,8 @@ title: 🏷️ Platform Version
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-18
-platform_version: v0.5.0
+updated: 2026-07-21
+platform_version: v0.6.0
 owner: GreenVenom
 ---
 
@@ -12,11 +12,11 @@ owner: GreenVenom
 
 ## ✅ Current Version
 
-v0.5.0
+v0.6.0
 
 ## 🏁 Current Milestone
 
-M05 – Obsidian Integration
+M06 – MCP Services
 
 ## 🚧 Repository Status
 
@@ -69,7 +69,7 @@ macOS
 | v0.3.0 | OpenClaw Platform | ✅ Complete |
 | v0.4.0 | Qdrant Vector Database | ✅ Complete |
 | v0.5.0 | Obsidian Integration | ✅ Complete |
-| v0.6.0 | MCP Servers | 🚧 Next |
+| v0.6.0 | MCP Services | ✅ Complete |
 | v0.7.0 | Monitoring | 🔜 Planned |
 | v0.8.0 | Backup and Disaster Recovery | 🔜 Planned |
 | v1.0.0 | Production Release | 🔜 Planned |

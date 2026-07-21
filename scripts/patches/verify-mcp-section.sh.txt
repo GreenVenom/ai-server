@@ -1,0 +1,14 @@
+# Insert before print_section "Summary".
+source "$HOME/server/scripts/lib/mcp.sh"
+
+print_section "MCP Verification"
+
+if mcp_validate_probe >/dev/null; then
+    pass \
+        "MCP Production Policy" \
+        "2 approved servers, exact 8-tool inventory, no diagnostics"
+else
+    fail \
+        "MCP Production Policy" \
+        "Production MCP inventory does not match the approved policy"
+fi
