@@ -1,4 +1,21 @@
-# ADR-0022: Obsidian Index V2 Cutover and V1 Rollback Retention
+---
+title: ADR-0022 - Obsidian Index V2 Cutover and V1 Rollback Retention
+document: ADR
+status: Accepted
+created: 2026-07-27
+updated: 2026-07-27
+platform_version: v0.7.0
+owner: GreenVenom
+decision_id: ADR-0022
+supersedes: null
+superseded_by: null
+---
+
+# ADR-0022 - Obsidian Index V2 Cutover and V1 Rollback Retention
+
+## Summary
+
+This decision records the production cutover of the personal-knowledge Obsidian retrieval workload to V2 while retaining V1 as a read-only rollback target.
 
 - **Status:** Accepted
 - **Date:** 2026-07-27
@@ -103,3 +120,9 @@ retention period:
 The V1 collection and its original manifest must not be modified as part of a
 rollback; they are retained specifically as the known-good recovery target.
 
+
+## Related documentation
+
+- [M07 milestone record](../operations/milestones/M07-Obsidian-Retrieval-V2-Cutover.md)
+- [v0.7.0 release notes](../releases/v0.7.0.md)
+- [Obsidian integration architecture](../architecture/Obsidian-Integration.md)

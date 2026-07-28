@@ -3,8 +3,8 @@ title: 🧠 Personal AI Platform
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-21
-platform_version: v0.6.0
+updated: 2026-07-27
+platform_version: v0.7.0
 owner: GreenVenom
 ---
 
@@ -23,7 +23,7 @@ M03  OpenClaw Platform             ✅ Complete
 M04  Qdrant                        ✅ Complete
 M05  Obsidian Integration          ✅ Complete
 M06  MCP Services                  ✅ Complete
-M07  Monitoring                    🔜 Planned
+M07  Obsidian Retrieval V2 Cutover ✅ Complete
 M08  Backup & Disaster Recovery    🔜 Planned
 ```
 
@@ -182,7 +182,7 @@ docs/operations/runbooks/Benchmark-Validation.md
 
 ## 🧭 Architecture Decisions
 
-Current M06 architecture decisions include:
+Current architecture decisions include:
 
 ```text
 ADR-0014  Authoritative Obsidian Vault and Read-Only Server Mirror
@@ -193,6 +193,7 @@ ADR-0018  First-Party Local STDIO MCP Servers
 ADR-0019  MCP Tool Authorization and Exposure
 ADR-0020  Read-Only Obsidian MCP Adapter
 ADR-0021  MCP Tool Schemas, Errors, and Logging
+ADR-0022  Obsidian Index V2 Cutover and V1 Rollback Retention
 ```
 
 For the complete milestone-to-ADR mapping, see the [architecture index](docs/architecture/Architecture-Index.md).
@@ -210,17 +211,17 @@ Important rules:
 
 ## 🚀 Current Release
 
-v0.6.0 completes M06 and adds two secured local stdio MCP services: approved Obsidian retrieval and platform inspection. The services expose exactly eight read-only tools to sandboxed OpenClaw agents and retain the M05 read-only vault, local embedding, and Qdrant retrieval boundary.
+v0.7.0 completes M07 by cutting the `personal-knowledge` retrieval workload over to the independently rebuilt `obsidian_chunks_v2` collection. The V2 manifest, scheduler, MCP adapter, and OpenClaw plugin now use the V2 configuration.
 
 ```text
 Obsidian vault → read-only mirror → local embeddings → Qdrant → MCP retrieval → OpenClaw
 ```
 
-Operational safeguards include strict input schemas, explicit tool authorization, subprocess allowlists, bounded output, security and abuse tests, and inventory validation requiring two servers, eight tools, and zero diagnostics. See the [M06 milestone record](docs/operations/milestones/M06-MCP.md), [MCP architecture](docs/architecture/MCP-Architecture.md), and [v0.6.0 release notes](docs/releases/v0.6.0.md).
+The V1 collection and manifest remain read-only rollback data for at least 30 days after the cutover. Validation confirmed matching manifest chunk IDs and Qdrant point IDs, a successful scheduler run, and healthy MCP services. See the [M07 milestone record](docs/operations/milestones/M07-Obsidian-Retrieval-V2-Cutover.md), [ADR-0022](docs/decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md), and [v0.7.0 release notes](docs/releases/v0.7.0.md).
 
 ## 🚧 Next Milestone
 
-M07 introduces monitoring for runtime visibility, service health, benchmark trends, resource use, and alerting.
+M08 will cover backup and disaster recovery for runtime configuration and persistent platform data.
 
 ## 🔗 Related documentation
 

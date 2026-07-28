@@ -3,8 +3,8 @@ title: Architecture Index
 document: Architecture
 status: Active
 created: 2026-07-17
-updated: 2026-07-21
-platform_version: v0.6.0
+updated: 2026-07-27
+platform_version: v0.7.0
 owner: GreenVenom
 ---
 
@@ -40,6 +40,7 @@ This directory contains the high-level architectural documentation for the Perso
 | M04 — Qdrant | ADR-0010 through ADR-0013 |
 | M05 — Obsidian Integration | ADR-0014 through ADR-0016 |
 | M06 — MCP Services | ADR-0017 through ADR-0021 |
+| M07 — Obsidian Retrieval V2 Cutover | [ADR-0022](../decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md) |
 
 ### Design Principles
 

@@ -3,8 +3,8 @@ title: Documentation
 document: Reference
 status: Active
 created: 2026-07-15
-updated: 2026-07-21
-platform_version: v0.6.0
+updated: 2026-07-27
+platform_version: v0.7.0
 owner: GreenVenom
 ---
 
@@ -35,6 +35,7 @@ Use [Documentation Standards](templates/Documentation-Standards.md) for all new 
 - New to the platform: [root README](../README.md), [Platform Charter](operations/milestones/M00-Platform-Charter.md), then [System Overview](architecture/System-Overview.md).
 - Making a technical change: architecture, related [ADRs](decisions/), the active milestone, and relevant runbooks.
 - Operating the platform: platform configuration followed by the relevant runbook.
+- Reviewing the current release: [M07 milestone record](operations/milestones/M07-Obsidian-Retrieval-V2-Cutover.md), [ADR-0022](decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md), and [v0.7.0 release notes](releases/v0.7.0.md).
 
 ## Status Conventions
 

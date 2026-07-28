@@ -3,8 +3,8 @@ title: 🗺️ Roadmap
 document: Reference
 status: Active
 created: 2026-07-14
-updated: 2026-07-21
-platform_version: v0.6.0
+updated: 2026-07-27
+platform_version: v0.7.0
 owner: GreenVenom
 ---
 
@@ -124,15 +124,19 @@ Delivered:
 
 Architecture decisions: ADR-0017 through ADR-0021.
 
-## M07 — Monitoring 🔜
+## M07 — Obsidian Retrieval V2 Cutover ✅
 
-Objectives:
+Status: Complete
 
-- runtime visibility
-- service health
-- benchmark trend tracking
-- resource monitoring
-- alerting strategy
+Delivered:
+
+- production cutover to the independently rebuilt `obsidian_chunks_v2` collection
+- a dedicated V2 manifest root at `data/obsidian/manifests-v2`
+- V2 configuration for the indexer scheduler, MCP adapter, and OpenClaw plugin
+- manifest-to-Qdrant chunk-ID reconciliation that excludes intentional non-indexable mirror content
+- a documented V1 rollback and 30-day retention contract
+
+Architecture decision: [ADR-0022](docs/decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md).
 
 ## M08 — Backup & Disaster Recovery 🔜
 
