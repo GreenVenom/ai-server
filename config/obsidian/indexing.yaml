@@ -1,26 +1,39 @@
 schema_version: 1
+
+collection:
+  name: obsidian_chunks_v2
+  payload_schema_version: 2
+
 embedding:
-  provider: ollama
   model: nomic-embed-text:latest
-  dimension: 768
-qdrant:
-  url: http://127.0.0.1:6333
-  collection: obsidian_chunks_v1
   vector_name: text-dense
+  dimension: 768
   distance: Cosine
+
+discovery:
+  include_extensions:
+    - .md
+  exclude_directories:
+    - .obsidian
+    - .trash
+    - templates
+  exclude_patterns:
+    - "*.excalidraw.md"
+  follow_symlinks: false
+
+index_control:
+  default_include: true
+  exclusion_field: ai_exclude
+  inclusion_field: ai_index
+
 chunking:
   profile: heading-aware-v1
-  target_characters: 700
-  maximum_characters: 1200
-  overlap_characters: 100
-  minimum_characters: 40
-reconciliation:
-  maximum_delete_percent: 10
-exclusions:
-  directories:
-    - .git
-    - .obsidian
-    - .smart-env
-    - .smtcmp_json_db
-  files:
-    - .smtcmp_vector_db.tar.gz
+  target_tokens: 700
+  maximum_tokens: 1200
+  overlap_tokens: 100
+  minimum_tokens: 40
+
+safety:
+  maximum_automatic_deletion_percent: 10
+  require_completed_sync: true
+  prevent_overlapping_runs: true

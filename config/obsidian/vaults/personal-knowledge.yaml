@@ -1,13 +1,24 @@
 schema_version: 1
-vault_id: personal-knowledge
-mirror_path: /Users/openclaw/server/data/obsidian/vaults/personal-knowledge
-read_only: true
-authoritative: false
-collection: obsidian_chunks_v1
-manifest_path: /Users/openclaw/server/data/obsidian/manifests/personal-knowledge.json
-incremental: true
+
+vault:
+  id: personal-knowledge
+  display_name: Personal Knowledge Vault
+
+mirror:
+  path: /Users/openclaw/server/data/obsidian/vaults/personal-knowledge
+  mode: read_only
+  authoritative: false
+
+index:
+  collection: obsidian_chunks_v2
+  manifest: /Users/openclaw/server/data/obsidian/manifests-v2/personal-knowledge.json
+  incremental: true
+
 retrieval:
+  enabled: true
   maximum_results: 8
-  default_threshold: 0.35
-reconciliation:
+  default_score_threshold: 0.35
+
+safety:
   maximum_delete_percent: 10
+  require_override_for_large_delete: true

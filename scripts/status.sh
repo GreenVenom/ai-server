@@ -24,9 +24,9 @@ source "${LIB_DIR}/platform.sh"
 
 QDRANT_URL="${QDRANT_URL:-http://127.0.0.1:6333}"
 
-OBSIDIAN_COLLECTION="obsidian_chunks_v1"
+OBSIDIAN_COLLECTION="obsidian_chunks_v2"
 OBSIDIAN_VAULT_ID="personal-knowledge"
-OBSIDIAN_MANIFEST="$HOME/server/data/obsidian/manifests/personal-knowledge.json"
+OBSIDIAN_MANIFEST="$HOME/server/data/obsidian/manifests-v2/personal-knowledge.json"
 OBSIDIAN_STATE="$HOME/server/data/obsidian/state/personal-knowledge-job-state.json"
 OBSIDIAN_COMMIT="$HOME/server/data/obsidian/state/personal-knowledge-source.commit"
 OBSIDIAN_PLUGIN="obsidian-retrieval"
@@ -401,6 +401,25 @@ obsidian_commit="$(
 [[ -n "$obsidian_commit" ]] && \
     ok "Obsidian Source Commit" "$obsidian_commit" || \
     warn "Obsidian Source Commit" "Unavailable"
+
+# ---------------------------------------------------------------------------
+# MCP Servers
+# ---------------------------------------------------------------------------
+
+source "$HOME/server/scripts/lib/mcp.sh"
+
+printf '\n'
+printf '▶ MCP Servers\n'
+
+if mcp_validate_probe >/dev/null; then
+    ok \
+        "OpenClaw MCP" \
+        "servers=$(mcp_server_count), tools=$(mcp_tool_count), diagnostics=$(mcp_diagnostic_count)"
+else
+    fail \
+        "OpenClaw MCP" \
+        "MCP server inventory, tool inventory, or diagnostics validation failed"
+fi
 
 printf '\n'
 printf 'OpenClaw Workspace : %s\n' "$OPENCLAW_WORKSPACE"

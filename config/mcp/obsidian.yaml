@@ -9,4 +9,6 @@ retrieval:
 vaults:
   personal-knowledge:
     enabled: true
-    collection: obsidian_chunks_v1
+    display_name: Personal Knowledge Vault
+    collection: obsidian_chunks_v2
+    manifest: /Users/openclaw/server/data/obsidian/manifests-v2/personal-knowledge.json

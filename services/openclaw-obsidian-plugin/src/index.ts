@@ -10,7 +10,7 @@ const SEARCH_COMMAND =
   "/Users/openclaw/server/scripts/obsidian-search.sh";
 
 const DEFAULT_VAULT_ID = "personal-knowledge";
-const DEFAULT_COLLECTION = "obsidian_chunks_v1";
+const DEFAULT_COLLECTION = "obsidian_chunks_v2";
 const MAXIMUM_LIMIT = 8;
 
 const resultSchema = Type.Object(
