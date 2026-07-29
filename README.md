@@ -3,8 +3,8 @@ title: 🧠 Personal AI Platform
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-27
-platform_version: v0.7.0
+updated: 2026-07-28
+platform_version: v0.8.0
 owner: GreenVenom
 ---
 
@@ -24,7 +24,8 @@ M04  Qdrant                        ✅ Complete
 M05  Obsidian Integration          ✅ Complete
 M06  MCP Services                  ✅ Complete
 M07  Obsidian Retrieval V2 Cutover ✅ Complete
-M08  Backup & Disaster Recovery    🔜 Planned
+M08  Backup & Disaster Recovery    ✅ Complete
+M09  Future Plans                  🔜 Planned
 ```
 
 ## ⚙️ Current Runtime
@@ -211,17 +212,17 @@ Important rules:
 
 ## 🚀 Current Release
 
-v0.7.0 completes M07 by cutting the `personal-knowledge` retrieval workload over to the independently rebuilt `obsidian_chunks_v2` collection. The V2 manifest, scheduler, MCP adapter, and OpenClaw plugin now use the V2 configuration.
+v0.8.0 completes M08 with encrypted off-host backups for the active V2 Qdrant index and allow-listed non-secret runtime configuration. The automated backup job verifies checksums after upload and supports controlled restore validation without overwriting production data.
 
 ```text
 Obsidian vault → read-only mirror → local embeddings → Qdrant → MCP retrieval → OpenClaw
 ```
 
-The V1 collection and manifest remain read-only rollback data for at least 30 days after the cutover. Validation confirmed matching manifest chunk IDs and Qdrant point IDs, a successful scheduler run, and healthy MCP services. See the [M07 milestone record](docs/operations/milestones/M07-Obsidian-Retrieval-V2-Cutover.md), [ADR-0022](docs/decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md), and [v0.7.0 release notes](docs/releases/v0.7.0.md).
+The V1 collection and manifest remain read-only rollback data through the documented retention period. Validation confirmed encrypted upload/download integrity, a successful scheduled backup, and a restore into a separate Qdrant collection with matching point counts and manifest reconciliation. See the [M08 milestone record](docs/operations/milestones/M08-Backup-and-Disaster-Recovery.md), [ADR-0023](docs/decisions/ADR-0023-Encrypted-Google-Drive-Off-Host-Backups.md), [backup and recovery runbook](docs/operations/Backup-and-Recovery-Runbook.md), and [v0.8.0 release notes](docs/releases/v0.8.0.md).
 
 ## 🚧 Next Milestone
 
-M08 will cover backup and disaster recovery for runtime configuration and persistent platform data.
+M09 — Future Plans is reserved for future platform work; its scope will be recorded before implementation begins.
 
 ## 🔗 Related documentation
 

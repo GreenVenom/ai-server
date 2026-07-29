@@ -1,4 +1,17 @@
-# ADR-0023: Use Encrypted Google Drive for Off-Host Backup Copies
+---
+title: ADR-0023 Encrypted Google Drive Off-Host Backups
+document: ADR
+status: Accepted
+created: 2026-07-28
+updated: 2026-07-28
+platform_version: v0.8.0
+owner: GreenVenom
+decision_id: ADR-0023
+supersedes: null
+superseded_by: null
+---
+
+# ADR-0023 Encrypted Google Drive Off-Host Backups
 
 - **Status:** Accepted
 - **Date:** 2026-07-28
@@ -134,3 +147,9 @@ availability, encryption, or restore-validation requirements, disable the
 automated upload job while retaining existing validated local artifacts. Do
 not delete existing off-host copies. Select and record a replacement encrypted
 off-host destination in a new ADR before resuming automated off-host backups.
+
+## Related documentation
+
+- [M08 milestone record](../operations/milestones/M08-Backup-and-Disaster-Recovery.md)
+- [Backup and recovery runbook](../operations/Backup-and-Recovery-Runbook.md)
+- [v0.8.0 release notes](../releases/v0.8.0.md)

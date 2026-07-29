@@ -3,8 +3,8 @@ title: 🗺️ Roadmap
 document: Reference
 status: Active
 created: 2026-07-14
-updated: 2026-07-27
-platform_version: v0.7.0
+updated: 2026-07-28
+platform_version: v0.8.0
 owner: GreenVenom
 ---
 
@@ -138,18 +138,26 @@ Delivered:
 
 Architecture decision: [ADR-0022](docs/decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md).
 
-## M08 — Backup & Disaster Recovery 🔜
+## M08 — Backup & Disaster Recovery ✅
 
-Objectives:
+Status: Complete
 
-- backup runtime configuration
-- backup persistent data
-- validate restore procedures
-- document disaster recovery
+Delivered:
 
-## 💡 Future Work
+- encrypted, off-host backups of the active V2 Qdrant index and allow-listed non-secret runtime configuration
+- automated daily backup execution with integrity manifests, upload verification, retention controls, and capacity fail-closed behavior
+- a non-production Qdrant restore drill with checksum, vector-contract, point-count, and manifest-reconciliation validation
+- a recovery runbook, off-host backup ADR, and v0.8.0 release record
 
-Potential later milestones include:
+Architecture decision: [ADR-0023](docs/decisions/ADR-0023-Encrypted-Google-Drive-Off-Host-Backups.md).
+
+## M09 — Future Plans 🔜
+
+Status: Planned
+
+M09 is reserved for future platform work. Its scope will be defined in a milestone record before implementation begins.
+
+Potential future plans include:
 
 - richer benchmark statistics
 - multi-provider benchmark comparison

@@ -3,8 +3,8 @@ title: Architecture Index
 document: Architecture
 status: Active
 created: 2026-07-17
-updated: 2026-07-27
-platform_version: v0.7.0
+updated: 2026-07-28
+platform_version: v0.8.0
 owner: GreenVenom
 ---
 
@@ -41,6 +41,7 @@ This directory contains the high-level architectural documentation for the Perso
 | M05 — Obsidian Integration | ADR-0014 through ADR-0016 |
 | M06 — MCP Services | ADR-0017 through ADR-0021 |
 | M07 — Obsidian Retrieval V2 Cutover | [ADR-0022](../decisions/ADR-0022-obsidian-index-v2-cutover-and-v1-rollback-retention.md) |
+| M08 — Backup and Disaster Recovery | [ADR-0023](../decisions/ADR-0023-Encrypted-Google-Drive-Off-Host-Backups.md) |
 
 ### Design Principles
 

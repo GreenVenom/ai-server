@@ -3,8 +3,8 @@ title: 🏷️ Platform Version
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-27
-platform_version: v0.7.0
+updated: 2026-07-28
+platform_version: v0.8.0
 owner: GreenVenom
 ---
 
@@ -12,11 +12,11 @@ owner: GreenVenom
 
 ## ✅ Current Version
 
-v0.7.0
+v0.8.0
 
 ## 🏁 Current Milestone
 
-M07 – Obsidian Retrieval V2 Cutover
+M09 – Future Plans
 
 ## 🚧 Repository Status
 
@@ -71,7 +71,8 @@ macOS
 | v0.5.0 | Obsidian Integration | ✅ Complete |
 | v0.6.0 | MCP Services | ✅ Complete |
 | v0.7.0 | Obsidian Retrieval V2 Cutover | ✅ Complete |
-| v0.8.0 | Backup and Disaster Recovery | 🔜 Planned |
+| v0.8.0 | Backup and Disaster Recovery | ✅ Complete |
+| M09 | Future Plans | 🔜 Planned |
 | v1.0.0 | Production Release | 🔜 Planned |
 
 ---
