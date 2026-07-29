@@ -5,6 +5,11 @@
 
 set -uo pipefail
 
+# launchd supplies only a system PATH. Homebrew installs rclone under
+# /opt/homebrew/bin on Apple Silicon (or /usr/local/bin on older Macs).
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH
+
 SERVER_HOME="${HOME}/server"
 QDRANT_URL="${QDRANT_URL:-http://127.0.0.1:6333}"
 COLLECTION="${BACKUP_COLLECTION:-obsidian_chunks_v2}"
