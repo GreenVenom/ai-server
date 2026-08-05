@@ -3,7 +3,7 @@ title: 🏷️ Platform Version
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-28
+updated: 2026-08-04
 platform_version: v0.8.0
 owner: GreenVenom
 ---
@@ -16,7 +16,7 @@ v0.8.0
 
 ## 🏁 Current Milestone
 
-M09 – Future Plans
+M09 – Model Lifecycle, Selection, and Routing
 
 ## 🚧 Repository Status
 
@@ -72,8 +72,13 @@ macOS
 | v0.6.0 | MCP Services | ✅ Complete |
 | v0.7.0 | Obsidian Retrieval V2 Cutover | ✅ Complete |
 | v0.8.0 | Backup and Disaster Recovery | ✅ Complete |
-| M09 | Future Plans | 🔜 Planned |
-| v1.0.0 | Production Release | 🔜 Planned |
+| M09 | Model Lifecycle, Selection, and Routing | 🔜 Planned |
+| M10 | Secure Primary-Workstation Web UI | 🔜 Planned |
+| M11 | Agent Management Foundation | 🔜 Planned |
+| M12 | Curated MCP Catalog and Governance | 🔜 Planned |
+| M13 | Guided AI Agent Creation | 🔜 Planned |
+| M14 | Controlled Automated File-Update Workflows | 🔜 Planned |
+| M15 / v2.0.0 | Hardening and Release | 🔜 Planned |
 
 ---
 

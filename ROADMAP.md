@@ -3,7 +3,7 @@ title: 🗺️ Roadmap
 document: Reference
 status: Active
 created: 2026-07-14
-updated: 2026-07-28
+updated: 2026-08-04
 platform_version: v0.8.0
 owner: GreenVenom
 ---
@@ -151,19 +151,61 @@ Delivered:
 
 Architecture decision: [ADR-0023](docs/decisions/ADR-0023-Encrypted-Google-Drive-Off-Host-Backups.md).
 
-## M09 — Future Plans 🔜
+## M09 — Model Lifecycle, Selection, and Routing 🔜
 
 Status: Planned
 
-M09 is reserved for future platform work. Its scope will be defined in a milestone record before implementation begins.
+Establish controlled acquisition, evaluation, activation, rollback, and routing for approved local models. The milestone includes a pinned model catalog and profiles, 24 GB server capacity safeguards, model inventory and selection controls, and primary, fallback, embedding, and agent-specific routing policy. Hermes is optional and must have a defined role; it is not a platform-wide replacement.
 
-Potential future plans include:
+## M10 — Secure Primary-Workstation Web UI 🔜
 
-- richer benchmark statistics
-- multi-provider benchmark comparison
-- automated baseline regression detection
-- expanded local model routing
-- additional retrieval and agent workflows
+Status: Planned
+
+Provide an authenticated, Tailscale-only control plane for chat, retrieval, health, model inventory, and model selection. It will use approved backend APIs and will not expose Ollama, Qdrant, OpenClaw, or backup endpoints directly to the browser.
+
+## M11 — Agent Management Foundation 🔜
+
+Status: Planned
+
+Introduce governed, versioned agent definitions with schemas, validation, lifecycle controls, per-agent runtime assignments, audit records, status, and backup/restore coverage.
+
+## M12 — Curated MCP Catalog and Governance 🔜
+
+Status: Planned
+
+Extend the M06 baseline through a reviewed first-party or explicitly approved MCP catalog, per-agent allowlists, tool-level least-privilege boundaries, read-only-by-default controls, validation, security tests, and audit visibility. Arbitrary public or community MCP installation is out of scope.
+
+## M13 — Guided AI Agent Creation 🔜
+
+Status: Planned
+
+Provide guided UI and CLI workflows that create agents from approved templates and validated model, retrieval, and MCP selections. Definitions must support preview/testing, ownership, version history, and rollback before activation.
+
+## M14 — Controlled Automated File-Update Workflows 🔜
+
+Status: Planned
+
+Allow agents to propose and apply file changes only in explicitly approved repository or workspace scopes. The workflow requires deny-by-default writes, dry runs, diff previews, approval gates, Git-backed commits and rollback, queue visibility, audit logging, backup coverage, and security acceptance tests.
+
+## M15 — v2.0.0 Hardening and Release 🔜
+
+Status: Planned
+
+Validate the complete platform and publish v2.0.0. Completion requires end-to-end acceptance testing, a security review, current architecture and operational documentation, final release verification, a version bump, annotated tag, and release notes.
+
+## Script Evolution
+
+| Area | Roadmap change |
+| --- | --- |
+| `status.sh`, `health.sh`, `verify.sh` | Report UI, model registry, agent runtime, MCP policy state, automation queue, and backup freshness. |
+| `doctor.sh` | Validate capacity, authentication, configuration schemas, MCP allowlists, Git availability, and approved writable boundaries. |
+| `install.sh`, `update.sh` | Manage pinned dependencies, configuration migrations, and rollback-safe updates. |
+| `backup.sh`, `restore.sh` | Include model, agent, MCP, UI, and automation configuration/manifests; continue excluding secrets, logs, virtual environments, images, and server-side Obsidian mirrors. |
+| New commands | Add model, agent, MCP catalog, automation, and UI deployment/verification commands using the shared validation, result, error, and logging libraries. |
+
+## Release Policy
+
+M01–M08 establish the production foundation. M09–M14 introduce v2 capabilities incrementally, with feature-specific releases as appropriate. `v2.0.0` is reserved for successful M15 completion, when the secure workflow is proven end-to-end: model management → UI → agents → governed MCP → approved file automation.
 
 ## 🔗 Related documentation
 

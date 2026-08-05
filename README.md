@@ -3,7 +3,7 @@ title: 🧠 Personal AI Platform
 document: Reference
 status: Active
 created: 2026-07-12
-updated: 2026-07-28
+updated: 2026-08-04
 platform_version: v0.8.0
 owner: GreenVenom
 ---
@@ -25,7 +25,13 @@ M05  Obsidian Integration          ✅ Complete
 M06  MCP Services                  ✅ Complete
 M07  Obsidian Retrieval V2 Cutover ✅ Complete
 M08  Backup & Disaster Recovery    ✅ Complete
-M09  Future Plans                  🔜 Planned
+M09  Model Lifecycle & Routing     🔜 Planned
+M10  Secure Workstation Web UI     🔜 Planned
+M11  Agent Management Foundation   🔜 Planned
+M12  Curated MCP Governance        🔜 Planned
+M13  Guided AI Agent Creation      🔜 Planned
+M14  Controlled File Updates       🔜 Planned
+M15  v2.0.0 Hardening & Release    🔜 Planned
 ```
 
 ## ⚙️ Current Runtime
@@ -222,7 +228,11 @@ The V1 collection and manifest remain read-only rollback data through the docume
 
 ## 🚧 Next Milestone
 
-M09 — Future Plans is reserved for future platform work; its scope will be recorded before implementation begins.
+M09 — Model Lifecycle, Selection, and Routing establishes a pinned, approved model catalog; capacity safeguards for the 24 GB server; controlled model lifecycle operations; and routing policy for primary, fallback, embedding, and agent-specific models. See the [M09 milestone record](docs/operations/milestones/M09-Model-Lifecycle-Selection-and-Routing.md) and [roadmap](ROADMAP.md).
+
+## 🧭 Road to v2.0.0
+
+The v2 program adds an authenticated Tailscale-only UI (M10), governed agent lifecycle management (M11), curated least-privilege MCP controls (M12), guided agent creation (M13), and approval-gated file-update workflows (M14). M15 reserves `v2.0.0` for end-to-end validation, security review, release documentation, and tagging.
 
 ## 🔗 Related documentation
 
